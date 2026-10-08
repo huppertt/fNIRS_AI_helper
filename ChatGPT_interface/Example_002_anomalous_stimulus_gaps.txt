@@ -1,0 +1,55 @@
+# Example 002: Detecting and Correcting Anomalous Stimulus Gaps
+
+Status: Draft
+
+## User problem
+
+Researchers may have stimulus annotations that are incomplete or contain spurious events because the E-Prime, PsychoPy, or other stimulus program was not coded correctly. Examples include a missing stimulus marker, an unexpectedly long gap between events, or a short/spurious event inserted within an otherwise continuous task block.
+
+## Expert reasoning
+
+1. Inspect the stimulus-event sequence and understand the expected experimental timing.
+2. Use the Stimulus Manager GUI to view the stimulus table and time-course visualization.
+3. Use the existing outlier-labeling functionality to identify unusually large inter-stimulus intervals or unusual event durations.
+4. Treat statistical outliers as candidates for investigation, not proof that an annotation is wrong.
+5. Manually inspect suspicious events in the table/time-course display.
+6. If an individual event is clearly spurious, the existing GUI can be used to remove it.
+7. If the study design supports a minimum expected gap/ISI or block structure, an existing pipeline operation may be appropriate for systematic correction.
+
+## Relevant existing Python functionality
+
+Verified in pyNIRS_toolbox/pyBrainAnalyzIR/pipelines/modules/events.py:
+
+- RemoveStimGaps — displayed as “Remove Gaps in Stim Blocks.” Merges stimulus events separated by a sufficiently short gap or whose onsets are within a configured minimum ISI. It can process conditions separately.
+- RemoveShortStims — displayed as “Remove Short Stims.” Removes stimulus events shorter than a specified minimum duration.
+- Existing stimulus manipulation modules also include renaming, removing, and keeping specified stimulus conditions.
+
+## Example scenario
+
+A task is expected to have stimulus events approximately every 5–15 seconds, but one interval is 45 seconds. The unusually large interval can be identified as a statistical outlier and visually inspected as a possible missing stimulus marker. If the user instead has a spurious event splitting what should be a continuous block, RemoveStimGaps may be appropriate when the study-specific gap criterion justifies merging the events.
+
+## Intended AI behavior
+
+When a user asks how to find or correct suspicious stimulus gaps, the assistant should:
+
+- Determine the expected experimental timing or design from the user's description.
+- Identify the existing Brain Analyzer GUI or pipeline functionality that addresses the problem.
+- Explain why an event is suspicious.
+- Recommend inspection before modification.
+- Propose specific existing operations rather than inventing new data-processing code.
+- Require user approval before making annotation changes.
+
+## Important distinction
+
+There are two related but distinct tasks:
+
+1. Anomaly detection: identify unusually large gaps or unusual durations.
+2. Annotation repair: determine whether the anomaly represents a missing or spurious event and, if justified, propose a correction.
+
+The AI should not automatically equate a statistical outlier with an annotation error.
+
+## Open questions
+
+- Verify the exact Stimulus Manager outlier-labeling implementation and user-facing option name in the current GUI.
+- Determine whether the current GUI exposes RemoveStimGaps directly or whether it is currently available primarily as a pipeline module.
+- Determine the best read-only tool interface for reporting stimulus intervals and outlier candidates to the AI assistant.

@@ -1,0 +1,1409 @@
+[00:00:00] so hi again so this morning there and
+[00:00:04] today what we're gonna do is a little
+[00:00:06] bit more of the data analysis side of
+[00:00:08] things so what my thought is this
+[00:00:10] morning is I'm gonna give this talk on
+[00:00:13] kind of introduction to data analysis
+[00:00:16] most of the stuff in this talk are it's
+[00:00:21] it's kind of intended of here's an
+[00:00:23] overview of kind of what the community
+[00:00:25] does in the different steps and the
+[00:00:26] different options you have for
+[00:00:28] physiology correction motion artifact
+[00:00:30] correction etc so I'm gonna go through
+[00:00:33] kind of explain some of that it's a lot
+[00:00:35] of you know if you're reading through
+[00:00:37] the literature keywords that you tend to
+[00:00:39] see in terms of you know Rob Cooper's
+[00:00:42] lab did principal component analysis
+[00:00:44] removing the first blah blah blah blah
+[00:00:46] blah what did that actually mean so I'm
+[00:00:48] gonna go through some of that please ask
+[00:00:50] questions I know it's a little bit
+[00:00:53] mathematically dense but I try my best
+[00:00:55] to explain it after that then we're
+[00:00:58] gonna switch over to it was originally
+[00:01:00] gonna be advanced analysis and what I
+[00:01:02] decided to do was advanced had way too
+[00:01:04] many equations so we're gonna is gonna
+[00:01:06] jump to how do you actually do this in
+[00:01:08] practice which I have a toolbox and
+[00:01:11] we're gonna go through kind of a
+[00:01:12] hands-on walking through the data that
+[00:01:14] we collected yesterday and talking about
+[00:01:17] that within this toolbox for doing
+[00:01:20] analysis and then we can ask answer
+[00:01:22] questions and I can explain what it's
+[00:01:24] actually doing so
+[00:01:26] so this first talk what we're going to
+[00:01:27] do first steps to data analysis is kind
+[00:01:29] of I'm gonna walk you through the
+[00:01:30] different steps of pre-processing talk
+[00:01:32] about some of the practical issues we
+[00:01:35] have mostly being physiological noise
+[00:01:38] systemic physiology and motion artifacts
+[00:01:40] and then talk about some of the data
+[00:01:42] analysis tools that are available out
+[00:01:44] there for dealing with this kind of data
+[00:01:48] so obviously this is nice this is
+[00:01:52] actually one of the the really old
+[00:01:54] Tekin systems and hopefully you're all
+[00:01:57] experts on that half of the slide now
+[00:02:00] and you know our typical
+[00:02:02] data analysis you know near X data comes
+[00:02:07] here you've collected raw data you know
+[00:02:09] it's been saved now what do you do with
+[00:02:12] it right and
+[00:02:13] so we're gonna be talking about this
+[00:02:15] whole pipeline of taking raw data
+[00:02:17] bringing it through what's called the
+[00:02:21] beer-lambert law to estimate oxy and
+[00:02:22] dioxin him above and then doing
+[00:02:25] statistical testing group level analysis
+[00:02:27] and eventually image reconstruction on
+[00:02:30] that data so I'm going to talk about the
+[00:02:33] ins and outs of that so the first step
+[00:02:36] of Mirrors is conversion to hemoglobin
+[00:02:41] you measure raw signal intensity it's
+[00:02:42] the amount of light from a source
+[00:02:44] reaching a detector or anything that
+[00:02:46] changed in the tissue in between that
+[00:02:49] source detector obviously absorbs the
+[00:02:50] light and you get less light hitting
+[00:02:52] that detector and so that's the
+[00:02:56] conversion of raw data to hemoglobin
+[00:02:59] units is what's called the beer-lambert
+[00:03:00] law and it's a concept that's introduced
+[00:03:04] in maybe freshmen chemistry class in in
+[00:03:07] college in analytic chemistry but it's
+[00:03:10] basically this idea if I if I have a
+[00:03:13] substitute and I shine light through the
+[00:03:16] test tube I can figure out how much what
+[00:03:19] the concentration is in here as long as
+[00:03:22] I know some of the physical properties
+[00:03:25] that is the extinction coefficient of
+[00:03:28] the whatever the compound is and I know
+[00:03:31] the distance the path length of the
+[00:03:33] light travel through the tissue or
+[00:03:35] through the sample and so in a chemistry
+[00:03:37] class this is really simple because you
+[00:03:39] can take a ruler and go and measure that
+[00:03:41] distance you know it's one centimeter
+[00:03:43] across the little cube at there's
+[00:03:45] something but it becomes a lot harder
+[00:03:46] when we start talking about tissue where
+[00:03:50] the light going through the tissue
+[00:03:51] doesn't go straight it doesn't go there
+[00:03:53] ballistically through it scatters and so
+[00:03:55] we know all about this here but the
+[00:03:59] light going through the tissue doesn't
+[00:04:01] take a straight path it wanders around
+[00:04:02] it diffuses and so it might be taking my
+[00:04:05] finger as an example it might be a
+[00:04:07] centimeter across my finger physically
+[00:04:10] going going straight but it's probably
+[00:04:12] close to six centimeters in terms of all
+[00:04:15] the back-and-forth wandering that light
+[00:04:16] has gone and that factor of six is
+[00:04:18] what's called the differential path line
+[00:04:20] factor it's an it's a fudge factor a
+[00:04:23] scaling factor that accounts for the
+[00:04:25] fact that light didn't go straight
+[00:04:28] and so the the what's called the
+[00:04:30] modified beer-lambert law here takes in
+[00:04:34] not the the once a mirror
+[00:04:37] half length but this effective path
+[00:04:39] length of the original distance times
+[00:04:41] this with a differential path length
+[00:04:44] factor there's an additional term G a
+[00:04:48] geometry factor that accounts for the
+[00:04:51] fact that light can because it's
+[00:04:53] diffusing around it can escape out the
+[00:04:55] sides of my fingers as well as hitting
+[00:04:56] the detector and that's this this
+[00:04:59] geometry term let's see and and I will
+[00:05:06] introduce oh it's not on the side oil
+[00:05:09] energy sit here one of the problems with
+[00:05:10] with brain imaging is there's actually
+[00:05:12] two terms here that that control the
+[00:05:16] absolute amplitude of the nearest signal
+[00:05:19] that is the micromolar your estimate of
+[00:05:21] micro molar units there's this
+[00:05:24] differential path length but the light
+[00:05:25] just didn't go straight through and we
+[00:05:29] can model this using Monica if we have
+[00:05:32] estimates of the structure MRI CT
+[00:05:36] something like that we can model it with
+[00:05:38] Montecarlo methods or so on we can
+[00:05:40] bottle this diffusion and come up with
+[00:05:43] that value of six six-fold there's also
+[00:05:46] what's called the partial volume term
+[00:05:48] which is of this light going through the
+[00:05:51] tissue it went in through you know the
+[00:05:54] skin skull CSF hit the brain came back
+[00:05:57] out through the skin skull or CSF this
+[00:05:59] is call that skin and the problem is
+[00:06:02] that of that six centimeters that are
+[00:06:04] traveled through only maybe half of like
+[00:06:08] five millimeters was actually spent in
+[00:06:10] the region that you actually cared about
+[00:06:11] the brain so you have both this
+[00:06:13] differential path length that the light
+[00:06:16] traveled much farther than you thought
+[00:06:18] it did and this partial volume term of
+[00:06:21] only of that that full path length only
+[00:06:25] a small fraction that was actually spent
+[00:06:26] in the brain and the problem is you need
+[00:06:28] to know both of those terms in order to
+[00:06:31] be quantitative so typically in the
+[00:06:33] nearest community we always talk about
+[00:06:34] you know the modified beer-lambert law
+[00:06:36] and I think the narek software even has
+[00:06:39] this term of
+[00:06:40] DPF and they put a value of six the
+[00:06:44] problem is that doesn't account for this
+[00:06:46] partial volume term so so when you're
+[00:06:48] estimating six you put six for DPF
+[00:06:50] you're actually overestimating the
+[00:06:52] actual brain response that's assuming
+[00:06:54] that the entire path occurred or that
+[00:06:57] the activity occurred in the entire path
+[00:06:59] which we know to be mostly as skin and
+[00:07:01] skull and so on and so we have this
+[00:07:03] additional term of partial volume so
+[00:07:07] typically our DTF or what's called the
+[00:07:09] PPF the partial half-life factor which
+[00:07:12] is a combination of both the
+[00:07:14] differential path length and the partial
+[00:07:15] volume is typically something more on
+[00:07:18] the order of like a half meaning that of
+[00:07:22] that three centimeter distance
+[00:07:25] differential path length is six but of
+[00:07:28] that 18 centimeters only half of that
+[00:07:32] only nine centimeters was actually spent
+[00:07:34] in the actual brain itself and you have
+[00:07:36] to know those those terms to be
+[00:07:38] quantitative fortunately what I'll talk
+[00:07:42] about a little bit later is if you're
+[00:07:45] just worried about T statistics that
+[00:07:49] term appears in both the numerator and
+[00:07:51] the denominator and washes out at least
+[00:07:53] on a single subject level where you run
+[00:07:55] into trouble is if you're trying to do
+[00:07:57] group level analysis where you're
+[00:08:00] looking at say younger versus older
+[00:08:02] subject you know the older subjects have
+[00:08:04] brain atrophy the brain is moving away
+[00:08:05] which means that partial volume term is
+[00:08:07] going to be smaller which means you're
+[00:08:09] going to underestimate the signal if you
+[00:08:11] use the same term so it's things that
+[00:08:13] have to be considered so anyway we kind
+[00:08:18] of jump through this really quick
+[00:08:20] because hopefully most people kind of
+[00:08:22] know about this the beer-lambert law the
+[00:08:25] idea by measuring two wave lengths we
+[00:08:28] have two unknowns oxy and
+[00:08:30] deoxyhemoglobin we solve this two-by-two
+[00:08:33] system of equations so we can estimate
+[00:08:36] oxy and the oxy and these differential
+[00:08:38] path length terms or partial path length
+[00:08:40] terms appear in this this equation here
+[00:08:44] that if we get these wrong we're off by
+[00:08:48] our amplitude estimates of oxy and deoxy
+[00:08:51] and up wrong now the choice of
+[00:08:54] of wavelengths that we use and why the
+[00:08:57] nirach systems use seven 8850 the Tecton
+[00:09:00] systems used 69830 the reason why those
+[00:09:05] specific wave lamps is because there's a
+[00:09:08] bit of work the paper by Gary Strang
+[00:09:12] then it all in o2 i think is kind of the
+[00:09:16] one everyone points to that basically
+[00:09:19] showed that if you're selective in which
+[00:09:21] wavelengths you use although you don't
+[00:09:24] know the differential path length as
+[00:09:25] long as it's the same for both wave
+[00:09:28] lamps at worst you're off by a scalar
+[00:09:30] right worse your amplitude you get oxy
+[00:09:33] deoxy relatively right that is oxy is
+[00:09:36] three times bigger than deoxy you don't
+[00:09:38] have crosstalk but at worse you're off
+[00:09:41] by an overall scalar factor of the
+[00:09:44] entire system if you choose the wrong
+[00:09:46] way of lamps what gary stranglin showed
+[00:09:48] was that you can actually lead to
+[00:09:51] crosstalk you don't separate oxy and
+[00:09:53] deoxy correctly and you end up kind of
+[00:09:56] getting weird
+[00:09:57] type responses and not the right shape
+[00:09:59] and then everything is wrong so as long
+[00:10:02] as you paid attention to which
+[00:10:04] wavelengths you use DPF for the most
+[00:10:07] part is considered as a scalar factor
+[00:10:11] that affects the overall amplitude but
+[00:10:13] not the separation of oxy deoxy but it
+[00:10:15] is definitely something to be aware of
+[00:10:18] because every now and again you get a
+[00:10:21] comments for a paper review or something
+[00:10:24] dealing with crosstalk between oxy and
+[00:10:26] deoxy that you have to address and then
+[00:10:28] go point to this gary stringent paper so
+[00:10:32] anyway so we've we've now collected our
+[00:10:34] data we've turned that oxy or that raw
+[00:10:37] signal intensity to oxy and
+[00:10:40] deoxyhemoglobin so we now have a time
+[00:10:42] course and the time course looks
+[00:10:44] something like this hopefully that you
+[00:10:47] have your experimental design this was
+[00:10:50] this is kind of simulated data but let's
+[00:10:53] say a finger-tapping experiment that you
+[00:10:55] kept tapping your fingers and you get
+[00:10:57] this change in oxy and deoxyhemoglobin
+[00:11:00] every time you tapped your fingers so
+[00:11:03] now what the the goal of course not all
+[00:11:05] data looks as beautiful as this
+[00:11:08] you can obviously see it do your stats
+[00:11:10] by I here now the goal is to do some
+[00:11:14] sort of statistical analysis I want to
+[00:11:17] know what channels statistically change
+[00:11:20] during these task periods compared to
+[00:11:24] these rest periods and so by oh you can
+[00:11:26] really clearly see it's these couple
+[00:11:28] channels and those channels now there
+[00:11:29] didn't change at all and so if I map
+[00:11:31] these on the head and this was a finger
+[00:11:33] tapping the expectation would be these
+[00:11:35] channels were over the motor cortex and
+[00:11:37] these other channels were not but as I
+[00:11:40] said most data doesn't look nearly this
+[00:11:42] this clean and so that's what I'm gonna
+[00:11:45] spend kind of the rest of the talk
+[00:11:46] talking about so there's there's a
+[00:11:50] really two different schools of thought
+[00:11:55] that's column on the the analysis here
+[00:11:58] and historically it kind of came from
+[00:12:02] people coming into mirrors where did
+[00:12:05] their background come from so in the
+[00:12:07] nearest community we drew historically
+[00:12:09] we drew a lot of users and I know this
+[00:12:12] from this crowd here even that you
+[00:12:14] either came from having done previously
+[00:12:15] fMRI experiments or eg experiments and
+[00:12:19] EEG the EEG people which a lot of the
+[00:12:23] kid the pediatric type imaging people
+[00:12:27] that move migrate into the nearest field
+[00:12:29] kind of from came for that eg type world
+[00:12:31] the EEG analysis we tend tended to favor
+[00:12:37] deconvolution block averaging type
+[00:12:39] techniques where you basically take
+[00:12:41] every one of these blocks you stack them
+[00:12:44] up on top of each other you average
+[00:12:45] through and you get something akin to an
+[00:12:47] ERP so we call that a href a human
+[00:12:50] addict response function but it's you
+[00:12:52] know this nice curve that kind of comes
+[00:12:54] up and so on and so I'm gonna refer to
+[00:12:58] that as HRF analysis which is really
+[00:13:01] where you're estimating the average
+[00:13:03] response of the curve and you're kind of
+[00:13:05] looking at this at a time course on it's
+[00:13:09] always a two-step process because after
+[00:13:12] you've now estimated this it's time
+[00:13:13] course you know have to do some sort of
+[00:13:15] hypothesis testing so you have to frame
+[00:13:18] that as well I'm going to look at this
+[00:13:20] window from
+[00:13:21] let's say six to twelve seconds and I'm
+[00:13:23] going to compute the amplitude over that
+[00:13:25] window and compare it to the amplitude
+[00:13:26] of some other window some baseline
+[00:13:28] window and so hrf analysis is always
+[00:13:30] kind of a two stage where you estimate
+[00:13:33] the response and then you define a
+[00:13:36] contrast window and you estimate the
+[00:13:38] contrast over that window the other
+[00:13:41] school of thought which are people that
+[00:13:44] him were much more familiar with fMRI
+[00:13:46] and it came from that was this idea of
+[00:13:49] kind of jumping straight into the
+[00:13:52] hypothesis by using a canonical or a
+[00:13:55] parametric model so people from the fMRI
+[00:13:58] we're familiar with acne or FSL or SPM
+[00:14:01] where the standard kind of in the fMRI
+[00:14:04] community is you take your stimulus
+[00:14:07] timing you convolve that stimulus timing
+[00:14:11] with an expectation of what the response
+[00:14:14] should have looked like
+[00:14:15] so you've done 30 years of the field
+[00:14:18] incident 30 years of research we kind of
+[00:14:19] know that the hemodynamic shape should
+[00:14:21] come up peak around eight seconds come
+[00:14:22] back down so we're going to assume that
+[00:14:24] our data looks like that and we're gonna
+[00:14:26] basically ask which channel is
+[00:14:28] correlated with that expected signal and
+[00:14:30] so we're jumping in straight to the
+[00:14:32] hypothesis of which channels were
+[00:14:36] statistically is the null hypothesis
+[00:14:38] which two channels were statistically
+[00:14:39] not related to that task or not related
+[00:14:43] to that expected timing so if the
+[00:14:45] expected timing is is wrong I'm gonna
+[00:14:48] find I know I might have a channel that
+[00:14:50] was activated by some other definition
+[00:14:53] that had a slightly different timing but
+[00:14:55] I'm gonna fail to find that because I
+[00:14:58] didn't match my hypothesis it's really
+[00:15:01] the case if I used the wrong hypothesis
+[00:15:03] but I'm gonna refer to that as
+[00:15:05] parametric modeling and these kind of
+[00:15:07] two schools of thought of estimating
+[00:15:11] deconvolution as being the entire time
+[00:15:14] force versus doing hypothesis testing so
+[00:15:23] hmm I'm gonna skip that so I'm jumpy
+[00:15:26] here so if you've done that that
+[00:15:29] experiment hopefully so this is
+[00:15:31] obviously this is the deconvolution
+[00:15:33] version
+[00:15:35] so hopefully you would get some sort of
+[00:15:37] response like this
+[00:15:38] the oxyhemoglobin goes up volume or
+[00:15:42] total hemoglobin goes up my
+[00:15:44] oxyhemoglobin goes down this is really
+[00:15:47] the results of the competition between a
+[00:15:49] flow response in your brain and a
+[00:15:52] metabolism oxygen metabolism response
+[00:15:54] the flow response generally wins by two
+[00:15:57] to threefold we call that the hyperemic
+[00:16:00] or a positive fold response and
+[00:16:02] hopefully your data looks something like
+[00:16:04] this that these guys are going up in
+[00:16:06] Yahtzee is going down so if you followed
+[00:16:10] that kind of d arc deconvolution erp d
+[00:16:12] you've got something like this you've
+[00:16:14] got a time chorus hopefully with some
+[00:16:16] error bars on it and what you would have
+[00:16:18] to do that is you would pick a window of
+[00:16:21] time you know in this case this is a
+[00:16:24] very short 2 second finger tapping data
+[00:16:27] so you might pick a window from say 5 to
+[00:16:29] 10 seconds or so and you would compute
+[00:16:32] the average and the error bars for that
+[00:16:35] window and maybe you compare it to the
+[00:16:37] average and error bars for some baseline
+[00:16:39] limit people also do although I don't
+[00:16:45] advocate it looking at peak amplitude or
+[00:16:49] time to onset as a statistical parameter
+[00:16:52] but somehow you take this even I have a
+[00:16:54] response you can press it into a single
+[00:16:57] test if this window different than that
+[00:17:00] window and that's what that's what you
+[00:17:01] can use your stats on considerations for
+[00:17:04] that are what window to use because
+[00:17:06] obviously if I the one of the problems
+[00:17:10] with this kind of analysis is you're
+[00:17:13] tempted to change your hypothesis after
+[00:17:15] you see your data right I mean if I if I
+[00:17:19] looked at this data and I said oh 5 to
+[00:17:20] 10 seconds I said 5 to 10 seconds
+[00:17:22] because that's what the data say right
+[00:17:25] if I was up here and the data was
+[00:17:27] shifted I would have said a different
+[00:17:28] window which means that my hypothesis is
+[00:17:31] gonna favor a kind of false positives
+[00:17:34] right because I'm always kind of tempted
+[00:17:36] to lead my hypothesis to match my data
+[00:17:39] so that's that's that's definitely a
+[00:17:41] issue you also have this issue of
+[00:17:45] multiple comparisons because in
+[00:17:48] mirrors and I'll talk about this a
+[00:17:50] little bit more we have what's called
+[00:17:52] serial correlations in our noise our
+[00:17:55] noise is not white it's not instrument
+[00:17:57] noise it's what's called color it has
+[00:18:00] specific frequency components to it
+[00:18:02] cardiac respiratory blood pressure are
+[00:18:05] slow physiological changes that are much
+[00:18:08] slower than our data rates and so a lot
+[00:18:12] of this this noise is due to that yeah
+[00:18:15] which means that the error bars at this
+[00:18:17] point are not independent of the error
+[00:18:19] bars at this point because there you had
+[00:18:22] this slow noise that was moving from you
+[00:18:24] the data and so taking a window of time
+[00:18:28] you might have let's say a hundred time
+[00:18:32] points within this window that you don't
+[00:18:34] actually have a hundred degrees of
+[00:18:36] freedom and so so you have to somehow
+[00:18:38] correct for that in order to get your
+[00:18:40] statistics right because you're actually
+[00:18:42] under estimating the noise under eyes to
+[00:18:46] over estimated in degrees of freedom
+[00:18:48] when you do that that problem so I don't
+[00:18:55] have this side I was looking for that oh
+[00:18:57] I'll go to this so so kind of the HRF
+[00:19:00] analysis you get to see more if the data
+[00:19:03] it's more of an exploratory but you have
+[00:19:06] this this may be user bias that unless
+[00:19:10] you predefined your windows you might be
+[00:19:12] tempted to to change your hypothesis
+[00:19:15] it's more flexibility in that sense to
+[00:19:17] test different things like is the timing
+[00:19:20] different between my two populations or
+[00:19:22] whatever the other problem with HRF
+[00:19:26] analysis is you can only average things
+[00:19:28] with the same duration right so if you
+[00:19:31] tap your fingers and you do it for 10
+[00:19:33] seconds so you can repeat that and every
+[00:19:35] single block you did it for 10 seconds
+[00:19:36] you're fine but if you're and a lot of
+[00:19:40] the psychologists I work with they do
+[00:19:43] you know some sort of cognitive testing
+[00:19:45] with be prime that requires a response
+[00:19:47] from the subject which means that each
+[00:19:50] trial can be a different life because in
+[00:19:53] some trials the subject didn't respond
+[00:19:54] as fast as the other trials or whatever
+[00:19:57] and the problem is you know if that's
+[00:19:59] the case now if I stack all the data and
+[00:20:01] try to
+[00:20:02] which through all of that jitter in the
+[00:20:04] timing the the response timing causes
+[00:20:08] problems when I do the stats right that
+[00:20:10] I have to somehow correct for that if
+[00:20:13] you're if you're doing kind of more the
+[00:20:16] metric analysis which is the fMRI style
+[00:20:19] as I said what you do is you take your
+[00:20:22] your timing you convolve it with an
+[00:20:24] expected response you deconvolve and you
+[00:20:27] just test do that response correlate
+[00:20:29] with your data well if you do that now
+[00:20:30] you have more flexibility because if if
+[00:20:33] you have that information that this
+[00:20:35] trial was longer than that trial that
+[00:20:37] actually gets incorporated into your
+[00:20:39] your hypothesis into your ear
+[00:20:40] expectation so these these kind of SPM
+[00:20:44] analysis can deal with variability in
+[00:20:47] response timing and so on you did a
+[00:20:50] question yeah well it's it's if you do
+[00:21:00] the experiment in law of course if you
+[00:21:02] brought it to your statistician they
+[00:21:04] would have the first thing that they
+[00:21:06] would have asked you when you entered
+[00:21:07] their office was what time when do you
+[00:21:09] want to use yeah
+[00:21:23] yeah
+[00:21:51] well no if that if that yeah I know if
+[00:21:54] that was the case your hypothesis is did
+[00:21:59] this population differ from that one or
+[00:22:00] did this condition differ from that one
+[00:22:02] and that that test by choosing the
+[00:22:09] window as long as you were consistent
+[00:22:10] between the two you know then you're
+[00:22:12] fine you don't have that that bias it's
+[00:22:14] really if you're testing it against did
+[00:22:16] this condition activate relative to a
+[00:22:18] baseline that's where you run into the
+[00:22:20] bias right or you looked at the two
+[00:22:23] conditions separately and said I'm going
+[00:22:25] to use this window and I'm gonna use
+[00:22:26] that window that's a problem right but
+[00:22:28] but yeah it's you can get around it
+[00:22:30] doing like that but you have to be
+[00:22:32] conscious of what you're you know of
+[00:22:35] those those type of questions and and I
+[00:22:39] don't want to knock the nearest field at
+[00:22:43] all but historically you haven't been
+[00:22:45] the greatest group when it comes to some
+[00:22:48] of those questions and some of those
+[00:22:50] hypothesis testing the the more recent
+[00:22:54] stuff and I am I threw out the slide
+[00:22:57] later on that shows this but I'll jump
+[00:23:00] to you some of the new stuff that we're
+[00:23:02] doing that it turns out and I'll show
+[00:23:04] this a little bit in the tool box if so
+[00:23:09] I said this way it's a two-step model
+[00:23:10] you estimate the humanik response and
+[00:23:12] they choose a window and estimate over a
+[00:23:14] window whereas this you jump straight
+[00:23:16] through hypotheses if you chose the
+[00:23:19] window correctly if you chose the window
+[00:23:22] of of well actually I know that kind of
+[00:23:25] comes up Keeks at eight seconds comes
+[00:23:26] back down and instead of using a
+[00:23:28] constant window of I'm gonna give equal
+[00:23:32] weight to all those time points you
+[00:23:33] actually give a tapered window that goes
+[00:23:35] up that comes back down and use that as
+[00:23:37] your contrast you get the exact same
+[00:23:39] answer between these two methods
+[00:23:41] so you can do a full deconvolution look
+[00:23:44] at the whole time course and then choose
+[00:23:46] a tapered window that had that shape of
+[00:23:49] the canonical response and we would have
+[00:23:51] gotten the exact same T value as if you
+[00:23:53] did it over here the advantage over here
+[00:23:56] is you're jumping straight to that
+[00:23:57] answer so there is a little bit more
+[00:23:58] advantage of the power weighting it by
+[00:24:01] types of use a tapered this method so in
+[00:24:05] in the nearest field and I'm glad you
+[00:24:08] asked that question cuz it's exactly
+[00:24:09] something that nearest field has
+[00:24:10] criticized the fMRI people about of hey
+[00:24:14] I do kids I don't know it from attack
+[00:24:16] response looks like I don't want to make
+[00:24:18] assumptions like that it turns out that
+[00:24:23] the canonical model the way to think
+[00:24:26] about a canonical model is not imposing
+[00:24:29] a specific shape it's imposing a
+[00:24:31] hypothesis it's imposing the shape of
+[00:24:34] you know what time we know you want to
+[00:24:35] use such they if you use the wrong time
+[00:24:38] window or you saw long shape it's
+[00:24:39] equivalent to just picking the wrong
+[00:24:40] time limit and and so it's it's not it
+[00:24:45] turns out not you know I have an inch
+[00:24:47] maybe I don't know what the shape is it
+[00:24:49] turns out that that really wasn't as big
+[00:24:51] of a deal as we thought it's I have a
+[00:24:53] new paper that's about to come out that
+[00:24:55] looks at it does nonlinear regression
+[00:24:58] and estimates the response and actually
+[00:25:01] looks at some of these issues of done
+[00:25:03] simulations of you know puts in beta
+[00:25:06] with a kind of a wonky and keep an after
+[00:25:08] sponsor keeps much later than a my
+[00:25:10] canonical and ask well how bad is right
+[00:25:12] I use the wrong model how bad is it and
+[00:25:15] it looks at this as a function of the
+[00:25:17] duration of the task and what it turns
+[00:25:20] out is that if your task is longer than
+[00:25:23] about 10 seconds it doesn't matter
+[00:25:25] anymore because the shape of the human
+[00:25:27] addict response is wherever at the last
+[00:25:30] couple slide where close up and keys if
+[00:25:32] I shift the response or I have a
+[00:25:34] slightly different response it affects
+[00:25:35] the transients that is the very early
+[00:25:38] seconds in the very late seconds but if
+[00:25:40] your task is long enough that it kind of
+[00:25:42] goes up and stays up and it comes back
+[00:25:44] down the past is long enough it no
+[00:25:46] longer really matters and so if you do
+[00:25:48] sensitivity specificity analysis you
+[00:25:52] know using the wrong shapes and stuff
+[00:25:54] you find out
+[00:25:55] it really doesn't matter all too much if
+[00:25:57] your task is longer than about 10
+[00:25:58] seconds long if your task is shorter
+[00:26:01] than that then it really becomes really
+[00:26:03] important to get the right shape and if
+[00:26:05] you have the wrong shape you have type 2
+[00:26:07] error that is you activity is actually
+[00:26:10] there but you fail to report it so you
+[00:26:12] have a false negative but it's it's
+[00:26:16] we're gonna publish something that's
+[00:26:18] going to come out this is above 10
+[00:26:19] seconds which is
+[00:26:20] the vast majority of experiment up 10
+[00:26:23] yeah 10 second duration of the task it's
+[00:26:27] true for both event related in and block
+[00:26:30] design there's a little bit when you go
+[00:26:33] to event related there's a little bit of
+[00:26:35] a caveat with what I said about choosing
+[00:26:38] the window right but it's it's but yeah
+[00:26:44] so so what I'm gonna show I'm gonna show
+[00:26:47] it in my tool box in the second talk my
+[00:26:50] lab almost exclusively does this version
+[00:26:54] because there's a huge statistical power
+[00:26:56] associated with this version and almost
+[00:27:00] all of our experiments are dealing with
+[00:27:01] tasks that are longer than contact as
+[00:27:03] well and I'm gonna show you both ways
+[00:27:07] within the code box and leave it to you
+[00:27:11] to decide which one you like better so I
+[00:27:15] kind of got sidetracked a little bit on
+[00:27:17] that so I'm gonna jump in some of the
+[00:27:20] practical issues and how historically
+[00:27:23] the field has dealt with them and as I
+[00:27:25] said kind of give some background in
+[00:27:28] this and actually starting to run they
+[00:27:31] have to 11 right ish okay so let's let's
+[00:27:37] go a little bit faster okay so so I
+[00:27:40] showed some data before that was nice
+[00:27:43] clean you clearly saw the responses but
+[00:27:45] most of the time your data looks a
+[00:27:46] little bit something more like this
+[00:27:48] that we clearly have a motion artifact
+[00:27:50] in the data motion artifact for Neer's
+[00:27:53] is when the probe moves relative to the
+[00:27:56] head so I move around all you want I
+[00:27:58] showed yesterday my all my work with
+[00:28:00] gait mobility and stuff like that probe
+[00:28:03] remains fixed as long as it rains fixed
+[00:28:05] I can I can dance I can do Nintendo
+[00:28:07] whatever
+[00:28:08] as soon as that probe starts sliding on
+[00:28:10] the head the light that's going through
+[00:28:12] the tissue is orders of magnitude weaker
+[00:28:15] than the light that's just bouncing off
+[00:28:18] the surface and so if it lifts off even
+[00:28:20] transiently you're gonna flood the
+[00:28:22] detectors with an order of magnitude
+[00:28:23] change in light and that's why you get
+[00:28:25] these huge spikes like this do you get
+[00:28:28] two kinds of artifacts generally with
+[00:28:30] motion you get what we call a spike
+[00:28:33] artifact where it comes up and comes
+[00:28:35] back down or you can have a shift
+[00:28:37] artifact where it comes up comes back
+[00:28:39] down and goes to a slightly different
+[00:28:41] spot so you actually see the beam
+[00:28:42] intensity changed before and after the
+[00:28:45] artifact and but those are kind of the
+[00:28:50] two types of artifacts that you deal
+[00:28:52] with we zoom in here we also have so you
+[00:28:56] see cardiac oscillations once every you
+[00:28:59] know 60 beats per minute or so you see
+[00:29:02] respiratory oscillations so generally
+[00:29:04] people breathe at about a quarter of a
+[00:29:06] Hertz so you have an oscillation every
+[00:29:08] four seconds or so which is the
+[00:29:10] breathing rate typically you see cardiac
+[00:29:14] the cardiac oscillations on the
+[00:29:16] oxyhemoglobin channel because that's
+[00:29:18] more of an arterial you typically see
+[00:29:21] respiratory on a little bit of both the
+[00:29:24] oxy and the deoxy here we're looking at
+[00:29:26] oxy and then you you see what pressure
+[00:29:31] oscillations which are which are a more
+[00:29:33] variable and much slower but you have
+[00:29:37] these these kind of waves Thomas
+[00:29:39] mentioned yesterday that so-called Maher
+[00:29:41] waves at time for the Earth's or slower
+[00:29:44] drips over minutes to hours to days due
+[00:29:48] to blood pressure I think so you have
+[00:29:51] these various little oscillations blood
+[00:29:54] pressure tends to as the cardiac tends
+[00:29:57] to show up a little bit more on the
+[00:29:58] oxyhemoglobin
+[00:29:59] blood pressure and respiratory i should
+[00:30:01] tend to show up a little bit more on the
+[00:30:02] dioxygen of living but so you have these
+[00:30:06] these different frequency bands to deal
+[00:30:10] with the fast cardiac versus the slow
+[00:30:13] blood pressure type oscillations and
+[00:30:18] then our hemodynamic response is
+[00:30:21] typically kind of
+[00:30:22] right in between which which causes a
+[00:30:25] little bit of issues with filtering that
+[00:30:27] I'll explain in a second but it's slower
+[00:30:30] than the heart rate but probably faster
+[00:30:32] than the blood pressure oscillations and
+[00:30:37] one thing I'll just show is these
+[00:30:39] oscillations is this movie playing no
+[00:30:42] it's not gonna play that's right this
+[00:30:45] was a paper from Bari Angela Franceschi
+[00:30:47] need from MGH but what we did was we did
+[00:30:50] a whole head imaging and mapped out
+[00:30:53] these different physiological components
+[00:30:56] this was supposed to be a movie but what
+[00:30:59] you end up seeing is if you look at the
+[00:31:01] cardiac the whole head is kind of moving
+[00:31:03] in unison because it's it's you know
+[00:31:06] your heart rates pumping but if you look
+[00:31:08] at more of these slow drips like blood
+[00:31:11] pressure what you see is the blood
+[00:31:13] pressure actually starts in the back of
+[00:31:15] the head where your meanest sinuses are
+[00:31:17] and kind of you got a rolling wave that
+[00:31:20] kind of moves from back to front as this
+[00:31:22] pressure wave moves through the system
+[00:31:24] so you have these very unique temporal
+[00:31:26] and spatial features of the different
+[00:31:29] physiology this is just an example this
+[00:31:34] is this is theresa Wilcox's lab is
+[00:31:36] something i talked about yesterday
+[00:31:38] the little baby is watching the puppet
+[00:31:40] show that's during the rest period this
+[00:31:43] is actually off the chart hi you get
+[00:31:45] these huge motion artifacts so the
+[00:31:47] baby's moving around during the task
+[00:31:49] near the holy man and responses but
+[00:31:53] they're in the rest period craziness and
+[00:31:55] so if we take those ideas of the
+[00:31:57] statistics and I want to ask me the
+[00:31:59] average amplitude here and compare it to
+[00:32:02] the average amplitude here well the
+[00:32:04] averages are different departments the
+[00:32:06] arrow bars on this part the baseline
+[00:32:08] period are so large that I said I failed
+[00:32:11] pretty much every statistical test I can
+[00:32:13] do right and and so that becomes a
+[00:32:16] problem with with with this and we
+[00:32:18] talked about it a bit yesterday with
+[00:32:19] that so there are options historically
+[00:32:25] for dealing with these types of
+[00:32:27] artifacts and I'm so I'm gonna walk
+[00:32:29] through some of those those different
+[00:32:31] options and they basically either make
+[00:32:33] use of spatial features of the day
+[00:32:36] or temporal features of the game so I'm
+[00:32:39] gonna go I'm gonna go go through these
+[00:32:41] in I'm gonna start with the temporal
+[00:32:43] feature it's one so the easiest one and
+[00:32:49] something that's in was in the software
+[00:32:52] for real time that Thomas showed
+[00:32:54] yesterday so on is a bandpass filter so
+[00:32:59] for something like cardiac oscillation
+[00:33:01] these fast oscillations I mastered
+[00:33:03] yesterday if I put a low pet or a
+[00:33:06] high-pass filter sorry a low-pass filter
+[00:33:08] a low-pass filter is going to allow
+[00:33:10] frequencies lower than the cutoff to
+[00:33:14] pets low-pass and so if I choose a low
+[00:33:18] pass filter at say half of Hertz all
+[00:33:21] that cardiac oscillations at 1 Hertz it
+[00:33:23] at 1/8 per second it's going to get
+[00:33:26] filtered away and so you see if you play
+[00:33:28] a low-pass filter at the right frequency
+[00:33:31] you can remove all this cardiac but we
+[00:33:33] need to signal interest the problem is
+[00:33:37] if you choose the little paths much
+[00:33:39] lower so now we lower that threshold now
+[00:33:42] we start the wipeout signal that
+[00:33:44] potentially was of interest and so one
+[00:33:47] of the problems with with an high-pass
+[00:33:51] filter is the opposite a high-pass
+[00:33:53] filter lets high frequencies pass and so
+[00:33:56] it removes slow drift but let's all
+[00:33:58] these high frequencies and so so a
+[00:34:00] bandpass filter news take a window you
+[00:34:03] cut off anything below or anything above
+[00:34:05] that window and the problem with the
+[00:34:08] MCATs filtering is selecting the window
+[00:34:11] cardiac yz1 Hertz you know you can
+[00:34:14] remove it safely without really
+[00:34:15] affecting your human response blood
+[00:34:18] pressure respiratory because the
+[00:34:21] frequencies overlap with the frequencies
+[00:34:24] of my him at half response it's a lot
+[00:34:26] more troublesome I have a hard time
+[00:34:28] designing a filter that's going to
+[00:34:31] safely remove all of that physiology and
+[00:34:34] leave and and and have confidence that
+[00:34:36] I'm leaving the signal I care about but
+[00:34:41] people still to this day kind of use
+[00:34:43] bandpass filtering I guess this is the
+[00:34:46] slide I was looking for I'm interested
+[00:34:48] in this so I
+[00:34:49] high pass filter Ola instrument noise of
+[00:34:52] cardiac I could proudly low-pass filter
+[00:34:54] the or high pass filter the really
+[00:34:57] really slow blood pressure but I have
+[00:35:00] trouble kind of in the middle and here's
+[00:35:02] just an example low pass filter I pass
+[00:35:06] filter over filter and I wipe the
+[00:35:08] response you get the idea so that's how
+[00:35:12] people used to do it and there are a
+[00:35:13] little bit more fancy ways in the
+[00:35:15] literature to try to deal with that one
+[00:35:17] of the ways people have proposed is by
+[00:35:21] using essentially adaptive filter or
+[00:35:24] wavelet filters where it's it's not a
+[00:35:28] specific frequency cutoff so much
+[00:35:30] anymore but kind of trying to remove
+[00:35:33] some sort of trend you still have the
+[00:35:36] concept of overfitting where if you
+[00:35:40] choose the parameters too high it
+[00:35:41] removes too much the signal versus
+[00:35:44] getting it just right this is the
+[00:35:48] methods that are currently used in near
+[00:35:49] assess p.m. so the the s the near is
+[00:35:53] extension to SPM it's what's called a
+[00:35:55] minimum descriptive life wavelet where
+[00:35:58] what they try to do is find the waves of
+[00:36:02] wavelets been like a frequency filter
+[00:36:04] and they try to use the lowest order or
+[00:36:08] wavelet that cleans up the date so
+[00:36:10] they're trying to avoid
+[00:36:11] pipat they're trying to avoid
+[00:36:13] overfitting and removing too much and so
+[00:36:17] they kind of have a criterion for trying
+[00:36:19] to remove an optimal amount of noise
+[00:36:22] leaving the signal on touch I won't go
+[00:36:25] through the math on that another way
+[00:36:30] that we talked about yesterday a little
+[00:36:36] bit what is oh this is not this so I get
+[00:36:40] forget that time another no skip I'm
+[00:36:46] gonna come back to that one cuz that's
+[00:36:49] jumping another way that people try to
+[00:36:54] remove physiology that was a motion
+[00:36:56] correction slide I'm gonna finish the
+[00:36:58] physiology motion another way people try
+[00:37:02] to deal with the
+[00:37:03] theology is to externally record it so
+[00:37:07] say I have I have a subject I can put a
+[00:37:10] pulse oximeter I can put a respiratory
+[00:37:13] belt I can maybe even put a non-invasive
+[00:37:16] blood pressure beat to be blood pressure
+[00:37:18] on me and I can we measure some of this
+[00:37:20] physiology and so the idea is that
+[00:37:23] knowing that external physiology I can
+[00:37:25] then design a filter to remove it from
+[00:37:28] the brain and so there's this is
+[00:37:32] actually fairly popular in in fMRI where
+[00:37:35] we record physiology and these methods
+[00:37:37] what's called broach rykor and so on to
+[00:37:40] put in these external variables as
+[00:37:42] filters to clean up the data we can do
+[00:37:45] the same thing with mirrors and the idea
+[00:37:48] is i measure all these things I measure
+[00:37:50] everything I can off the body and and
+[00:37:55] then I designed some sort of filter
+[00:37:57] that's gonna remove it from the brain
+[00:38:00] the problem is so what you do is you put
+[00:38:05] them in as as some sort of regressor you
+[00:38:10] have to actually estimate
+[00:38:11] what's that transfer function that is
+[00:38:13] that the excuse me
+[00:38:16] the cardiac signal heartbeat measure at
+[00:38:18] my finger is not the same as a heartbeat
+[00:38:20] measure I Brian at minimum there's a
+[00:38:22] time lag between the two and so what you
+[00:38:25] have to do is you have to put in and try
+[00:38:27] to model that time lag so you put in
+[00:38:30] lags of the heartbeat signal at the
+[00:38:32] finger and try to estimate that as a
+[00:38:34] filter this is just an example this is
+[00:38:37] simulated data this was actually from
+[00:38:40] the original Homer so if you download
+[00:38:41] Homer I think this is one of the data
+[00:38:43] sets a minute but you have data here
+[00:38:45] that's heavily corrupted by cardiac and
+[00:38:48] respiratory and stuff you have these
+[00:38:51] different blocks which are an event so
+[00:38:53] he this average through you get
+[00:38:55] something that's really really really
+[00:38:57] noisy right and that's because you
+[00:39:00] haven't you don't have enough blocks to
+[00:39:03] get rid of this part or get rid of these
+[00:39:06] these noise oscillations if you've had
+[00:39:07] enough trials eventually it would go
+[00:39:09] away because it would average to zero
+[00:39:11] but for a limited number of trials which
+[00:39:14] is
+[00:39:15] paraty of all the work we do is always a
+[00:39:18] limited number of trials it doesn't go
+[00:39:21] away yeah and so if you go and you
+[00:39:23] measure that and you put it in now to
+[00:39:26] regressors one that's trying to model
+[00:39:28] that cardiac oscillation and second one
+[00:39:32] of interest that kind of model response
+[00:39:34] you can now remove that that that signal
+[00:39:38] and and and clean it up so you have your
+[00:39:42] modeling that original data as a linear
+[00:39:44] combination of the response you care
+[00:39:47] about and nuisance responses that you
+[00:39:50] don't care about that our modeling is
+[00:39:52] these types of noise structures I'm
+[00:39:57] gonna skip that one because it's yeah
+[00:40:19] mm-hm
+[00:40:27] yeah that becomes the problem right so
+[00:40:30] if your if if yeah the the the the major
+[00:40:36] problem of all of these these methods
+[00:40:38] are that they assume all the
+[00:40:42] independence between your task and your
+[00:40:44] physiology said yesterday that if I even
+[00:40:47] do a finger tapping task or certainly
+[00:40:49] running on a treadmill my heart rate
+[00:40:50] went off correlated with the task and so
+[00:40:54] separating out they solely on the time
+[00:40:57] quarks what is a cardiac Ostia what is
+[00:41:00] the systemic versus the brain signal is
+[00:41:02] going to be very difficult ask the
+[00:41:04] question again after we go through the
+[00:41:05] spatial methods because in that case the
+[00:41:08] spatial methods are going to be what
+[00:41:09] helps you okay and for the sake of time
+[00:41:17] I'm going to jump through a little bit
+[00:41:19] of this quickly people do adaptive
+[00:41:21] filtering so we've done a number of
+[00:41:24] adaptive filtering methods that try to
+[00:41:27] one of the problems with this kind of
+[00:41:30] this kind of method it assumes that lag
+[00:41:33] from my finger to my brain is constant
+[00:41:35] right and if I'm sitting still that's
+[00:41:37] probably true but if I'm running around
+[00:41:39] and I'm jogging or something like that
+[00:41:41] every time my heart you know my hand
+[00:41:42] goes up the transfer functions gonna
+[00:41:44] change you know so if you have su so
+[00:41:48] this assumes a stationary build a
+[00:41:53] stationary relationship between what I
+[00:41:55] measure at the finger or the heart or
+[00:41:56] whatever and what I measure out in my
+[00:41:57] brain and if you're changing your
+[00:41:59] posture or whatever that's gonna change
+[00:42:01] as a function of time so the way that
+[00:42:03] people get around that is to try to do
+[00:42:05] adaptive models where they allow those
+[00:42:07] transfer functions those relationships
+[00:42:10] to evolve over time you put some sort of
+[00:42:13] restriction that they evolve slowly they
+[00:42:15] don't sue so you're kind of think of it
+[00:42:18] like a sliding window over over your
+[00:42:20] data but there's been a couple of groups
+[00:42:23] we use this for real-time imaging where
+[00:42:26] we have both adaptive filters that model
+[00:42:29] at the physiology and then adaptive
+[00:42:31] filters that model the brain activities
+[00:42:33] such that we're getting a updated model
+[00:42:36] of brain activity in this case this was
+[00:42:38] a finger tapping experiment
+[00:42:40] and we're sure our model was able to
+[00:42:42] switch our model only do when the tasks
+[00:42:45] occurred it didn't know if it was left
+[00:42:47] or right hand and was able to switch
+[00:42:48] back and forth with this I mean I don't
+[00:42:57] want to go too much do the math gets a
+[00:42:59] little complicated on some of this I
+[00:43:01] just want to throw out some of the ideas
+[00:43:02] because when you read through the
+[00:43:05] literature and you look at some of the
+[00:43:06] reviews they do talk about adaptive
+[00:43:08] filtering and regression and these kind
+[00:43:11] of methods and you should at least know
+[00:43:12] what the terms sort of mean at least
+[00:43:15] what they're referring to but as I said
+[00:43:18] those are all temporal methods they're
+[00:43:19] using this idea that I can identify
+[00:43:22] cardiac because it's fast or that
+[00:43:27] spatial methods try to take advantage of
+[00:43:30] the spatial structure the fact that I
+[00:43:33] said if you look at the cardiac it's
+[00:43:34] actually the whole head kind of going
+[00:43:36] like this and so it has a lot more
+[00:43:38] spatial structure it's going to be all
+[00:43:41] over the whole probe whereas brain
+[00:43:43] activity might only be a very focal
+[00:43:45] local/regional activity and so we kind
+[00:43:48] of had to use that as a filter to try
+[00:43:51] move things that are global from the
+[00:43:53] signal versus brain activity that's
+[00:43:55] that's very local I'm gonna this is kind
+[00:44:01] of I'm gonna come back to that one too
+[00:44:03] because that's kind of a hybrid between
+[00:44:05] the two anyway so this is this is again
+[00:44:09] that same image from the full head
+[00:44:13] mariangela paper where she looked at the
+[00:44:15] spatial structure of her feet
+[00:44:19] respiratory and blood pressure I'm sorry
+[00:44:21] this also was a movie that was supposed
+[00:44:23] to animate but this is the heartbeat is
+[00:44:26] going like this
+[00:44:27] whereas respiratory and blood pressure
+[00:44:29] are starting in the back ahead and kind
+[00:44:31] of rolling forward as a relation as a as
+[00:44:35] a time course and so so what you can do
+[00:44:41] so one of the ways that we can do this
+[00:44:44] is with principal component analysis so
+[00:44:49] principal component analysis
+[00:44:52] this is a terrible okay so so so
+[00:44:58] principle component analysis is a
+[00:45:01] mathematical technique for decomposing a
+[00:45:07] data matrix into its like a better term
+[00:45:11] it's principal components the features
+[00:45:13] that describe the most of the data so
+[00:45:16] the first component the strongest
+[00:45:18] component describes the strongest
+[00:45:20] feature in the data the next component
+[00:45:22] is the next strongest out to the last
+[00:45:24] component which describes the fine
+[00:45:25] details and so what you can do in
+[00:45:28] principal component analysis is kind of
+[00:45:33] likened it to frequency filtering that
+[00:45:36] we can take our data and you can pose it
+[00:45:39] to different frequencies we can then
+[00:45:41] remove certain frequencies and we rotate
+[00:45:44] back and so we now have the original the
+[00:45:46] data in the original space minus the
+[00:45:49] cardiac frequency or whatever that was
+[00:45:51] what we talked about for the bandpass
+[00:45:52] filter PCA very similar kind of concept
+[00:45:55] what we do Susu with the frequency we
+[00:45:58] decompose in frequency cut out some of
+[00:46:01] the frequencies and rotate back with
+[00:46:03] principal component it's the same sort
+[00:46:05] of concept that I'm sorry my equations
+[00:46:08] are not a failing a little bit but we
+[00:46:10] can take our data we can compose it into
+[00:46:13] these this principal component space we
+[00:46:17] can identify which of those principal
+[00:46:19] components look like cardiac or look
+[00:46:22] like respiratory remove that we zero
+[00:46:24] them out and then when we rotate back to
+[00:46:27] the original space now that feature has
+[00:46:29] been removed from the data okay so
+[00:46:33] people actually this credit seemed like
+[00:46:34] a lot of people did EEG PCA or I see a
+[00:46:38] very similar type of method unless
+[00:46:42] you're a mathematician then you'll
+[00:46:43] crucify me for saying that statement are
+[00:46:46] widely used in EEG for things like heart
+[00:46:49] beat memorable and I've like and stuff
+[00:46:51] like that same concept in ears what we
+[00:46:54] do is I'm trying to think how and I just
+[00:47:01] described this I don't want to go
+[00:47:03] through the math what PCA
+[00:47:05] but what we do in mirrors is we take the
+[00:47:09] space the spatial covariance so channel
+[00:47:13] by channel noise structure right so
+[00:47:17] things like the cardiac oscillation are
+[00:47:19] going to be very global features that
+[00:47:21] matrix is going to be very full because
+[00:47:24] all the channels were moving together
+[00:47:25] okay other features like finger tapping
+[00:47:30] or whatever are going to be much less
+[00:47:32] dominant features they only affected a
+[00:47:33] smaller number of channels okay
+[00:47:36] and so what we can do is from take that
+[00:47:38] covariance matrix we can do a principal
+[00:47:40] component analysis and we can remove the
+[00:47:43] first couple of components which are the
+[00:47:46] features that were spatially global so
+[00:47:49] if I go and I take my data and do you
+[00:47:51] compose it I know that first components
+[00:47:53] being the strongest global feature and
+[00:47:55] if I remove it then and and rotate back
+[00:47:57] what I'm going to be left with is a much
+[00:47:59] more focal things that will affect it of
+[00:48:01] only a focal area of activity okay so go
+[00:48:05] the opposite I removed the last couple
+[00:48:07] components those are things that only
+[00:48:08] affected only like one channel and I
+[00:48:11] know brain activity is probably a
+[00:48:12] cluster of channels depending on my
+[00:48:15] probe design but it's probably not all
+[00:48:17] the channels and so you can use this
+[00:48:19] kind of spatial feature to filter out
+[00:48:21] your data yeah
+[00:48:29] yes
+[00:48:35] so PCA when we jump to my toolbox the
+[00:48:41] next lecture I'm gonna kind of undo
+[00:48:43] everything I'm saying here because we
+[00:48:45] don't do any of this stuff now we've got
+[00:48:47] better ways to do it but but because
+[00:48:52] because that's that's one of the
+[00:48:53] problems with PCA the other problem is
+[00:48:56] it works really well if your probe is
+[00:48:58] large in this case what probe is the
+[00:49:00] entire head cardiac is moving the entire
+[00:49:02] probe and I have a lot of channels where
+[00:49:04] I didn't expect any brain activity and
+[00:49:07] I'm using the fact that it showed up in
+[00:49:09] those channels as to know it all there
+[00:49:12] wasn't very active but if you had a very
+[00:49:14] small probe maybe give you children
+[00:49:16] where you don't want to use 32 source
+[00:49:19] detectors you only want four across the
+[00:49:21] floor a very small probe brain activity
+[00:49:23] could be 50% of your your channels right
+[00:49:26] in which case it's much much harder to
+[00:49:29] separate it out from a global signal
+[00:49:32] versus a local or regional signal okay
+[00:49:35] so this kind of PCA really only works if
+[00:49:38] your probe is large enough that you have
+[00:49:41] a lot of areas where you didn't see
+[00:49:43] brain activity and you didn't expect to
+[00:49:45] see very active okay but if you do that
+[00:49:48] this you know you have a probe like this
+[00:49:49] is from re Angeles paper again this was
+[00:49:53] a finger tapping or a median nerve
+[00:49:55] somatosensory but you expected activity
+[00:49:57] here if you just looked at the signal
+[00:50:02] with no pre-processing you end up
+[00:50:04] getting a very global response because
+[00:50:06] every time I Pat my fingers it turns out
+[00:50:08] my heart rate went up and so I have this
+[00:50:09] very global signal if you do the
+[00:50:12] principal component and remove the
+[00:50:14] global components global signals you're
+[00:50:17] left with this just the motor cortex or
+[00:50:20] the sensory I don't remember if it's a
+[00:50:22] medium or a motor with your left with
+[00:50:25] activity just right there
+[00:50:26] the problem with principal component
+[00:50:28] analysis is one I said you have there at
+[00:50:30] the right probe it s big enough and two
+[00:50:33] how many components to remove and which
+[00:50:36] components becomes a challenge just like
+[00:50:40] filtering if I remove too many
+[00:50:41] components maybe the first component
+[00:50:44] okay it knocked it down maybe the second
+[00:50:46] component it's more focal groove the
+[00:50:48] third component also in what I was
+[00:50:49] calling great activity disappeared cuz
+[00:50:51] I've over filtered down there is a
+[00:50:53] question of where do you stop and how
+[00:50:55] did you know to stop there and I would
+[00:50:58] argue that the statement and this is
+[00:51:02] knocking my own work the statement of I
+[00:51:04] removed two components because what was
+[00:51:06] left was the motor cortex probably isn't
+[00:51:08] a good answer because you know it's it's
+[00:51:11] you've the number of components until
+[00:51:13] you saw what you wanted to see it's
+[00:51:15] probably not the best way to do science
+[00:51:17] so one of the problems with PCA or ICA
+[00:51:21] becomes how do you identify which
+[00:51:24] components to remove and how many and so
+[00:51:27] people like I mean we recognize this
+[00:51:29] Mari Angela is a good scientist she
+[00:51:31] always has some version of an objective
+[00:51:34] criteria and such as I'm gonna remove
+[00:51:38] the up to the number of components
+[00:51:41] modeling up to 80% of the spatial
+[00:51:44] covariance so she has like kind of a
+[00:51:46] criterion that she starts with and she
+[00:51:49] does it that way she doesn't just look
+[00:51:51] at the data and stop when she sees a
+[00:51:53] good response but not everyone follows
+[00:51:56] that practice and I'm sorry if I'm
+[00:51:59] making fun of people this is just
+[00:52:02] another example this is my student been
+[00:52:05] playing Dance Dance Revolution which is
+[00:52:08] kind of a reaction time sort of task
+[00:52:11] with your feats but if you do that head
+[00:52:17] up before image that you have this huge
+[00:52:19] kind of global response maybe you could
+[00:52:21] say there was a little bit of activity
+[00:52:23] there but if you you get a much more
+[00:52:26] focal but again how did I know that that
+[00:52:29] was the correct response I don't have a
+[00:52:33] good answer for that one
+[00:52:34] other than that's where I expected it
+[00:52:39] PCA can use views for both Physiology or
+[00:52:42] motion correction and same thing is true
+[00:52:46] for motion artifacts motion artifacts
+[00:52:48] depending on the size your probe and and
+[00:52:51] the configuration tends to move the
+[00:52:52] entire probe the entire probe lifts off
+[00:52:55] and so that's less true if you have you
+[00:52:59] know multiple patches of a probe or
+[00:53:01] four different areas where which are
+[00:53:03] going to move a little bit more
+[00:53:04] independent but we've used most PCA in
+[00:53:07] the past for motion correction the same
+[00:53:10] idea that the whole probe all my
+[00:53:12] channels are moving when we do PCA for
+[00:53:16] physiology what we typically do is we
+[00:53:19] calculate it separately for oxy G octa
+[00:53:22] and deoxyhemoglobin because we know the
+[00:53:24] spatial pattern oxygen will go ahead
+[00:53:27] more cardiac deoxyhemoglobin has more
+[00:53:30] blood pressure and there they have
+[00:53:31] slightly different spatial patterns so
+[00:53:33] we compute it separately for the
+[00:53:35] different way of by and say they're
+[00:53:36] different for different types of data
+[00:53:38] with motion artifacts there's no reason
+[00:53:41] to believe that the probe lifted off the
+[00:53:43] head and only affected oxyhemoglobin and
+[00:53:46] didn't affect deoxy it doesn't care it's
+[00:53:48] just the whole probe all the signals
+[00:53:50] across all your wavelengths changed the
+[00:53:52] same way and so when we do PCA for
+[00:53:55] motion artifacts we actually put in the
+[00:53:57] entire matrix because now we're looking
+[00:54:00] for features that didn't care about
+[00:54:02] wavelength and so so so that tends to be
+[00:54:05] a lot better for motion artifacts
+[00:54:07] because again motion artifacts don't
+[00:54:08] care about wavelength they affected the
+[00:54:10] entire data and so this is an example
+[00:54:13] this is theresa Wilcox's data again and
+[00:54:15] it's a huge motion of facts during the
+[00:54:18] baseline period if you remove the first
+[00:54:21] component you knock it down you remove
+[00:54:23] the first and second spatial components
+[00:54:26] and get knocked down this noise but this
+[00:54:31] part remained mostly unchanged if you
+[00:54:35] started filtering more this would start
+[00:54:37] to disappear so again kind of where do
+[00:54:39] you stop on things I'm going to jump
+[00:54:42] back for a second this is one of the
+[00:54:45] slides I skipped then because those were
+[00:54:50] all methods that people used in the past
+[00:54:55] if you've used my software at home or
+[00:54:58] home or two all those methods are in
+[00:55:00] Homer and Homer - and that's the way
+[00:55:02] that we used to do it and it's really
+[00:55:04] nice in some cases the problem is you
+[00:55:08] know a lot of people we build the tools
+[00:55:10] and it's like hey it works in this data
+[00:55:12] set and then because this data set has a
+[00:55:14] large pro
+[00:55:15] or you know certain types of noise
+[00:55:17] structure and then you move to a
+[00:55:18] different data set and the tool would no
+[00:55:20] longer work as well we'd have to write a
+[00:55:22] new tool and so on so there was no
+[00:55:24] one-size-fits-all type approach and we
+[00:55:29] were posed with all these different
+[00:55:30] questions of how many components to
+[00:55:33] remove and so on and so so those methods
+[00:55:38] are still out there they're still I
+[00:55:41] would say actually the majority of
+[00:55:43] Mirrors research still use those tools
+[00:55:46] and those methods which is why it's
+[00:55:48] important to be aware of them there are
+[00:55:49] options and I'm not going to find the
+[00:55:51] reviewer on your paper I'm not going to
+[00:55:53] fall to you for using those tools as
+[00:55:55] long as you're aware of the limitations
+[00:55:58] and and and and so on and kind of think
+[00:56:00] about some of the issues I brought up
+[00:56:02] here where the field is going a little
+[00:56:05] bit more recently is and something
+[00:56:08] Thomas mentioned is the idea of short
+[00:56:10] distance measures and short distance
+[00:56:13] measures what you do is you have a
+[00:56:15] source detector at different space you
+[00:56:17] have a short one at maybe one centimeter
+[00:56:20] or shorter and then you have a long one
+[00:56:22] I'm a short one because the light
+[00:56:24] doesn't diffuse into the tissue as
+[00:56:26] deeply is only really measuring that is
+[00:56:28] superficial the long one is measuring
+[00:56:30] both superficial and deeper and so what
+[00:56:33] you can do is you can use that short
+[00:56:35] distance as a local estimate of this
+[00:56:40] noise structure and you can design your
+[00:56:43] filter based on that and then apply your
+[00:56:45] filter to remove that same noise
+[00:56:47] structure from the deeper but from the
+[00:56:49] other
+[00:56:49] the farther distance and so like joke
+[00:56:53] oversteer that wash you and Rob Cooper's
+[00:56:58] group out of ICI London have been huge
+[00:57:01] advocates of this type of approach the
+[00:57:04] downside is you need specialized fibre
+[00:57:07] optics or instrumentation to be able to
+[00:57:09] measure that you need at least you know
+[00:57:13] you need fibre optics with multiple
+[00:57:15] distances as thomas showed you need an
+[00:57:17] instrument that has enough dynamic range
+[00:57:19] because it's the light one centimeter is
+[00:57:23] an order of magnitude or two brighter
+[00:57:25] than the lake for these centimeters so
+[00:57:28] you have to be able
+[00:57:28] to model that dynamic range it does
+[00:57:32] depend on wavelengths I think with the
+[00:57:34] near X systems it's less of an issue
+[00:57:36] because your wavelengths are higher but
+[00:57:38] with my system at 690 and 834 the
+[00:57:41] wavelengths the 690 wavelength dies a
+[00:57:43] lot faster as a function of distance so
+[00:57:46] they might be evenly matched here but
+[00:57:50] down here the 690 is about threefold
+[00:57:53] brighter than the 30 so it's almost
+[00:57:55] impossible to match it both match the
+[00:57:58] intensities at both distances and that
+[00:58:00] causes an issue with our sins and vices
+[00:58:03] but what you do you do that measurement
+[00:58:05] use the short distance as some version
+[00:58:08] of limited Gras syrup and remove it from
+[00:58:11] the large distance and there's a number
+[00:58:14] of different ways to do it
+[00:58:15] Rob Cooper over here they're using as a
+[00:58:19] time series regressor so you use the
+[00:58:21] time series of the short distance and
+[00:58:23] you remove it from the long distance so
+[00:58:26] very similar to the what I described the
+[00:58:28] external measurements hold such symmetry
+[00:58:30] and stuff there's other people and the
+[00:58:33] weapon method I use for this is I
+[00:58:35] actually do a pca of just the short
+[00:58:38] distances and then kind of that but how
+[00:58:43] you do a spatial map PCA of the short
+[00:58:45] distances and then remove that from the
+[00:58:48] long distance is a little bit more
+[00:58:49] complicated than that but that's the
+[00:58:51] general idea of taking both space and
+[00:58:53] time information and so on and I think
+[00:58:57] you're gonna see a lot more of this in
+[00:58:59] the literature there's some circles of
+[00:59:04] mirrors like the ones I have to publish
+[00:59:07] in which are most being reviewed by
+[00:59:09] people that do only methods where they
+[00:59:12] almost insist that you do this kind of
+[00:59:14] stuff I think it's a great idea to do
+[00:59:16] short distance measurements I feel that
+[00:59:19] the field has not yet defined what the
+[00:59:22] best approach to it is but we all
+[00:59:24] recognize that it should be done so yeah
+[00:59:43] titters their authority yeah there's two
+[00:59:50] questions kind of embedded that is what
+[00:59:52] what is it you work how many so Ron
+[00:59:56] Cooper screwed out of UC London
+[00:59:58] published a paper recently in apps that
+[01:00:01] looked at distance so he looked at
+[01:00:05] different distances because it actually
+[01:00:06] going ahead in both events and we in
+[01:00:10] because if you make it you know too long
+[01:00:13] you're actually giving a little bit of a
+[01:00:15] brain and end up or birth right so we
+[01:00:19] have to read the paper don't quote me on
+[01:00:20] the numbers but I think in adults it was
+[01:00:23] on the order of maybe 30 millimeters per
+[01:00:26] so is what they considered it good
+[01:00:28] optimal short distance infants he was an
+[01:00:32] almost unrealistic like your eyes
+[01:00:35] knowing it which means you have to and
+[01:01:06] that's the other half the question
+[01:01:09] because I think Ron's group is born
+[01:01:14] favorite just have a couple of around
+[01:01:16] the head written Brazil animate that you
+[01:01:27] actually need one not for every source
+[01:01:29] detected but they should this in for
+[01:01:31] every source in a short distance for a
+[01:01:32] detective that yeah for everyone
+[01:01:35] management that care about you actually
+[01:01:37] need to distances I think that's a
+[01:01:43] little overkill I think the problem with
+[01:01:45] that well from a physics point of view
+[01:01:47] maybe that is the best solution I think
+[01:01:49] from a practical point of view I'm not
+[01:01:51] willing to sacrifice two-thirds of my
+[01:01:54] detectors to do that measure
+[01:01:56] because now I'm going from an 8-channel
+[01:01:59] narek system to a 24 channel near axis
+[01:02:02] to just just to do that I unfortunately
+[01:02:09] don't have a great answer
+[01:02:10] I mean how they asked me what kind of
+[01:02:13] system should I buy and how many
+[01:02:15] detectives and I've been I needed and do
+[01:02:17] I have to learn about this
+[01:02:41] okay so we stop and switch if we want to
+[01:02:45] take a break I'll switch over to the
+[01:02:46] other stuff isn't it yeah let's let's do
+[01:02:50] that but stop take a little breather and
+[01:03:56] [Music]
+[01:04:34] that way we know we're not going to get
+[01:04:41] like
+[01:04:44] but that's not a problem as long as it's
+[01:04:49] at least several meters so yeah this is
+[01:04:54] a brand excel we try to do a single
+[01:05:40] detector much larger I should say lower
+[01:05:52] sensitivity so you take this
+[01:06:16] a lot of people will say like hey let's
+[01:08:07] just walk around outside
+[01:11:37] separate so there are aspects of the
+[01:11:43] course owner mentions the group eggs
+[01:12:19] so
+[01:12:45] [Music]
+[01:13:08] [Music]
+[01:14:14] slow tanks weekend of LEDs about please

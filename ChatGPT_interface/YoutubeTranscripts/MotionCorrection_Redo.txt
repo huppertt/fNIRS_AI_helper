@@ -1,0 +1,1059 @@
+[00:00:04] [Music]
+[00:00:09] all right so you should see my MATLAB
+[00:00:11] screen here so and I'll I'll send you
+[00:00:18] guys near X I'll send you guys the code
+[00:00:20] and you're happy to distribute it and
+[00:00:21] and so on and this is from the dataset
+[00:00:26] that you guys that ashlynn sent out
+[00:00:29] maybe earlier this week or last week the
+[00:00:33] finger-tapping data so I have I have
+[00:00:37] this folder which contains this this
+[00:00:43] finger-tapping data so so right now I
+[00:00:47] have folder it's called near X webinar
+[00:00:49] and inside there's a folder called
+[00:00:51] finger tap and inside a finger tap I was
+[00:00:55] given two data files one in which they
+[00:00:57] were tapping their fingers while seated
+[00:00:59] and the other one they I guess were
+[00:01:02] moving around and there's more motion
+[00:01:03] artifacts in it if we look in either of
+[00:01:07] these these these files we have our we
+[00:01:12] have our subject and then there's our
+[00:01:14] actual near access data so so we've
+[00:01:18] created this hierarchy of here's my
+[00:01:21] here's my study my study has two
+[00:01:24] components a finger tapping still and a
+[00:01:27] finger tapping with artifacts and within
+[00:01:29] those folders is all the data associated
+[00:01:31] with that that that task and so so what
+[00:01:34] we can do is we can use in the toolbox
+[00:01:36] we can use the load directory function
+[00:01:38] we point to the finger-tapping folder
+[00:01:42] and we tell it the second argument tells
+[00:01:45] us how to interpret this hierarchy so it
+[00:01:49] says that any files you find in the
+[00:01:52] folder called finger taps still they're
+[00:01:55] gonna be a artifact type still and any
+[00:02:00] files you find in this other folder
+[00:02:02] they're going to be the other artifact
+[00:02:04] type so what we see is we ended up
+[00:02:06] loading up two data files from that and
+[00:02:09] if we li use the command near as dot
+[00:02:12] creates
+[00:02:13] demographic stable what we can see is
+[00:02:16] that it loads the subject ID age gender
+[00:02:24] experiment remarks that was all
+[00:02:26] information that came from the near ox
+[00:02:28] file itself so that was when they you
+[00:02:30] collected your data on the Narok system
+[00:02:32] you entered in demographics and so on
+[00:02:35] when you registered the subject and that
+[00:02:37] all stays in the file and gets loaded in
+[00:02:40] this demographics and then we created
+[00:02:43] this last column which I just titled
+[00:02:46] artifact which basically tells me which
+[00:02:48] folder it came from so if we had
+[00:02:51] multiple we had more than two files this
+[00:02:56] would be a bookkeeping of which files
+[00:02:57] were associated with which type of task
+[00:03:00] ok so so if we look at this let's look
+[00:03:05] at just the first file
+[00:03:06] so if we say raw draw what it's going to
+[00:03:08] do is it's going to draw both of these
+[00:03:13] files and so we see the first one here
+[00:03:16] where there are finger tapping whilst he
+[00:03:19] did versus the second one the second one
+[00:03:22] has a little bit of motion artifacts you
+[00:03:25] have some files here that have a little
+[00:03:26] bit of shift you have a couple spikes in
+[00:03:29] the data these are outliers there
+[00:03:31] clearly you know order an order of
+[00:03:34] magnitude about difference in terms of
+[00:03:37] the jump at that time point versus the
+[00:03:40] rest of the the data there so what we
+[00:03:45] need to do then in for the nearest
+[00:03:48] analysis is we need to fix the timing
+[00:03:54] information so right now with the knee
+[00:03:57] rack system it recorded the start of
+[00:03:59] each of these events the red and the
+[00:04:00] blue lines at the bottom but what this
+[00:04:03] task actually was was a ten second
+[00:04:06] finger tapping and it alternated between
+[00:04:09] left hand and right hand tapping and so
+[00:04:12] what we need to do is we need to we have
+[00:04:14] functionalities here so we're going to
+[00:04:16] call the function called Neiers dot
+[00:04:18] design change stimulus duration and what
+[00:04:22] we're going to do is we're going to use
+[00:04:23] that to change the stimulus duration to
+[00:04:26] ten second
+[00:04:28] instead of the the spikes so now if I
+[00:04:31] draw it now we get these ten-second
+[00:04:34] boxcars
+[00:04:35] with the events okay we're also going to
+[00:04:41] then run this code that's called renamed
+[00:04:46] stims because we need to rename these
+[00:04:49] events I don't really like channel 1 and
+[00:04:51] channel 2 I want to call them left and
+[00:04:53] right because that makes more sense to
+[00:04:55] me so if we run this now so we we
+[00:05:01] created a job with these module called
+[00:05:05] rename stints that job had a couple of
+[00:05:09] or had a field that we need to modify
+[00:05:12] called the list of changes and we tell
+[00:05:15] it what the stem was before you used to
+[00:05:17] be called channel 1 now we're going to
+[00:05:19] call it left used to be called channel 2
+[00:05:22] now we're going to call it right and
+[00:05:24] then we run that job on the raw data
+[00:05:28] capturing the result back and I just I
+[00:05:31] just called it raw to come back so if we
+[00:05:35] now draw the data now I'm just showing
+[00:05:37] one of them here now it's gone from
+[00:05:39] being channel 1 and channel 2 to being
+[00:05:41] left and right and we get this this this
+[00:05:44] time this time course here ok so this is
+[00:05:48] all just kind of pre getting the data
+[00:05:50] ready to do analysis within my tool box
+[00:05:54] I'll take the time here to show a couple
+[00:05:56] of other options too so things that have
+[00:06:00] added recently there is a function
+[00:06:02] called GUI so if you say raw GUI what it
+[00:06:07] does it actually gives a kind of a
+[00:06:10] graphical interface here that you can
+[00:06:12] click around and change say all off so
+[00:06:22] you
+[00:06:23] you can you can you can add you know so
+[00:06:26] you can view just some of the data so
+[00:06:28] kind of like the homer interface used to
+[00:06:30] be where you can actually click around
+[00:06:32] and see things you can change which way
+[00:06:34] if items you are looking at there
+[00:06:36] there's also if we say nearest dot vis
+[00:06:42] for visual visualization there's a
+[00:06:45] function called stimulate and if we run
+[00:06:49] that what that allows us to do is we can
+[00:06:55] go and if we wanted to change the
+[00:06:58] duration let's say that that one was 15
+[00:07:01] seconds we can go and manually enter
+[00:07:03] that timing what I did from the command
+[00:07:06] line version was I just set them all to
+[00:07:07] 10 seconds but we could actually go in
+[00:07:10] and we could edit things visually
+[00:07:12] manually with this this little GUI and
+[00:07:14] we can switch between the two the two
+[00:07:16] files like that we can also do tricks in
+[00:07:20] this GUI if you right-click you can do
+[00:07:24] things like you can set all the
+[00:07:28] durations to you can set all the
+[00:07:29] amplitudes you can shift the events so
+[00:07:33] if we wanted to shift everything by 10
+[00:07:36] seconds or whatever maybe the timing
+[00:07:40] came from EEPROM so it was set as a as a
+[00:07:42] known thing but II Prime started you
+[00:07:46] know 30 seconds in after the nearest
+[00:07:48] actually started recording so we need to
+[00:07:50] shift all of our time points or all of
+[00:07:52] our events from the maybe the excel file
+[00:07:56] the EEPROM generated and shift them we
+[00:07:59] can do that here by entering a time I'm
+[00:08:01] not going to do that because obviously
+[00:08:02] this data was collected properly there
+[00:08:07] the events here all the events they have
+[00:08:10] a name and onset which is when they
+[00:08:12] started a duration which is how long
+[00:08:14] they were and then this field called
+[00:08:16] amplitude and what amplitude is is it's
+[00:08:22] a way to run parametric general linear
+[00:08:25] models so right now all the amplitudes
+[00:08:28] are 1 which means that all the trials
+[00:08:31] are going to give be given the same
+[00:08:33] weight but say I had I wanted to look at
+[00:08:36] how
+[00:08:37] raishin effects right what I might do is
+[00:08:40] I might are there six here I might
+[00:08:44] change this such that we have there were
+[00:08:52] not six I totally can't count but that's
+[00:08:55] okay something like something like that
+[00:08:58] where the amplitude is changing it's a
+[00:09:03] little bit hard to see see if I can 6050
+[00:09:10] I just playing around with it so we can
+[00:09:12] actually see it a little bit better but
+[00:09:14] if you change the amplitude of the
+[00:09:17] events and now when I run the delete
+[00:09:27] okay but if you change the events now
+[00:09:31] what you're running is you're running a
+[00:09:33] model where you're looking at did the
+[00:09:37] brain activity also change on that same
+[00:09:40] parameter so in other words if you had a
+[00:09:44] learning effect the first time you did
+[00:09:46] it you had a bigger change then the next
+[00:09:48] time you did it and then the that you
+[00:09:51] know brain activity got less still and
+[00:09:53] less still you would get brain activity
+[00:09:55] that was decreasing with the number of
+[00:09:57] repetitions and so if you put in the
+[00:09:59] amplitude to model that what you would
+[00:10:02] find is when that that the coefficient
+[00:10:05] associated with that one term that that
+[00:10:07] term that's changing with repetition
+[00:10:10] would tell you whether or not your brain
+[00:10:13] activity was was also changing so if we
+[00:10:16] saw it as a if we put an amplitude
+[00:10:19] decreasing like that and we had beta
+[00:10:21] positive it would mean that the brain
+[00:10:24] activity was indeed going down with
+[00:10:27] repeated trials so you might have brain
+[00:10:29] XP that was some brain activity that was
+[00:10:31] constant then some brain activity some
+[00:10:33] regions that were decreasing because
+[00:10:35] motor learning or something like that
+[00:10:37] and so you can generate these kind of
+[00:10:39] parametric models by using using that
+[00:10:43] amplitude field like this and of course
+[00:10:47] I did something
+[00:10:50] because it's asking me to confirm and
+[00:10:54] I'm gonna say no and then I'm gonna
+[00:10:57] close it okay sorry
+[00:11:03] let me just make sure I didn't mess up
+[00:11:05] anything okay so so so so that's just
+[00:11:10] prepping the data right so we now have
+[00:11:13] these two files that have been the late
+[00:11:17] that the the timing has been labeled and
+[00:11:19] and and so on this data if we look at
+[00:11:25] Raw dot the probe if we look at the
+[00:11:31] probe we can go and we can if we change
+[00:11:35] this default draw function when what the
+[00:11:40] default draw function does is it
+[00:11:42] controls what the how the probe is drawn
+[00:11:46] so before it was drawn as a 2d plot I
+[00:11:49] changed the default draw function to 10
+[00:11:52] 20 so that now when I draw it or if I
+[00:11:55] say raw 1 gooey
+[00:12:00] now what it's gonna do is it's gonna
+[00:12:02] draw it based it's going to draw it to
+[00:12:04] 10 20 space and if you say raw if you
+[00:12:15] question mark it'll actually tell you
+[00:12:18] what options there were so you can draw
+[00:12:20] it in 2d space that this this option
+[00:12:23] here you can draw it in 1020 space if
+[00:12:27] you add the keyword zoom it'll actually
+[00:12:30] only show so I'll just do that really
+[00:12:33] quick the zoom so now when I say rod row
+[00:12:41] one probe got draw now what it's no
+[00:12:45] actually it didn't do it it's supposed
+[00:12:47] to zoom in on just the region the bench
+[00:12:50] just where you had the probe I spelled
+[00:12:54] something wrong that's alright and then
+[00:12:56] you can do it in 3d so we can say 3d I
+[00:13:00] want to show the mesh I want to show the
+[00:13:02] brain underneath and I want to show it
+[00:13:04] from the the superior direction so now
+[00:13:10] when you draw it it'll look like this
+[00:13:12] where you actually have the 3d head that
+[00:13:16] you can rotate around and and so on and
+[00:13:19] actually view exactly where the probe
+[00:13:20] was based on your knee rocks
+[00:13:22] registration one thing you can do is if
+[00:13:28] you don't like those fiducial marks on
+[00:13:31] there you can say probe dots oops what
+[00:13:37] is
+[00:13:39] [Music]
+[00:13:41] set fiducial visibility and if you set
+[00:13:44] that to false now when you draw it now
+[00:13:49] it's going to turn off those those those
+[00:13:51] labels so you're it no longer has all
+[00:13:55] those 10 20 points you can see the brain
+[00:13:57] a little bit better underneath so this
+[00:14:00] probe you can kind of see here it
+[00:14:02] actually has short distances in it so
+[00:14:05] there is a number of these long three
+[00:14:07] centimeter distances there's also this
+[00:14:10] short I think it's a seven millimeter
+[00:14:13] separation in there so in the the tool
+[00:14:18] box what we can do is if we label which
+[00:14:24] channels are short separations we can
+[00:14:27] actually use this within our GLM model
+[00:14:29] and so we can run this module called
+[00:14:32] labels short separations and what that
+[00:14:35] did is if I look at the probe a link
+[00:14:39] variable so this tells me of those 108
+[00:14:43] channels which one was source 1 detector
+[00:14:46] 2 at wavelength 760 etc but this last
+[00:14:50] column here is whether or not that
+[00:14:54] channel was a short separation so we see
+[00:14:56] that source 1 detector 16 was actually a
+[00:15:00] short separation channel of data and so
+[00:15:04] now what we can do is now that we've
+[00:15:08] marked up our stimulus events we've
+[00:15:11] labeled what is a short separation we
+[00:15:14] can actually run our our models so we're
+[00:15:18] going to create a pipeline here this
+[00:15:20] first the pipeline first computes
+[00:15:22] optical density then it resamples it's
+[00:15:25] gonna resample to 1 Hertz that is just
+[00:15:28] gonna make it faster for this demo
+[00:15:30] generally I like to run things at 4
+[00:15:32] Hertz but it runs like N squared so this
+[00:15:36] is going to run 16 times faster we're
+[00:15:39] then going to run the beer-lambert law
+[00:15:41] I'm gonna skip this and I'm going to
+[00:15:43] come back to it because I just want to
+[00:15:46] show the basic stuff first so then we're
+[00:15:49] going to run the GLM we're gonna use the
+[00:15:52] defaults which is this
+[00:15:54] should I just just run this we're gonna
+[00:15:56] use the defaults which is this
+[00:15:59] autoregressive ir LS the the algorithm I
+[00:16:03] talked about and then now within the GLM
+[00:16:07] model we have this flag called add short
+[00:16:10] separation regressors which if I set
+[00:16:13] that to true
+[00:16:14] I say job dot add short separation
+[00:16:19] regressors groups not tree true what
+[00:16:23] it's going to do now is in addition to
+[00:16:26] that evoked response that the stimulus
+[00:16:29] it's going to add the short separation
+[00:16:32] data as nuisance regressors within the
+[00:16:35] model so it's going to actually to solve
+[00:16:37] the GLM using those as additional
+[00:16:40] regressors so if i run this
+[00:16:48] to do first file second file
+[00:16:57] so now I've got this field called
+[00:17:00] subject stats I have two of them one for
+[00:17:04] the first file one for the second and so
+[00:17:07] what what I can do is I can draw t-test
+[00:17:12] that's Auto scale it and that's say Q
+[00:17:17] less than 0.05 oops
+[00:17:19] oh and t-test it's T stat and it's
+[00:17:31] opening up on this window so let me get
+[00:17:35] rid of the deoxy for a second so here's
+[00:17:41] the oxyhemoglobin image - this is right
+[00:17:45] tapping so you see left-sided activity
+[00:17:47] left tapping you see right-sided
+[00:17:49] activity with this and you can rotate
+[00:17:54] this around this is this is the first
+[00:17:57] data file the one that didn't have as
+[00:17:59] much as the motion artifacts if we draw
+[00:18:04] out the second file
+[00:18:08] Shh hold on let me probe that default
+[00:18:18] draw
+[00:18:19] function because I want it to look the
+[00:18:20] same it's opening up on my other window
+[00:18:30] that's why you don't quite see it so
+[00:18:40] so actually let me let me do something
+[00:18:46] to make it look more fair so that's not
+[00:18:49] confusing
+[00:19:01] and let's scale it to negative six to
+[00:19:07] six so that they're both on the same
+[00:19:11] scale
+[00:19:21] you
+[00:19:23] line this up right okay
+[00:19:27] so what we end up seeing right so that
+[00:19:30] this is the this row is the one that was
+[00:19:33] cleaner data this row is the one that
+[00:19:36] had a little bit noisier data so drawing
+[00:19:39] them on the same scale we see that you
+[00:19:41] know the effect size is considerably
+[00:19:43] lower so here you're going up at a tee
+[00:19:45] score of about six to the what is kind
+[00:19:48] of the motor region down here you're
+[00:19:50] seeing it it may be three so because the
+[00:19:53] noise the data has more noise to it your
+[00:19:57] effect size is going to be smaller so
+[00:20:00] even though we're running the algorithm
+[00:20:01] that is not gonna have false positives
+[00:20:04] due to motion artifacts we still take a
+[00:20:08] hit because the data is noisier that our
+[00:20:10] effect sizes go down so what you end up
+[00:20:12] seeing is with the motion artifacts the
+[00:20:15] effect sizes took a hit it's going to
+[00:20:17] take me more subjects to average to to
+[00:20:19] bring those effect sizes up but
+[00:20:22] generally you kind of get the same
+[00:20:23] result of you know you get right-sided
+[00:20:26] activity a left-sided activity when you
+[00:20:29] you tap your right hand and I'm running
+[00:20:35] out of time Wow okay I talk way too much
+[00:20:38] what I will show too is we can do with
+[00:20:42] this data we actually have some
+[00:20:47] accelerometers that were recorded and so
+[00:20:51] what you can do that gets stored in this
+[00:20:54] field called auxilary and so we can
+[00:20:58] actually look at if we extract the this
+[00:21:06] auxilary data we can actually draw it
+[00:21:09] and we see that you've got an
+[00:21:10] accelerometer on this so when they were
+[00:21:13] tapping their fingers there's a there's
+[00:21:15] an effect they're moving more their head
+[00:21:19] is moving more and what we can do is we
+[00:21:23] can run this code here that's called a
+[00:21:26] dog ciliary regressors and what this
+[00:21:29] does is this is going to move those that
+[00:21:34] channels those accelerometers from
+[00:21:37] external recording and actually put them
+[00:21:39] in as regressors within the GLM it's
+[00:21:41] gonna put them in as regressors of no
+[00:21:42] interest and so now if we run this again
+[00:21:49] job dot ad true now when if we run it
+[00:21:53] again now what it's doing is it's
+[00:21:57] running this GLM model there's the vocht
+[00:22:00] response the time the stimulus timing
+[00:22:02] there's still the short separation data
+[00:22:04] that's being partial doubt and now
+[00:22:07] there's accelerometer data that's that's
+[00:22:09] being partial doubt as well and so we
+[00:22:13] can see if it has an effect on the
+[00:22:15] results
+[00:22:20] you
+[00:22:22] I think I erased my lips so this is now
+[00:22:28] this is that first data that doesn't
+[00:22:30] have the the Moshe artifacts in it we
+[00:22:33] basically get the same result
+[00:22:39] but what we can do is we can actually
+[00:22:42] try to quantify that right so that was
+[00:22:44] just one subject well let's do of that
+[00:22:46] roc-roc analysis we can generate
+[00:22:49] thousands of data sets from this one by
+[00:22:52] adding kind of fictitious brain activity
+[00:22:55] and we can actually start to compare the
+[00:22:57] different models and so so what I did
+[00:23:00] earlier today was actually created five
+[00:23:04] different pipelines so this one that's
+[00:23:06] running ordinary least-squares this one
+[00:23:09] that's running the AR model the AR model
+[00:23:12] with short separations the error model
+[00:23:15] with the accelerometers only and then
+[00:23:19] the error model with both accelerometers
+[00:23:21] and short separation so I can go and I
+[00:23:25] can I can generate these five pipelines
+[00:23:27] I can create this ROC object which I
+[00:23:34] assign it I want to compare these five
+[00:23:36] pipelines in the simulate function what
+[00:23:41] I'm doing is I'm actually taking that
+[00:23:43] same data that actual experimental data
+[00:23:45] and I'm erasing the stimulus I'm adding
+[00:23:48] randomly some some known stimulus and
+[00:23:51] known brain activity to a subset of the
+[00:23:54] channels and then I can run that through
+[00:23:56] and do multi iterations of that and so I
+[00:24:01] can do that using the data file that has
+[00:24:03] no moshe artifacts in the data artifact
+[00:24:05] the one that had moshe artifacts so i
+[00:24:07] already ran this because it took a bit
+[00:24:10] of time let's actually skip this this is
+[00:24:16] the ROC curve so
+[00:24:24] this is now so
+[00:24:27] looking at here is which ones which this
+[00:24:33] is the one figure one here is the one
+[00:24:35] the cleaner data figure two is the
+[00:24:38] noisier data the blue line here is
+[00:24:41] ordinary least-squares these two lines
+[00:24:46] are the models that are using the
+[00:24:49] accelerometers the and these two are the
+[00:24:56] ones that are using the short separation
+[00:24:58] so this one
+[00:24:59] one is short separation sorry ordinary
+[00:25:03] least-squares a our model a our model
+[00:25:07] with accelerometers so you see that
+[00:25:09] adding the accelerometers to the air
+[00:25:11] model didn't really help at all a our
+[00:25:14] model with short separation and then a
+[00:25:16] our model with short separation and
+[00:25:18] accelerometers and so we can actually
+[00:25:20] start looking at again the closer you
+[00:25:22] are to a left-hand corner the better you
+[00:25:24] are so with this data set the best thing
+[00:25:27] to do was to put in the short separation
+[00:25:31] measurements in the context of the AR
+[00:25:35] GLM model and that gave these these
+[00:25:38] curves up in the the corner it didn't
+[00:25:40] matter if you added the accelerometers
+[00:25:42] it didn't actually help in this in this
+[00:25:43] this particular data set if you go to
+[00:25:47] this one figure two this is the same
+[00:25:50] data or this is the now that data set
+[00:25:52] that has the motion artifacts
+[00:25:54] so you see overall with the same level
+[00:25:57] of added synthetic brain activity the
+[00:26:00] area of the curve is a little bit lower
+[00:26:02] because you have more noise so
+[00:26:05] everything kind of went down a little
+[00:26:07] bit but it's still the case that the
+[00:26:10] best thing to do was to actually put in
+[00:26:13] the short separation regressors into the
+[00:26:15] GLM that that gave you the best area
+[00:26:17] under the curve and
+[00:26:23] I want to see if there was anything else
+[00:26:24] I wanted to show you guys but I guess I
+[00:26:27] will stop there and maybe since I'm got
+[00:26:32] like 30 seconds left I'd like to ask
+[00:26:35] answer questions like oh we cannot I
+[00:26:46] think we cannot here Co Ashley I'm sorry
+[00:26:49] about that no no Ashley with her mic no
+[00:27:05] problem so I will ask our ask some
+[00:27:07] questions and M'Lynn can also help me
+[00:27:11] okay so one of the questions that we
+[00:27:15] have actually in the first from the
+[00:27:17] first webinar it's is it possible to run
+[00:27:20] the uncover analysis within the within
+[00:27:23] the tool box and hope I don't have an
+[00:27:25] Kota I have no I have mixed effects
+[00:27:29] I have ANOVA I don't have an and Cova
+[00:27:32] module yet so that's not that's that's
+[00:27:36] not there
+[00:27:37] and actually since since you brought it
+[00:27:40] up we can look at this is if we say
+[00:27:43] nears diet modules dot T DDR so the the
+[00:27:50] so this is the T DDR code that you asked
+[00:27:52] about and this is just kind of look at
+[00:27:55] see what this effect this has
+[00:27:57] so there's there's two flags on here
+[00:27:59] that were actually added recently the
+[00:28:03] first flag is use PCA and so by default
+[00:28:07] it's false which means it's going to
+[00:28:09] take you know for one to number of
+[00:28:12] channels it's going to analyze what's an
+[00:28:14] outlier on each channel separately so it
+[00:28:18] uses time information but it doesn't
+[00:28:20] take advantage of any spatial structure
+[00:28:22] I added this PCA of what it does so if
+[00:28:26] we set that to true what it's going to
+[00:28:28] do is its first going to do a PCA
+[00:28:30] rotation so now the first component
+[00:28:33] ideally captured all that motion
+[00:28:34] artifact the last components didn't have
+[00:28:36] any mode
+[00:28:36] artifacts it doesn does tdd are on the
+[00:28:41] components removes outliers from
+[00:28:45] component one maybe more aggressively
+[00:28:48] because it has more artifacts than
+[00:28:49] component two and so on and then rotates
+[00:28:52] everything back so if it's if it's so
+[00:28:55] kind of the recommendation is actually
+[00:28:57] use PCA true as this look at and see
+[00:29:01] what this looks like let's say r2 is job
+[00:29:05] run let's only look at the second file
+[00:29:07] because that's the one that had the most
+[00:29:09] our two facts are to draw our draw oops
+[00:29:21] sorry
+[00:29:27] oops i9g Rome on top of each other and
+[00:29:29] that didn't help
+[00:29:39] you
+[00:29:45] so actually the TDR didn't really do
+[00:29:49] very much at all in this in this case
+[00:29:52] you see a couple of the artifacts like
+[00:29:55] down here got removed a little bit in
+[00:29:59] terms of the principal component version
+[00:30:01] let's see what happens when I run the
+[00:30:03] regular version use PCA is false
+[00:30:13] let's call that raw three and actually
+[00:30:24] it whether or not I use my other plot so
+[00:30:33] original data on figure one with PCA
+[00:30:37] without PCA it mean I did a little bit
+[00:30:40] in terms of be cleaned up with some
+[00:30:42] artifacts here but it really didn't the
+[00:30:44] TDR didn't really do very much and the
+[00:30:48] reason for that is that these motion
+[00:30:50] artifacts one they're not very global
+[00:30:52] right you see these only affecting a
+[00:30:54] couple of the channels not really all
+[00:30:57] the channels and to it they're not
+[00:31:00] really that big right compared to say
+[00:31:03] what we saw in Teresa Wilcox's data
+[00:31:05] where it just crazy went off the charts
+[00:31:08] these were really strong outliers
+[00:31:11] remember it's removing it's down
+[00:31:13] weighting if you're a crazy strong
+[00:31:15] outlier you're gonna go to zero but if
+[00:31:17] you're just a moderate outlier maybe
+[00:31:19] it's 50% related so it's not gonna
+[00:31:22] actually zero them per se but it did
+[00:31:27] have a little it it did have a little
+[00:31:29] bit of an effect okay I had actually
+[00:31:34] less effect than I it was less dramatic
+[00:31:36] than I I had I know and the results were
+[00:31:38] not gonna be that dramatic I wouldn't
+[00:31:40] have kind of gone through that data
+[00:31:47] where we see motion artifacts right is
+[00:31:50] in this was a data that was collected on
+[00:31:53] an adult where we see motion artifacts
+[00:31:56] is generally kid data because you can't
+[00:31:59] put the probe honest tight right you put
+[00:32:01] the probe on a kid tighter and they're
+[00:32:04] not going to sit for as long into the
+[00:32:05] study it's gonna be more uncomfortable
+[00:32:08] they're going to be pulling at this this
+[00:32:10] thing which means the population that's
+[00:32:13] more likely to move is the population
+[00:32:16] that you can't put the cap on us tightly
+[00:32:17] which generates my motion artifacts so
+[00:32:20] it's kind of the worst case scenario
+[00:32:22] so you should have had whoever collected
+[00:32:24] this data like scratching their head or
+[00:32:26] pulling on the cap or something kind of
+[00:32:28] simulate what happens with kids that's a
+[00:32:31] good idea
+[00:32:32] we will simulate this day the next time
+[00:32:36] so one other cache that have it's
+[00:32:38] actually on the accelerometer so you
+[00:32:40] show one way to incorporate them and
+[00:32:42] they're asked if there any other way you
+[00:32:44] can incorporate the accelerometer for
+[00:32:46] your data
+[00:32:48] if heavy one more than excel there one
+[00:32:50] tool for example or more beneficial so
+[00:32:54] so this was the first time I mean you
+[00:32:58] guys gave me this data set it was the
+[00:32:59] first time I really used accelerometers
+[00:33:02] at least from the venire AXA data so so
+[00:33:07] what we have found in the past is
+[00:33:10] actually having multiple accelerometers
+[00:33:13] is better than having just one because
+[00:33:15] if you put a accelerometer on the head
+[00:33:19] I really don't actually care that the
+[00:33:20] head moved right I mean we've done
+[00:33:22] studies of dancing moving around etc you
+[00:33:25] can move around all you want
+[00:33:26] it's the cap that's slipping relative to
+[00:33:29] the head so what we do what you could do
+[00:33:32] is if you have two accelerometers either
+[00:33:35] on two different parts of the cap or one
+[00:33:37] on the head and one on the cap what you
+[00:33:40] look at now is the cross-product between
+[00:33:42] those two vectors you're looking for did
+[00:33:45] the head move as a rigid body right in
+[00:33:48] which case the relationship between
+[00:33:50] these accelerometers stays constant or
+[00:33:52] you know the one on the head I'm like
+[00:33:54] dancing on webinar here or did the
+[00:33:57] accelerometer shift did one move and the
+[00:33:59] other one didn't which means that the
+[00:34:01] cattles right and the cat move relative
+[00:34:04] to the head so what we actually have
+[00:34:06] found is if you have two accelerometers
+[00:34:09] and instead of using the data as is you
+[00:34:12] actually compute the cross-product
+[00:34:14] between the two and look at the cross
+[00:34:16] product as you're regressor that works a
+[00:34:19] lot better for capturing the motion
+[00:34:20] artifacts but that requires to excel at
+[00:34:25] least two accelerometers and if you have
+[00:34:28] it on two parts of the cap you're
+[00:34:30] looking for did the cat move did the cap
+[00:34:32] kind of one part of the cat move
+[00:34:34] relative to the other if you have one on
+[00:34:36] the head and the other on the cap now
+[00:34:38] it's you know did the cap move relative
+[00:34:40] to the the subject so so I have more
+[00:34:47] possibilities to try to quantify your
+[00:34:49] movement also in this case yeah but
+[00:34:51] right now you know so I put them in as
+[00:34:53] news as regressors of no interest within
+[00:34:56] the GLM you could potentially do it as a
+[00:34:59] pre-processing step
+[00:35:01] so if you just like the short separation
+[00:35:04] you could run the GLM with just that
+[00:35:07] regressor take the residual and then
+[00:35:09] feed that into the the stats looking for
+[00:35:13] evoked response excuse me
+[00:35:15] or you could do it all as one step what
+[00:35:18] we found from the paper about short
+[00:35:21] separation once it was always better to
+[00:35:23] do it as one step because your stats
+[00:35:25] knew about what you were doing whereas
+[00:35:28] if you do it as a pre-processing it
+[00:35:30] could potentially remove too much so we
+[00:35:35] found that the type 2 error was
+[00:35:37] increased when you did it as a - as a
+[00:35:39] two-step process but you could deal if
+[00:35:42] the accelerometer is in the same way I
+[00:35:45] guess another way you could do it is you
+[00:35:49] could use the accelerometers and you
+[00:35:54] could define outliers you know what are
+[00:35:57] the you know statistical what are the
+[00:35:59] time periods in which the motion
+[00:36:01] occurred you could then use that to
+[00:36:04] maybe down wait the model so that you're
+[00:36:06] only including clean data in your GLM I
+[00:36:08] don't have code to do that yet but it's
+[00:36:10] really easy to add and that's one of the
+[00:36:13] things that I've been kind of working on
+[00:36:15] we're actually gonna use Luca Paulo
+[00:36:19] meanies
+[00:36:20] Phoebe stuff where it looks at the the
+[00:36:24] you know here's a time point in which
+[00:36:26] you have a lot of artifact because it
+[00:36:27] doesn't have the the scalp coupling and
+[00:36:29] so on and then use that too
+[00:36:32] instead of just removing outliers you're
+[00:36:34] removing time points in which that
+[00:36:36] criterion was not met and again you
+[00:36:39] remove it from the data and the design
+[00:36:41] matrix just like we do with the
+[00:36:44] whitening you could potentially do that
+[00:36:46] with the accelerometers as well however
+[00:36:48] if you look at these accelerometers
+[00:36:50] right you moved every time you tap your
+[00:36:52] fingers so you would be by that
+[00:36:56] criterion you would be removing all of
+[00:36:57] the tasks which would be a bad thing
+[00:37:01] which again kind of if you had two
+[00:37:03] accelerometers you might be able to
+[00:37:05] differentiate between what is a rigid
+[00:37:07] body motion the whole head moved but the
+[00:37:10] Cape's data fixed versus the cap sliding
+[00:37:13] on the head
+[00:37:14] so we on this regressor of no interest
+[00:37:20] we have one one question also are the
+[00:37:23] regresses of no interest just like the
+[00:37:25] other regresses in the model or there
+[00:37:27] are they orthogonal orthogonal eyes or
+[00:37:30] is any other different treatment so we
+[00:37:35] have I actually added this literally
+[00:37:38] this morning so it's actually not in the
+[00:37:40] toolbox not in the public version yet
+[00:37:43] but you have the the the stimulus
+[00:37:48] information there's two types of ways to
+[00:37:50] specify stimulus there's events and
+[00:37:54] there's vectors so nears dot design dot
+[00:38:00] stem events and stem vectors so so a
+[00:38:04] vectors are you have a time course like
+[00:38:07] the accelerometers for example events
+[00:38:11] are you have discrete onset durations to
+[00:38:14] both of these I actually added a flag
+[00:38:16] for regressor of no interest so we if
+[00:38:21] you have a stimulus that you've created
+[00:38:24] and you know with this vector or
+[00:38:26] whatever and you set that flag to true
+[00:38:28] when it solves the GLM what it's going
+[00:38:31] to do is it's gonna it's going to use
+[00:38:32] that in the regressor but then it's
+[00:38:34] gonna throw it out of this so it's it's
+[00:38:36] not in the final reported stats so when
+[00:38:40] we do like the you know draw Q less than
+[00:38:43] 0.05 which is the benjamina Hochberg
+[00:38:45] corrected we're not gonna penalize for
+[00:38:48] having that additional regressive that
+[00:38:50] we didn't care about so so right now
+[00:38:53] when you do regressives of non interest
+[00:38:56] if if you put it in manually and you can
+[00:38:59] put in anything you want either an
+[00:39:01] events or a vector if you set that flag
+[00:39:05] it's going to use it as is for the short
+[00:39:08] separation or my code that actually uses
+[00:39:11] it the accelerometers it's actually
+[00:39:14] doing a PCA to orthogonalize it so if
+[00:39:19] you're using my code kind of those
+[00:39:21] modules that automatically kind of
+[00:39:22] import it it it orthogonal eise's it but
+[00:39:26] if you didn't want to
+[00:39:28] you could manually import it and just
+[00:39:29] use it as is if that made sense yes
+[00:39:35] thank you we have two more questions or
+[00:39:38] sorry I mean we won't be able to answer
+[00:39:40] everything with I blocked off today so I
+[00:39:46] don't mind going over but you guys might
+[00:39:51] there is another one so talking actually
+[00:39:53] about the amplitude so should one inputs
+[00:39:57] the amplitude when working with
+[00:39:58] cognitive data where the duration might
+[00:40:01] differ according to the according to the
+[00:40:03] reaction of the of the participant so
+[00:40:07] this is so one advantage of so in in the
+[00:40:14] in the toolbox we have nearest dot
+[00:40:18] design dot basis basis and we have the
+[00:40:25] canonical basis sets we also have what
+[00:40:30] are called the fi are the impulse
+[00:40:31] response once and the fi are ones are
+[00:40:34] actually doing a deconvolution and if if
+[00:40:40] you do the fi are ones there is this
+[00:40:43] additional flag called
+[00:40:44] is impulse response and what that's
+[00:40:47] going to do is that's going to take the
+[00:40:48] stimulus duration and if your if your
+[00:40:52] task was thirty seconds it's going to
+[00:40:53] take that thirty second box car and
+[00:40:55] convolve it with this impulse response
+[00:40:58] so it is allow in in a model like that
+[00:41:02] your task can all have different
+[00:41:04] durations if you're dealing with a
+[00:41:07] straight deconvolution or a block
+[00:41:09] averaging that all your tasks have to
+[00:41:11] have the same duration right is you
+[00:41:14] can't average a thirty second out of
+[00:41:16] four second window together so one of
+[00:41:19] the advantages of the canonical of the
+[00:41:21] canonical model or the FI our model as
+[00:41:25] an impulse response is it adjusts for
+[00:41:28] the duration of the task and so you
+[00:41:30] don't you can have self paced tasks that
+[00:41:33] have different timing and you're still
+[00:41:35] able to estimate the evoked response now
+[00:41:38] you're assuming linearity which means
+[00:41:41] say if I
+[00:41:42] have my fingers for ten seconds versus
+[00:41:45] 20 seconds 20 seconds is 10 seconds you
+[00:41:48] know it's just twice as big so it has
+[00:41:50] that assumption that the longer the
+[00:41:52] duration the task just keeps building up
+[00:41:56] what is able to then model different
+[00:41:59] durations to the tasks within the same
+[00:42:01] to get one estimate of brain activity
+[00:42:03] even though you have different durations
+[00:42:05] that make sense yes the other way the
+[00:42:09] other way to do it is there's mirrors
+[00:42:12] dot design dots let's see if I can
+[00:42:18] figure out how to do this royals nearest
+[00:42:21] dot design Gibbon I have to edit the I
+[00:42:26] have to look at the peak at the code to
+[00:42:28] figure out what's under the hood for
+[00:42:30] this and what the input arguments were
+[00:42:34] so given data given data and a formula
+[00:42:40] so let's see that's that's let's just
+[00:42:43] play with the first channel here raw one
+[00:42:48] so my formula I'm going to use a
+[00:42:51] condition condition times one plus time
+[00:43:01] okay so so and this that's the center of
+[00:43:06] the variable so what
+[00:43:11] should see here oh and it didn't work
+[00:43:13] why didn't it work
+[00:43:24] oh I don't know why that didn't work why
+[00:43:27] didn't that work what we should have
+[00:43:29] seen this is why you don't do things
+[00:43:31] live what you should have seen is you
+[00:43:38] should have ended up with two rigor four
+[00:43:40] regressors the left in the right tap
+[00:43:43] that was constant with time and another
+[00:43:45] one that was decaying with the
+[00:43:47] experimental time so you would end up
+[00:43:50] with a you know a constant an intercept
+[00:43:53] and a slope and when you solve two GLM
+[00:43:56] you would have gotten four beta you know
+[00:43:58] beta for what brain activity was
+[00:44:01] constant with time and what brain
+[00:44:02] activity was changing with with
+[00:44:05] experimental time so like a habituation
+[00:44:07] effect if you use the amplitude like you
+[00:44:11] encode say reaction time or something
+[00:44:13] like that in there you could actually
+[00:44:16] look at that would give you what brain
+[00:44:18] activity was the brain activity for
+[00:44:20] trials where you were faster different
+[00:44:23] than the brain activity for trials that
+[00:44:25] were slower you were slower you know so
+[00:44:27] say you need a 30 second block and
+[00:44:29] within that block you had 30 events and
+[00:44:31] you had an average reaction time for
+[00:44:34] those 30 events and the blocks where you
+[00:44:37] were faster than the blocks we were
+[00:44:39] slower was there a difference in the
+[00:44:41] brain activity and in that case what you
+[00:44:43] would do is you would code up that
+[00:44:44] amplitude variable to be reaction time
+[00:44:47] and you would then look at that in the
+[00:44:50] model and it's kind of gonna be like
+[00:44:53] weighing the response in this sense
+[00:44:56] right yeah I know what I did there we go
+[00:45:04] so so in this case you have four
+[00:45:07] regressors you have left and right
+[00:45:10] tapping and then left and right tapping
+[00:45:12] as modulated by time in which case you
+[00:45:16] know you see these ones are kind of
+[00:45:17] changing with the experimental time this
+[00:45:23] is a case where my code was smarter than
+[00:45:26] me the way that you do it is you could
+[00:45:28] say like it I had it written as
+[00:45:34] condition like that but it
+[00:45:36] actually wanted you to type in what it
+[00:45:39] was so that that would have you know
+[00:45:44] given just the left hemisphere if I put
+[00:45:46] in the question of market does both you
+[00:45:48] can also do if you do amplitude like
+[00:45:54] that you know it'll let you put in that
+[00:45:56] whatever that amplitude variable was so
+[00:45:59] time D you are for duration and
+[00:46:03] amplitude am P are kind of key words
+[00:46:06] that you can use in this this function
+[00:46:08] you can also put in like quadratic terms
+[00:46:11] so you could say something like this
+[00:46:18] maybe you can't you should have been
+[00:46:22] able to do something like that in which
+[00:46:24] case you can have quadratic linear terms
+[00:46:26] and your quadratic time terms and stuff
+[00:46:40] using bridging within the nearest tool
+[00:46:42] box and we see that we can see that
+[00:46:46] being done by pulling in the homework to
+[00:46:47] blog average function so there is a
+[00:46:50] question about surveying yeah I forgot
+[00:46:54] that you asked that question so
+[00:46:56] unfortunately one of the things that
+[00:46:57] home or two does not do properly is
+[00:47:00] statistics so importing any of the
+[00:47:05] statistics programs in Homer really
+[00:47:09] don't work because it just doesn't the
+[00:47:11] way that it solves it it doesn't give
+[00:47:13] the outputs that I need to within my
+[00:47:16] tool box to keep track of stats so so
+[00:47:20] the the deconvolution stuff like that
+[00:47:23] doesn't work
+[00:47:23] I think it'll run but it doesn't like
+[00:47:26] actually save the right
+[00:47:29] statistics variable so I think like the
+[00:47:31] HRF we're sorry the block averaging
+[00:47:34] saves as the time course but doesn't
+[00:47:36] actually have any stats or so so we have
+[00:47:38] that time course because unfortunately
+[00:47:40] Homer also didn't give me the stats from
+[00:47:42] it Macbeth's so if you say job equals
+[00:47:47] nearest modules dots
+[00:47:50] I think it's called run homer - and then
+[00:47:54] you can say job dots function is I don't
+[00:48:01] know Homer I don't even know if I have
+[00:48:04] Homer - installed on this computer
+[00:48:08] apparently I don't but you'd say job dot
+[00:48:13] function is you know Homer - motion
+[00:48:17] correct or whatever it is whatever that
+[00:48:18] function from Homer is it'll auto
+[00:48:21] populate all the inputs and outputs
+[00:48:24] based on what that function required and
+[00:48:28] so it'll automatically figure out where
+[00:48:30] our home are - needs the probe it'll
+[00:48:32] figure out it'll grab the probe from my
+[00:48:34] data structure and put it into the Homer
+[00:48:37] data structure and vice-versa
+[00:48:38] I wish I had home or two installed on
+[00:48:41] here because I can I could show how it
+[00:48:43] actually worked but what you can do is
+[00:48:45] you can then run I'll think about the
+[00:48:50] block averaging how to put that in I
+[00:48:53] don't have block averaging in my code I
+[00:48:55] only have GLM methods I can think about
+[00:48:59] it but for anything else the motion
+[00:49:04] correction the short separation
+[00:49:06] correction and so on in Homer
+[00:49:08] you can basically create a step in the
+[00:49:11] pipeline that just calls that function
+[00:49:12] and then you know use my optical density
+[00:49:16] my beer-lambert law then the homers
+[00:49:18] motion correction and then my GL m as
+[00:49:21] one pipeline it'll just run it should
+[00:49:24] run completely seamlessly through like
+[00:49:26] that the reason I don't have block
+[00:49:30] averaging is because although the kind
+[00:49:35] of those idea of let's get the stats
+[00:49:36] right and let's do the robust regression
+[00:49:39] and that's correct for serial
+[00:49:40] correlations you can't do that in block
+[00:49:42] averaging and so it's I could do block
+[00:49:47] averaging it's really simple to code but
+[00:49:49] your stats wouldn't be right and so
+[00:49:52] that's why I haven't wanted to code it
+[00:49:53] in there thank you so we'll just ask one
+[00:49:59] more question
+[00:50:00] definitely pretty over time but
+[00:50:02] appreciate
+[00:50:03] you're seeing with us so I gotta do
+[00:50:06] where was I gonna go so I'm just going
+[00:50:13] to read this one word for word is there
+[00:50:16] any approach implemented in the toolbox
+[00:50:18] or that you would recommend to perform
+[00:50:19] statistics on the actual hrs after
+[00:50:22] deconvolution for example something
+[00:50:24] similar to cluster based permutation
+[00:50:26] methods employed to compare erp zeg
+[00:50:28] analysis instead of performing
+[00:50:30] statistics on the beta values as it is
+[00:50:32] usually done no but that's interesting
+[00:50:37] so so when when we've run one thing I
+[00:50:41] can show nearest modules there's this
+[00:50:44] whole set of default modules and one of
+[00:50:49] them is the FI our model so you if these
+[00:50:52] are kind of complete pipelines that run
+[00:50:55] so like the FI r1 would do the
+[00:50:58] deconvolution and and so on what's going
+[00:51:01] to get returned is going to be the betas
+[00:51:03] and the full covariance matrix so so the
+[00:51:08] relate you know the inter dependency of
+[00:51:10] all the betas to each other that should
+[00:51:13] be sufficient to do clustering analysis
+[00:51:16] in terms of you wrote your own code I
+[00:51:19] think that's the inputs that you would
+[00:51:20] need is the beta and the full covariance
+[00:51:22] matrix but I don't have any code that
+[00:51:25] doesn't but you should have you should
+[00:51:28] be should be able to kind of write a
+[00:51:32] wrapper around that or even write a
+[00:51:33] module that does it within the toe box
+[00:51:36] but I haven't I haven't given thought to
+[00:51:38] how to actually do that if I do a block
+[00:51:44] averaging it would probably be one of
+[00:51:45] these modules like like this I've just
+[00:51:48] created a default module that it's gonna
+[00:51:49] do block averaging in which case what
+[00:51:51] it's going to do behind the scenes is
+[00:51:53] gonna calculate it at the FI our model
+[00:51:55] but then use the stats to pull it back
+[00:51:58] as a because what you can do is the FI
+[00:52:04] our models take a while but I can do if
+[00:52:08] you have something that's already solved
+[00:52:10] you can call the function called HRF and
+[00:52:14] what it does is it'll actually
+[00:52:19] pull it back as a time course so in this
+[00:52:23] case it's just the canonical model so it
+[00:52:26] has it has a fixed structure but when
+[00:52:28] you run the deconvolution you run the
+[00:52:33] FIA our model get the stats it has all
+[00:52:36] these betas you can then say you know
+[00:52:38] stats that href and it should draw it as
+[00:52:41] something that looks like excuse me it
+[00:52:43] looks like this that actually has all
+[00:52:45] the the time course on it it's if you
+[00:52:50] look at the variable its I did this
+[00:52:54] trick of treating it as a complex number
+[00:52:58] where the real component is the shape
+[00:53:00] that you see here and the error bars are
+[00:53:03] actually the imaginary component so it
+[00:53:05] was just kind of a trick to book keep
+[00:53:07] how does a time course have error bars
+[00:53:09] on it so if you do the D convolute you
+[00:53:12] do the F IR model there's a way to
+[00:53:15] actually draw it as a curve with error
+[00:53:17] bars and maybe I'll just generate a
+[00:53:21] sample demo script on how to actually do
+[00:53:23] that that's as close I know I switched
+[00:53:27] back to the the block averaging question
+[00:53:29] that's the closest I can have I can do
+[00:53:31] the back a virgin there's a write code a
+[00:53:33] module that will estimate that curve and
+[00:53:36] then put error bars on it but it's done
+[00:53:39] based on a deconvolution not based on a
+[00:53:41] block averaging and again kind of to the
+[00:53:45] second question if I gave you that if
+[00:53:47] you had access to that information which
+[00:53:49] is just a case of showing you where it
+[00:53:51] is you could potentially write
+[00:53:53] clustering and kind of more advanced
+[00:53:55] code on that I'm happy to put any of
+[00:54:00] that in the toolbox if you if whoever
+[00:54:02] wrote the question implements that and
+[00:54:04] wants to share a happy to kind of put
+[00:54:06] some of those methods into the toolbox
+[00:54:08] so it's great so I guess that's it for
+[00:54:15] today thank you very much dr. Hooper
+[00:54:19] thank you very much for everyone that
+[00:54:21] has been with us you know this is the
+[00:54:23] third day so thank you very much that
+[00:54:26] everyone that's been with us for more
+[00:54:29] than six hours now all combined
+[00:54:31] for our brief analysis course with two
+[00:54:36] very well-known researchers so we will
+[00:54:41] give all the disco doll ready dr. Gupta
+[00:54:43] red said that the code will be available
+[00:54:45] we will make all the data set available
+[00:54:48] also and the webinar and if you want
+[00:54:52] more information from us you can also
+[00:54:54] email us and follow us on our social
+[00:54:56] medias new webinars will be coming up so
+[00:55:00] we'll wait for you guys thank you very
+[00:55:03] much and see you next time bye Rupert

@@ -1,0 +1,2307 @@
+[00:00:09] Okay, hello everyone again.
+[00:00:12] Uh nice to have you here. I will just
+[00:00:15] start uh with some of the reminders as
+[00:00:19] as usual. Just a moment. Okay, so
+[00:00:24] our webinar today is on motion analysis
+[00:00:27] with the brain analyzer toolbox, uh also
+[00:00:29] known as as the near stool box, and
+[00:00:32] we'll have our guest speaker Dr. Ted
+[00:00:34] Huppert.
+[00:00:35] Uh just some reminders if you're the
+[00:00:38] first first time listening to our
+[00:00:39] webinar, so all of you are muted. All
+[00:00:42] the questions are welcome and anytime in
+[00:00:44] the go to webinar panel, you can write
+[00:00:45] in your questions. We will get all of
+[00:00:48] them. Uh we will uh focus uh to answer
+[00:00:52] questions related to the tool or in the
+[00:00:54] first part some parts of the theoretical
+[00:00:57] approach that Dr. Ted will will tell us
+[00:00:59] today.
+[00:01:00] And all questions will be followed up
+[00:01:03] later if we don't have time to answer
+[00:01:05] everything today. The content will be
+[00:01:07] available on on our website after the
+[00:01:10] the webinar.
+[00:01:11] Um so
+[00:01:13] our guest speaker is Dr. Ted Huppert.
+[00:01:16] He's a PI in the Huppert lab at the near
+[00:01:18] optical lab at the University of
+[00:01:20] Pittsburgh. He's also an associate
+[00:01:22] professor
+[00:01:24] of radiology and has also appointments
+[00:01:26] in bioengineering.
+[00:01:28] Uh he's a core faculty member of the
+[00:01:30] UPMC magnetic resonance research center.
+[00:01:34] He's also has also authored more than 65
+[00:01:37] peer-reviewed publications on brain
+[00:01:39] imaging and methodology. And as you all
+[00:01:43] know, he's also a founding member of the
+[00:01:45] Society for fNIRS. It's a great honor
+[00:01:47] that we have Dr. Ted Huppert here today.
+[00:01:51] Dr. Ted Huppert.
+[00:01:53] Please, I will give you the presentation
+[00:01:56] now.
+[00:01:57] All right. Good morning, everyone.
+[00:02:00] Uh
+[00:02:00] let me figure out how to
+[00:02:03] Are my screens shared?
+[00:02:05] You should be able to share your screen
+[00:02:06] now.
+[00:02:08] Uh screen two.
+[00:02:11] Okay.
+[00:02:11] Yes. Yes, we can see.
+[00:02:12] can all you can all see. Um
+[00:02:14] it's not in presenter mode, but I'm
+[00:02:16] going to kind of leave it in this cuz
+[00:02:18] when I do it in presenter mode, I can no
+[00:02:19] longer see uh
+[00:02:22] my camera and stuff like that. So,
+[00:02:25] um yeah, so good morning. Uh hopefully
+[00:02:27] everyone is is doing as well as can be
+[00:02:30] expected. Um
+[00:02:33] today I'm going to talk about uh
+[00:02:35] our near-infrared analysis toolbox
+[00:02:37] called um Brain Analyzer, um also known
+[00:02:40] as the near-infrared toolbox,
+[00:02:42] um and specifically we're going to talk
+[00:02:44] about uh some of the methods for uh
+[00:02:47] dealing with motion artifacts, dealing
+[00:02:49] with physiological noise um within that
+[00:02:52] toolbox.
+[00:02:54] The way that I've structured this this
+[00:02:55] talk today is I'm going to go through um
+[00:02:59] presents maybe about 45 minutes or so of
+[00:03:02] kind of background and and theory and
+[00:03:05] stuff like that. Uh talk about some of
+[00:03:07] the algorithms and methods that we're
+[00:03:08] implementing, uh the different the
+[00:03:10] different options for dealing with these
+[00:03:12] types of artifacts, um and then I'm
+[00:03:15] going to switch over to looking at some
+[00:03:17] code in MATLAB and actually
+[00:03:19] getting our hands dirty with actual
+[00:03:21] data, uh looking at how this uh these
+[00:03:24] methods are implemented within the the
+[00:03:26] near-infrared toolbox.
+[00:03:27] Um
+[00:03:28] after that, we're going to if
+[00:03:30] hopefully we still have some time, I'm
+[00:03:32] going to show some data from my lab um
+[00:03:35] that looks at um
+[00:03:37] these issues of motion uh motion
+[00:03:39] artifacts and stuff, specifically in uh
+[00:03:41] I put together a bunch of data that
+[00:03:43] deals with uh brain imaging during gait
+[00:03:46] and balance and movement um
+[00:03:48] uh studies uh where these kind of motion
+[00:03:50] artifacts tend to come up a little bit
+[00:03:52] more.
+[00:03:54] All right. So, um and as I mentioned, um
+[00:03:56] I'm an associate professor at the
+[00:03:59] University of Pittsburgh. Um about
+[00:04:02] 5 months ago at this point, I actually
+[00:04:04] switched my affiliation. So,
+[00:04:06] unfortunately, I'm no longer in the
+[00:04:08] Department of Radiology. I'm no longer
+[00:04:09] in the Department of Bioengineering. I'm
+[00:04:11] actually in Electrical Engineering now.
+[00:04:13] Um
+[00:04:14] um and now almost entirely focused on
+[00:04:17] NIRS. I I don't do much MRI anymore. Um
+[00:04:21] so
+[00:04:24] So, so
+[00:04:26] I thought I'd start with with with this
+[00:04:28] um this slide here. Hopefully, you can
+[00:04:30] all see that the movie playing. Um this
+[00:04:33] was this was going back to my
+[00:04:35] introduction to NIRS to do movement
+[00:04:37] disorders.
+[00:04:39] Uh where when I came to the University
+[00:04:40] of Pittsburgh, we had a large group of
+[00:04:43] uh labs that were interested in studying
+[00:04:46] uh mobility and balance and risk of
+[00:04:49] falls, uh particularly with aging. And
+[00:04:52] so, one of my grad students, uh Helmet
+[00:04:54] Karim, um
+[00:04:57] basically convinced me that it would be
+[00:04:59] really great to measure NIRS while
+[00:05:01] letting him play video games.
+[00:05:03] Um
+[00:05:04] this was a theme in my lab. Actually, I
+[00:05:06] have a couple of people that did video
+[00:05:08] game projects. Um
+[00:05:11] but basically, what Helmet put together
+[00:05:13] was uh this study in which we were
+[00:05:17] recording NIRS from
+[00:05:19] uh the from regions of the temporal
+[00:05:22] parietal junction uh
+[00:05:24] um and the frontal cortex, uh which I'll
+[00:05:26] explain why in a second.
+[00:05:28] Uh but basically, measuring from these
+[00:05:30] parts of the brain that are associated
+[00:05:31] with balance. And
+[00:05:34] um what we were looking at, I'll replay
+[00:05:36] this video, is actually what parts of
+[00:05:38] the brain light up when you ski down
+[00:05:41] this hill in this video game. So, you're
+[00:05:43] standing on this force plate, adjusting
+[00:05:45] your balance to move your avatar uh down
+[00:05:48] the hill. Um And what we're looking at
+[00:05:51] here is actually brain activity
+[00:05:53] reconstructed into into brain space in
+[00:05:56] real time
+[00:05:58] from our nearest data.
+[00:06:00] And so I always give this slide as to to
+[00:06:04] when I start talking about mobility and
+[00:06:06] brain imaging of mobility because this
+[00:06:09] is nearest is actually one of the only
+[00:06:10] modalities you can do this kind of study
+[00:06:13] with. You can stand upright can actually
+[00:06:15] move around.
+[00:06:17] You can you can
+[00:06:19] you have range of motion and and with
+[00:06:21] the newer systems like the the sport
+[00:06:24] system and stuff where you it's
+[00:06:25] completely wireless, you can move
+[00:06:27] around.
+[00:06:29] And you can't really do this with other
+[00:06:31] modalities.
+[00:06:33] But the challenge to that is, you know,
+[00:06:36] now we're in this environment where you
+[00:06:38] can move around and so on and so we have
+[00:06:40] artifacts. We have motion. We have
+[00:06:42] physiology that changes when you do
+[00:06:44] these kind of tasks.
+[00:06:46] Um and so that's the purpose of today's
+[00:06:49] talk is to set up and talk about the
+[00:06:51] analysis approaches for dealing with
+[00:06:54] data that's collected under these type
+[00:06:56] of environment these type of scenarios.
+[00:06:58] So what I'm going to do is I'm going to
+[00:06:59] first talk about some of the
+[00:07:02] sources of noise that we see kind of a
+[00:07:04] little bit more in depth. I'm sure
+[00:07:07] you're all familiar with the kind of
+[00:07:09] physiology and motion artifacts that we
+[00:07:10] see in nearest and talk about methods to
+[00:07:13] basically pre-filter those away. So when
+[00:07:17] I say pre-filtering what I'm referring
+[00:07:19] to is this idea that you take your data,
+[00:07:21] you somehow clean it up, you remove a
+[00:07:24] motion artifact, you remove physiology.
+[00:07:27] At the end of the day you're left with
+[00:07:28] cleaner data and then you feed this into
+[00:07:31] your statistical model. So a
+[00:07:32] pre-filtering
+[00:07:34] prior to the statistical analysis. And
+[00:07:37] so I'm going to talk about that
+[00:07:39] those methods.
+[00:07:41] You probably heard a lot about that from
+[00:07:43] Miriam's talk on the Homer 3 stuff uh
+[00:07:45] because that's the majority of the way
+[00:07:47] that Homer deals with the these kind of
+[00:07:49] noise uh artifacts.
+[00:07:52] And then I'm going to talk about some of
+[00:07:53] our newer work uh which is to try to
+[00:07:56] incorporate that directly into the
+[00:07:58] statistical GLM. So, to adapt your
+[00:08:01] statistics in a way that becomes less
+[00:08:04] sensitive to these motion artifacts and
+[00:08:06] this physiology. And so, to deal with it
+[00:08:08] statistically
+[00:08:10] in one step rather than a pre-processing
+[00:08:13] uh type two step uh process.
+[00:08:15] Uh from there, as I said, we're going to
+[00:08:17] talk we're going to go in and show you
+[00:08:19] some some demo code and how this is
+[00:08:21] actually implemented in the toolbox. And
+[00:08:23] then I'll return to talking about uh
+[00:08:25] some of the studies that my lab my lab
+[00:08:27] does.
+[00:08:29] So, this is one of my favorite slides. I
+[00:08:31] think I've prepared this maybe 20 years
+[00:08:33] ago at this point um
+[00:08:36] because it basically shows everything
+[00:08:37] that you know uh we have in our our
+[00:08:40] nearest data, right? So, when we zoom in
+[00:08:43] on periods that we consider good, we
+[00:08:46] still have cardiac, we still have
+[00:08:48] respiratory, we still have blood
+[00:08:49] pressure oscillations.
+[00:08:51] Um, in the context of movement uh
+[00:08:54] studies, these are not stationary
+[00:08:56] things. Your heart rate actually will
+[00:08:58] change with changes in posture while you
+[00:09:02] do the tasks. And so, this becomes
+[00:09:04] non-stationarity. Our physiology, our
+[00:09:07] noise is actually different during the
+[00:09:09] task periods of say walking or or skiing
+[00:09:12] down that that uh that that video game
+[00:09:16] uh compared to the rest periods.
+[00:09:18] Um, we also have in this this this uh
+[00:09:22] time course here, we see we have uh
+[00:09:24] motion artifact, both a spike type of
+[00:09:27] artifact and a shift type of artifact.
+[00:09:30] This is where the probe has lifted off
+[00:09:32] the head uh transiently. So, so that the
+[00:09:35] sensors are not touching the the surface
+[00:09:38] of the scalp. Um it all of a sudden as
+[00:09:41] it lifts off, it maybe gets a lot more
+[00:09:43] light because the light is now bouncing
+[00:09:45] off the surface, but then it falls back
+[00:09:47] down, uh but comes to a slightly
+[00:09:49] different position in the head. And it
+[00:09:51] doesn't take much.
+[00:09:53] Uh so, when we talk about it's not like
+[00:09:55] the cap is going woo and and coming off.
+[00:09:58] It's just a very, very slight movement,
+[00:10:00] a slight change in the pressure of the
+[00:10:03] cap. Uh but because we're so sensitive
+[00:10:06] to the coupling of the fiber optics or
+[00:10:09] the optodes to the scalp, a very, very
+[00:10:12] small pressure, change in pressure, will
+[00:10:14] give a very large change in the signal.
+[00:10:17] Uh which as you can see from this this
+[00:10:19] time course here is orders of magnitude
+[00:10:22] bigger fluctuations than what we see
+[00:10:24] from the actual physiology, from the
+[00:10:26] heart rate, um
+[00:10:28] these these these physiological changes.
+[00:10:33] So,
+[00:10:34] in terms of dealing with these, both the
+[00:10:37] physiology and the motion type
+[00:10:39] artifacts,
+[00:10:41] there's basically two different types,
+[00:10:43] uh two different um
+[00:10:45] families of methods that we can use for
+[00:10:48] filtering.
+[00:10:49] The first is based on
+[00:10:52] I'm going to do the the right column
+[00:10:53] here. The first is based on uh the
+[00:10:55] temporal properties.
+[00:10:57] So, we know something like the cardiac
+[00:10:59] oscillation is around uh 60 beats per
+[00:11:02] per minute. So, we know its frequency,
+[00:11:04] we can design filters to cut out that
+[00:11:06] frequency uh from the temp the time
+[00:11:09] information. Um
+[00:11:12] so, things like bandpass filtering,
+[00:11:14] wavelet analysis, adaptive filtering are
+[00:11:16] all ways to kind of take advantage of
+[00:11:18] the time series and the temporal
+[00:11:21] properties that some of this noise, like
+[00:11:24] the cardiac, is going to be a lot higher
+[00:11:26] frequencies than our signal of interest,
+[00:11:28] the brain um activity.
+[00:11:30] And so, what we see from this this plot
+[00:11:32] here, this is space versus time, uh we
+[00:11:36] can see if we're interested in brain
+[00:11:37] activity here, cardiac is well removed.
+[00:11:40] It's much higher frequencies than what
+[00:11:42] we would expect for the brain activity.
+[00:11:44] So we can filter it out. We can separate
+[00:11:46] out based on that temporal information.
+[00:11:49] However, something like respiratory or
+[00:11:51] blood pressure uh overlaps. And so the
+[00:11:56] uh it's impossible to separate it those
+[00:11:58] things simply on the basis of time uh
+[00:12:01] because their frequency content, their
+[00:12:03] their time scales overlap with the time
+[00:12:06] scales of interest of our our signal of
+[00:12:08] interest, the brain activity.
+[00:12:11] So we're going to talk a little bit
+[00:12:12] about different methods for temporal
+[00:12:14] filtering um and how those and then I'll
+[00:12:16] show how those are implemented within
+[00:12:18] the toolbox. Um we can also take
+[00:12:21] advantage of spatial filtering.
+[00:12:23] So in the case of spatial filtering,
+[00:12:26] this is taking advantage of the fact
+[00:12:27] that systemic physiology will tend to be
+[00:12:30] global. Your heart rate, for example, is
+[00:12:32] all over your your the the probe and so
+[00:12:34] all of these channels will experience
+[00:12:36] this
+[00:12:37] this noise fluctuation at the same time.
+[00:12:41] Other things like motion artifact, it's
+[00:12:43] the entire probe lifting off and coming
+[00:12:45] back down. So it's going to be a large
+[00:12:47] number of channels.
+[00:12:49] Excuse me, and it's not going to care
+[00:12:50] about wavelength
+[00:12:52] because it's the whole probe so both of
+[00:12:54] your your colors, your wavelengths that
+[00:12:56] you're using are going to see that
+[00:12:57] motion the same way.
+[00:12:59] Whereas something like a cardiac or a
+[00:13:01] respiratory might only show up on this
+[00:13:04] the the wavelengths that are more
+[00:13:05] sensitive to oxyhemoglobin or
+[00:13:07] deoxyhemoglobin. So they're more
+[00:13:09] wavelength specific.
+[00:13:11] Um so we have a whole family of methods
+[00:13:13] devoted to spatial filtering to try to
+[00:13:16] take advantage of the spatial
+[00:13:18] properties. And so the idea is, you
+[00:13:21] know, you can you can you can uh look
+[00:13:23] along the spatial profile and if you saw
+[00:13:26] things that only changed on one channel,
+[00:13:28] that's probably something like an
+[00:13:30] instrument noise.
+[00:13:31] Brain activity probably changes a couple
+[00:13:33] of channels. It shouldn't be the entire
+[00:13:35] probe, but it should be more than just
+[00:13:37] one channel. Um whereas things that
+[00:13:40] changed all the channels are going to be
+[00:13:42] more like systemic physiology, blood
+[00:13:45] pressure, respiratory, and and so on.
+[00:13:47] And so between the time and the this the
+[00:13:49] temporal frequencies and the spatial
+[00:13:51] frequencies, you can start to tease
+[00:13:53] apart to carve out um
+[00:13:55] the brain activity signals from the rest
+[00:13:58] of this this noise that's in here.
+[00:14:01] Um and actually already talked about
+[00:14:03] this stuff, so I'll I'll skip that.
+[00:14:05] Um
+[00:14:07] This is actually a This is a slide um
+[00:14:10] This is now 20 years old uh slide, but
+[00:14:12] this is from Mariangela Franceschini at
+[00:14:15] MGH who did a study uh with me where we
+[00:14:18] actually recorded NIRS across the whole
+[00:14:20] head. Uh and so what we're looking at
+[00:14:22] here is actually the spatial
+[00:14:27] um locations of the heartbeat and the
+[00:14:30] respiratory and the blood pressure-type
+[00:14:32] signals.
+[00:14:33] And so so we end up seeing that they
+[00:14:35] have both spatial kind of profiles
+[00:14:40] um
+[00:14:41] that are kind of unique to the different
+[00:14:43] the different physiology. And
+[00:14:45] respiratory, for example, is largely of
+[00:14:48] um
+[00:14:49] a uh blood pressure change. When you
+[00:14:51] breathe, what happens is your heart
+[00:14:53] actually uh so your lungs put pressure
+[00:14:56] on your heart uh which basically slows
+[00:14:59] the venous return. Uh so so so it it's
+[00:15:03] what's called the sinus arrhythmia, the
+[00:15:04] pressure from the lungs slowing the the
+[00:15:08] return of blood to the heart. And so
+[00:15:10] what this ends up doing is creating a
+[00:15:11] pressure wave that starts in the venous
+[00:15:15] circulation, which is largely at the
+[00:15:16] back of the head, and starts to feed
+[00:15:19] forward towards the front, kind of
+[00:15:21] mapping out the the uh the
+[00:15:24] of the blood flow in the brain, which
+[00:15:26] goes, you know, up the neck, feeds the
+[00:15:30] MCA, ACA, PCA, and then drains out the
+[00:15:34] dural sinuses to the confluence of
+[00:15:36] sinuses, and then back out the
+[00:15:39] the
+[00:15:40] jugular vein.
+[00:15:41] So, what happens when you get a
+[00:15:42] respiratory wave is or a pressure wave
+[00:15:45] originating in the venous circulation is
+[00:15:48] it starts in the back, and then pushes
+[00:15:51] forward towards the front of the head as
+[00:15:53] it moves from the largest veins through
+[00:15:57] the dural sinuses, and then to more of
+[00:16:00] the capillary level. So, whereas if we
+[00:16:03] look at something like heartbeat,
+[00:16:05] heartbeat is more of a arterial
+[00:16:07] fluctuation. So, we tend to see that
+[00:16:10] more coming from the arterial the
+[00:16:12] feeding the arteries that are feeding
+[00:16:14] the brain, which are as I said are the,
+[00:16:17] you know, the AC
+[00:16:19] A
+[00:16:19] A the anterior, middle, and posterior
+[00:16:23] cerebral arteries. Um
+[00:16:26] And so, you tend to see that the
+[00:16:28] heartbeat kind of pulsing the whole
+[00:16:30] brain at once because it's being fed by
+[00:16:32] these major arteries, whereas these
+[00:16:34] venous circulations tend to have these
+[00:16:36] rolling waves that start in the back and
+[00:16:38] move to the front. So, very unique
+[00:16:40] spatial profiles between these different
+[00:16:43] physiological signals.
+[00:16:46] Okay. So, ways that you can start to
+[00:16:49] remove this. So, as I said,
+[00:16:52] um you can start to take advantage of
+[00:16:53] the time series. So, we know cardiac,
+[00:16:56] for example, is much higher frequency
+[00:16:58] than our signal of interest. And so, we
+[00:17:01] can do, if we start with raw data like
+[00:17:04] this on the top plot, we can low-pass
+[00:17:06] filter, which means that we're going to
+[00:17:08] remove the high frequencies, and we see
+[00:17:10] that this if if I zoomed in, you see
+[00:17:12] that's cardiac oscillations there. As I
+[00:17:15] low-pass filter, the cardiac
+[00:17:16] oscillations go away. We still have slow
+[00:17:19] drifts in the data. Those are the the
+[00:17:21] low frequencies, but all the high
+[00:17:22] frequency noise has been removed.
+[00:17:25] If I
+[00:17:27] high pass filter that data, then
+[00:17:30] when you high pass filter, you allow
+[00:17:33] allow higher frequencies to pass. So,
+[00:17:35] now we're removing the low frequencies.
+[00:17:39] And so, if you high pass filter, you
+[00:17:40] take this data and high pass filter, now
+[00:17:43] you can start to get rid of these slow
+[00:17:44] drifts. And so, so
+[00:17:47] the idea would be you could would design
+[00:17:49] a low pass filter that cuts off
+[00:17:53] cardiac and high and and fast stuff, but
+[00:17:57] leaves the signal of interest. So, it
+[00:17:59] has to be higher than the evoked
+[00:18:02] response,
+[00:18:03] but lower than the cardiac signal. So,
+[00:18:06] usually we choose something like a half
+[00:18:08] hertz for the cut off. We say that the
+[00:18:10] the brain response is pretty slow.
+[00:18:13] Um it's all slower than a half hertz,
+[00:18:15] and cardiac is all faster than a half
+[00:18:17] hertz. Uh so, we can filter out cardiac
+[00:18:20] if we choose that.
+[00:18:22] On the high pass end, we have to choose
+[00:18:24] a frequency that's uh high enough that
+[00:18:27] we're going to get rid of things like
+[00:18:29] blood pressure, but not too high that
+[00:18:31] we're going to start to carve into our
+[00:18:32] brain response. And so, in this case,
+[00:18:34] choosing a high pass filter, you have to
+[00:18:36] consider uh what your task actually was.
+[00:18:40] So, for example, if you were doing a
+[00:18:41] block design task, 30 seconds on, 30
+[00:18:44] seconds off, um you have kind of a
+[00:18:47] natural frequency of about a minute uh
+[00:18:50] in terms of one complete cycle of that
+[00:18:53] task.
+[00:18:54] And so, if you were to high pass filter
+[00:18:57] at say 30 seconds or 1 over 30 seconds,
+[00:19:01] that is faster than that natural cycle
+[00:19:04] of the the of the evoked response, and
+[00:19:06] what you would have what it would happen
+[00:19:07] is you would actually kill all of your
+[00:19:09] signal of interest. You would filter it
+[00:19:11] away, and you'd be left with no brain
+[00:19:13] activity. You would remove too much.
+[00:19:15] Um
+[00:19:17] So, in that case, if it was again 30
+[00:19:19] seconds on, 30 seconds off, you'd
+[00:19:21] probably want to pick something that is
+[00:19:23] safely away from that that um
+[00:19:26] 1/60 type frequency, so you might do 1/2
+[00:19:29] minutes or so.
+[00:19:31] So, 1/2 minutes is going to get rid of
+[00:19:33] some of the blood pressure, the really
+[00:19:35] slow blood pressure. Um but there's a
+[00:19:38] lot of blood pressure and certainly
+[00:19:39] things like respiratory that are not
+[00:19:41] going to get removed by choosing a high
+[00:19:43] pass that's that low. Um so, on the low
+[00:19:46] pass end, you can fairly confidently use
+[00:19:50] uh 1/2 hertz for all of your data,
+[00:19:53] um unless it's kind of
+[00:19:55] um unless you're really interested in
+[00:19:57] the fast evoked responses. Um but on the
+[00:20:00] low pa- the high pass end, the the the
+[00:20:02] low frequency cutoffs, uh you have to
+[00:20:04] really think about how that interferes
+[00:20:07] could interfere with your um
+[00:20:09] your experimental timing.
+[00:20:11] And if you're not careful with that, you
+[00:20:14] can end up actually removing too much of
+[00:20:16] your data um and be left with no signal
+[00:20:19] of interest. Um so, if you're too
+[00:20:21] aggressive, it can be bad.
+[00:20:25] Okay. So, so um
+[00:20:29] The other way uh we we can think about
+[00:20:31] this is um as I said, dealing with the
+[00:20:36] spatial information within within the
+[00:20:39] data.
+[00:20:40] Oops, is my
+[00:20:43] My slides are out of order because it
+[00:20:45] didn't sync to the the my two computers
+[00:20:47] didn't sync. So, let me jump around for
+[00:20:49] a second. I'm sorry.
+[00:20:50] Um
+[00:20:52] So, another way that we can deal with
+[00:20:56] the time series filtering
+[00:20:59] is by using things like adaptive
+[00:21:00] filtering. So, um Zhang et al. um and
+[00:21:04] there's a couple other publications
+[00:21:06] including myself have looked at the use
+[00:21:09] of adaptive filters. So, the idea with
+[00:21:11] an adaptive filter is that what you try
+[00:21:15] to do is you try to you're not carving
+[00:21:18] out specific frequencies per se, um
+[00:21:22] you're trying to carve out um just kind
+[00:21:25] of follow the notch natural contours of
+[00:21:28] the data using an adaptive algorithm,
+[00:21:30] something like a Kalman filter, and
+[00:21:32] trying to remove then these
+[00:21:34] low-frequency drifts. Um the difference
+[00:21:38] there is you don't actually enter in any
+[00:21:42] um
+[00:21:43] uh specific frequency cutoff. You kind
+[00:21:45] of define it from the data itself.
+[00:21:48] Uh in a sense. And so, the Zhang et al.
+[00:21:51] paper
+[00:21:52] uh
+[00:21:52] they looked at that
+[00:21:54] um
+[00:21:55] and they used what what I'm going to
+[00:21:56] call a model-free approach. That is,
+[00:21:59] they took their data, they tried to do
+[00:22:00] an adaptive filtering based on the data
+[00:22:02] to remove slow drift, but it didn't
+[00:22:05] introduce any models about kind of I
+[00:22:09] kind of expect the blood pressure to be
+[00:22:11] about maybe one 1/10 hertz. I kind of
+[00:22:14] expect the respiratory to be about a
+[00:22:16] quarter of hertz. They used none of that
+[00:22:18] model information, they just fit the
+[00:22:20] data to an adaptive model.
+[00:22:23] And what they ended up finding in this
+[00:22:24] this paper, and you can kind of guess it
+[00:22:26] from the title of uh how well and when
+[00:22:29] does it work, is by
+[00:22:33] using kind of driving it solely from the
+[00:22:35] data and not having prior information
+[00:22:37] about what frequencies you're trying to
+[00:22:38] remove, you have to be careful because
+[00:22:42] it can actually start to over-correct.
+[00:22:44] And so, one of the things they found
+[00:22:45] there was that if you were too
+[00:22:48] aggressive in your adaptive filtering,
+[00:22:50] it would actually, again, remove too
+[00:22:52] much of your signal of interest.
+[00:22:56] And so,
+[00:22:59] uh
+[00:23:00] uh where is my
+[00:23:05] So, an alternative to that, uh, so one
+[00:23:08] that was introduced by Simon Prince and
+[00:23:10] Simon Aldrich, was instead of using a,
+[00:23:13] uh, model-free adaptive model,
+[00:23:16] uh, model-free common filter.
+[00:23:18] Uh, what they introduced was an idea
+[00:23:21] that, well, you have some known
+[00:23:23] physiology. You expect to have cardiac
+[00:23:27] oscillations. You expect to have
+[00:23:28] respiratory at a core or hertz. You
+[00:23:31] expect to have blood pressure or the
+[00:23:32] mayor waves at about once every 10
+[00:23:34] seconds. And so, what they did was
+[00:23:36] instead of just trying to follow the
+[00:23:39] entire data, uh, be purely data-driven,
+[00:23:42] what they did was they put in
+[00:23:44] the the idea that I have a sinusoid
+[00:23:47] around that car that respiratory
+[00:23:50] frequency, around that blood pressure
+[00:23:51] frequency. And the phase and the
+[00:23:54] amplitude of that blood pressure
+[00:23:56] oscillation might change a little bit.
+[00:23:58] It's not a pure sine wave. Um, it it
+[00:24:01] it's a sine wave that kind of varies a
+[00:24:03] little bit. It it it's, um,
+[00:24:06] it has some degree of noise in the phase
+[00:24:08] and the amplitude.
+[00:24:10] And so, what they did was instead of
+[00:24:12] trying to solve for an adaptive filter
+[00:24:14] that fit the data, they tried to solve
+[00:24:17] for this,
+[00:24:18] um,
+[00:24:19] oscillation that was allowed to adjust,
+[00:24:21] uh, to the data. So, it's it's a
+[00:24:22] targeted approach. It's using those
+[00:24:25] frequencies they want to remove and
+[00:24:27] trying to target a filter around those
+[00:24:30] frequencies, adapting it to the data,
+[00:24:33] but still constraining it, uh, to be
+[00:24:36] roughly around the frequencies that they
+[00:24:38] a priori thought would be into the data.
+[00:24:40] Uh, and so, this is this is an example
+[00:24:42] of this where they had three, uh,
+[00:24:45] different sine waves in, one at the
+[00:24:47] cardiac, respiratory, and blood
+[00:24:48] pressure, uh, frequencies, uh, tried to
+[00:24:51] try to model data like that.
+[00:24:55] Uh, in my lab, we actually extended that
+[00:24:58] idea a couple of years later with, in
+[00:25:00] addition to trying to model out the
+[00:25:03] physiology, we said, well, in in
+[00:25:06] addition, there there's an evoked
+[00:25:07] response in there somewhere, and that's
+[00:25:09] actually what we want to estimate. And
+[00:25:11] so, what we did was we introduced, in
+[00:25:13] addition to those
+[00:25:15] those sine waves that are dealing with
+[00:25:17] the motion the physiology, we introduced
+[00:25:21] the model that's dealing with the evoked
+[00:25:23] response. And so, now we used adaptive
+[00:25:26] modeling to fit both the the noise
+[00:25:29] parameters and the evoked response data,
+[00:25:33] which allowed us to do things like this
+[00:25:35] as shown in this slide. So, this was
+[00:25:38] a study published in 2009 that actually
+[00:25:40] did real-time estimation. Where we're
+[00:25:43] taking data in, we're adapting this
+[00:25:46] model to estimate the noise in real
+[00:25:48] time, and estimating that evoked
+[00:25:51] response from that same model. So, we're
+[00:25:53] cleaning up the noise and estimating
+[00:25:55] the statistical evoked response. This
+[00:25:57] was a finger tapping task. So, it was
+[00:26:00] kind of that hello world experiment
+[00:26:02] where I tap my right hand and the mouse
+[00:26:04] cursor moves to the right. I tap my left
+[00:26:07] hand and my mouse cursor moves to the
+[00:26:08] left.
+[00:26:10] And so, we were controlling
+[00:26:12] kind of a computer feedback based on
+[00:26:14] which hand we were
+[00:26:17] which side of the brain we were
+[00:26:18] measuring this near as response from.
+[00:26:21] Um,
+[00:26:23] we we followed that up actually we ended
+[00:26:25] up with a
+[00:26:26] grant from DARPA to do this in real time
+[00:26:30] for estimating brain activity. And so,
+[00:26:33] this is this is actually
+[00:26:35] one of the figures we developed for
+[00:26:38] this DARPA project, where we actually
+[00:26:41] hooked up this
+[00:26:42] this algorithm to one of our instruments
+[00:26:44] recording data in real time and taking
+[00:26:47] the output of that real-time general
+[00:26:50] linear model, feeding that into a
+[00:26:52] classifier. In this case, it was a
+[00:26:54] neural network model that was actually
+[00:26:56] predicting um
+[00:26:58] I'm going to call it um attention to the
+[00:27:00] task. I can go into more details, but
+[00:27:02] that's that's a that's a um uh a good
+[00:27:05] first approximation. And so, what we did
+[00:27:08] was we trained a neural network model uh
+[00:27:10] to basically uh
+[00:27:12] give me a scale between 0 and and 10 uh
+[00:27:16] with whether or not the person was
+[00:27:18] engaged in this task. As you went
+[00:27:21] through these blocks,
+[00:27:23] um
+[00:27:23] the the you see the needle kind of
+[00:27:25] flying up to to 10, and then at some
+[00:27:27] point you turn your brain up to 11. Um
+[00:27:31] where we're seeing where where basically
+[00:27:33] predicting from the this real-time uh
+[00:27:36] denoised data what the brain signals
+[00:27:38] actually were. Um so, that's an example
+[00:27:41] again of a using temporal information.
+[00:27:44] We're um building a model to try to
+[00:27:46] filter out specific frequencies or
+[00:27:49] filter around specific frequencies,
+[00:27:52] taking advantage of the temporal
+[00:27:54] information, the temporal
+[00:27:56] um
+[00:27:56] uh differences between noise and our
+[00:27:59] brain activity of interest.
+[00:28:01] Um
+[00:28:03] And actually, something very similar to
+[00:28:04] this is uh what's done in NIRS-SPM in
+[00:28:08] their um minimum wavelength um
+[00:28:11] uh
+[00:28:11] um
+[00:28:13] minimum wavelength minimum descriptive
+[00:28:16] length, the the wavelength MDL code uh
+[00:28:19] within uh NIRS-SPM.
+[00:28:21] Where the idea, just like that Kalman
+[00:28:23] filter, is we're trying to we solve a
+[00:28:27] model that has these kind of sinusoids
+[00:28:30] that are modeling the the noise in
+[00:28:33] addition to
+[00:28:34] the basis set that's describing the
+[00:28:36] evoked response. In the case of the
+[00:28:38] wavelets, what we're doing is we're
+[00:28:40] using these
+[00:28:42] um
+[00:28:43] these kind of sinusoids that are local
+[00:28:45] in time. Uh and so so um these these
+[00:28:49] frequency time uh representations from
+[00:28:52] the wavelets uh to to describe the noise
+[00:28:55] within their data. So, just like the
+[00:28:56] adaptive filter, it allows this noise to
+[00:28:59] evolve over time, to change over time,
+[00:29:03] um but is still centered on this idea
+[00:29:05] that it's roughly around the cardiac
+[00:29:08] frequency or the respiratory frequency.
+[00:29:10] Um it's just uh changing uh slightly
+[00:29:13] over time in frequency and phase.
+[00:29:16] Um
+[00:29:20] And then finally, kind of wrapping out
+[00:29:21] the time series approaches,
+[00:29:25] um
+[00:29:26] maybe well, going back uh 10 years now,
+[00:29:29] uh but what's been a really hot topic in
+[00:29:32] the last um
+[00:29:33] maybe 5 years for the nearest community
+[00:29:36] has been the idea of using external uh
+[00:29:39] regressors to try to capture this
+[00:29:42] systemic physiology and remove it. Um
+[00:29:45] and so
+[00:29:46] um um
+[00:29:48] uh Felix Scholkmann has been a a uh
+[00:29:50] really big advocate of this what's
+[00:29:53] called short separation regression,
+[00:29:55] which is the idea that um when we set up
+[00:29:58] our nearest probe, our source detector
+[00:30:01] distance, as that source detector
+[00:30:03] distance increases, on average, we our
+[00:30:06] our banana, our sensitivity model goes
+[00:30:08] deeper into the brain. But if I use a
+[00:30:11] really short separation of say 1 cm, um
+[00:30:15] it's only catching the skin.
+[00:30:17] Whereas if I use a longer uh 3 and 1/2
+[00:30:20] cm, what we'd use for brain imaging
+[00:30:22] brain um
+[00:30:24] uh evoked brain signals, uh it's seeing
+[00:30:26] both the skin and the deeper brain. And
+[00:30:29] so if I take the short separation and
+[00:30:31] the long separation and subtract uh
+[00:30:34] difference them, what I'm left with is
+[00:30:37] kind of just the brain part. So, I've
+[00:30:39] removed out the skin the skin. Um and
+[00:30:42] there's a couple of different
+[00:30:43] approaches. I'm going to return to some
+[00:30:45] of the comparisons that we've done uh
+[00:30:47] between these approaches
+[00:30:49] in how do you use that short separation
+[00:30:52] data? Do you use it as a pre-filtering
+[00:30:55] that you um in this case uh like what's
+[00:30:58] in the Greg paper here, you take your
+[00:31:00] your raw data uh the top line
+[00:31:03] the top row
+[00:31:05] you denoise it. Um, so in this case
+[00:31:08] they're denoising using using is um
+[00:31:12] Sorry, uh first neighbors. In this case
+[00:31:14] they're denoising using both first and
+[00:31:16] second neighbors.
+[00:31:18] And you remove the you remove the
+[00:31:20] systemic physiology. You're ideally
+[00:31:23] ideally left with a cleaner signal and
+[00:31:26] then you go as a second step into the
+[00:31:28] general linear model, the statistical
+[00:31:30] model. And And what they showed was that
+[00:31:32] um you got a in this case going from
+[00:31:36] panel D to panel E, when you remove the
+[00:31:39] short separation you got a um
+[00:31:42] cleaner-looking uh evoked response. That
+[00:31:45] is it looked more like what you expected
+[00:31:47] it to. Um the original data had these
+[00:31:50] bumps and wiggles that probably were due
+[00:31:52] to the physiology
+[00:31:54] um that got cleaned up when you removed
+[00:31:56] um you removed that.
+[00:31:58] And I'm going to talk a little bit more
+[00:32:00] about about that.
+[00:32:02] Um
+[00:32:03] uh after I finish kind of this survey of
+[00:32:05] of of methods here.
+[00:32:07] Um
+[00:32:09] So those were all temporal methods. They
+[00:32:12] took advantage of this idea that the
+[00:32:15] time series of our physiology is very
+[00:32:17] different from the time series of our
+[00:32:19] signal of interest. Um but we can also
+[00:32:21] do the spatial methods as well. So um
+[00:32:25] one of the one of the spatial methods um
+[00:32:28] that was originally introduced in the
+[00:32:30] Homer 1 package and has since uh been
+[00:32:33] one of our our our favorites
+[00:32:35] um is principal component analysis.
+[00:32:38] And so, the idea with principal
+[00:32:39] component analysis is
+[00:32:42] what it's trying to do is it's trying to
+[00:32:44] remove uh features that are dominant in
+[00:32:49] the spatial covariance. In other words,
+[00:32:52] features that are changing the entire
+[00:32:55] probe all at the same time. Um and
+[00:32:58] whether that's the entire probe all
+[00:33:00] wavelengths or oxy and deoxy differently
+[00:33:04] um um
+[00:33:07] has an effect on what it ends that
+[00:33:08] principal component ends up removing. Um
+[00:33:11] so, in this case, this is just a a quick
+[00:33:13] example.
+[00:33:14] Uh this is another one of my grad
+[00:33:16] students, Ben. Uh this he talked me into
+[00:33:19] letting him play Dance Dance Revolution
+[00:33:21] as his project. Uh but here he is
+[00:33:23] standing on this this force plate here.
+[00:33:26] Um
+[00:33:27] dancing, responding to these arrows as
+[00:33:30] they come down the screen to kind of
+[00:33:32] dance his his his PhD away. Um and when
+[00:33:36] you do that and you look at kind of the
+[00:33:38] evoked response to a task like this,
+[00:33:42] um you see a very kind of global
+[00:33:45] response. When you're doing this
+[00:33:47] movement and so on,
+[00:33:49] um compared to a standing baseline, when
+[00:33:52] you're moving, there's a lot more uh
+[00:33:54] physiology. And so, you have a task
+[00:33:57] locked systemic physiology.
+[00:34:00] Um
+[00:34:02] Fortunately, or that physiology tends to
+[00:34:05] be very global cuz it's systemic,
+[00:34:07] whereas the brain activity is is is
+[00:34:09] presumably much more localized. And so,
+[00:34:12] uh we we we end up seeing without
+[00:34:14] filtering that we end up with this very
+[00:34:16] kind of global uh decrease in
+[00:34:19] oxygenation uh as you're doing the this
+[00:34:22] task.
+[00:34:24] If you apply principal component
+[00:34:26] analysis,
+[00:34:27] uh
+[00:34:28] trying to trying to remove features that
+[00:34:30] are um
+[00:34:32] spatially global, what happens is the
+[00:34:35] only thing that ends up left with is
+[00:34:37] kind of these these areas of the
+[00:34:38] temporal parietal junction, uh which are
+[00:34:41] areas that we we now know to be involved
+[00:34:43] in vestibular uh multi-sensory control
+[00:34:46] of balance and and movement. Um
+[00:34:49] So, how principal component analysis
+[00:34:52] actually works
+[00:34:54] is
+[00:34:56] um
+[00:34:57] basically, it's a rotation of the data.
+[00:35:01] So, you start off with your original
+[00:35:03] data,
+[00:35:05] um and
+[00:35:06] let's just make it up. You have 20
+[00:35:08] channels by time. And so, your
+[00:35:11] covariance matrix is 20 by 20. It's a
+[00:35:14] It's a It's a 20 by 20 matrix of the
+[00:35:17] spatial covariance of your data.
+[00:35:20] And what we do is we do a um
+[00:35:22] singular value decomposition on that.
+[00:35:25] And
+[00:35:27] basically, what that's doing is that's
+[00:35:28] rewriting that matrix as a linear
+[00:35:32] combination of
+[00:35:34] other matrices, of a natural basis set.
+[00:35:38] Um
+[00:35:39] The first component, the first of those
+[00:35:42] natural basis set, describes the most
+[00:35:44] dominant features. The things that
+[00:35:47] change the entire probe, change all 20
+[00:35:49] channels. The next component is going to
+[00:35:51] be things that are a little bit less
+[00:35:53] dominant. Maybe they're half the
+[00:35:54] channels. They're They're less spatial,
+[00:35:56] they're less
+[00:35:58] uh spatial structure. All the way out to
+[00:36:00] the 20th component, which is the fine
+[00:36:02] details. And so, if we look at the the
+[00:36:05] uh
+[00:36:06] the the principal components of this,
+[00:36:09] the first component is the most
+[00:36:10] dominant, the last component is the the
+[00:36:13] least the most um
+[00:36:16] uh things that only showed up on single
+[00:36:17] channels.
+[00:36:19] And so, what we do is we take that
+[00:36:21] take that decomposition, and just kind
+[00:36:24] of like a
+[00:36:25] um a temporal filter, where we're going
+[00:36:28] to throw out the low frequencies or
+[00:36:30] throw out the high frequencies,
+[00:36:32] we decompose it and then using this uh
+[00:36:35] principal components, and then zero out
+[00:36:38] the first component or the last
+[00:36:40] component. If we zero out the first
+[00:36:42] component and then rotate back to the
+[00:36:45] original space, what's going to happen
+[00:36:47] is now the data is going to have that
+[00:36:50] that uh dominant spatial feature
+[00:36:52] removed. It's going to have less spatial
+[00:36:55] structure, it's going to be left with
+[00:36:56] things that changed a couple of
+[00:36:58] channels, but not the whole thing.
+[00:37:01] If we did the opposite, if we removed
+[00:37:03] the last component, what's going to
+[00:37:05] happen is it's going to act kind of like
+[00:37:06] a low-pass uh
+[00:37:08] uh um a spatial smoothing, that it's
+[00:37:10] going to remove things that only If you
+[00:37:12] only saw it on one channel, it's
+[00:37:14] probably just noise.
+[00:37:16] Uh and so principal component analysis
+[00:37:18] can be used uh if you remove the first
+[00:37:21] couple of components, it's going to make
+[00:37:22] things less global. If you remove the
+[00:37:24] last components, it's going to make
+[00:37:26] things more global. And so the idea is
+[00:37:28] you can filter out things that are too
+[00:37:31] global and things that are, you know,
+[00:37:33] only affecting a single channel to try
+[00:37:35] to localize uh to to leave you with um
+[00:37:38] the brain activity.
+[00:37:40] Uh
+[00:37:43] uh
+[00:37:44] And here's another example. This is from
+[00:37:46] that same uh Mariangela Franceschini uh
+[00:37:49] paper that did the whole-head imaging.
+[00:37:52] Um
+[00:37:53] where in this case the subject is doing
+[00:37:55] We're measuring NIRS from the entire
+[00:37:57] head and did a finger-tapping task. And
+[00:38:01] before filtering, what you end up seeing
+[00:38:03] is you see a very global response. You
+[00:38:05] see this evoked signal on pretty much
+[00:38:07] all the channels. Because even with
+[00:38:09] something like tapping your fingers,
+[00:38:11] if you were to measure your heart rate,
+[00:38:13] you would actually see your heart rate
+[00:38:14] increases.
+[00:38:16] Uh if you're tapping your fingers for
+[00:38:17] say 5 seconds or something short like
+[00:38:19] that, you probably held your breath
+[00:38:21] while you did it. And so, you end up
+[00:38:23] with this coupled systemic physiology
+[00:38:27] that is has the same time course as the
+[00:38:29] task. And so, then when you do your your
+[00:38:32] block averaging or whatever, you see
+[00:38:34] this very global signal.
+[00:38:37] And so, if you take that principal
+[00:38:38] component trick and take that data and
+[00:38:41] remove things that were spatially
+[00:38:43] dominant, now the only things that
+[00:38:46] survive are
+[00:38:48] uh these more localized signals, which
+[00:38:50] hopefully is the brain activity.
+[00:38:52] If you are too aggressive and you start
+[00:38:54] to remove too many components, now
+[00:38:57] you're going to start to cut into that
+[00:38:58] brain activity. And so, with principal
+[00:39:00] component analysis, there's always kind
+[00:39:02] of the question of how many components
+[00:39:05] should I remove? I want to remove enough
+[00:39:08] that I get rid of the systemic
+[00:39:09] physiology, but not too many that I
+[00:39:12] start to get rid of the brain activity.
+[00:39:14] And where that cutoff is is really
+[00:39:16] subjective. Um some people to try to be
+[00:39:19] a little bit more objective in that, um
+[00:39:23] Mariangela, for example, recommends you
+[00:39:25] use 80%. So, you remove all the
+[00:39:27] components up that model up to 80% of
+[00:39:31] your spatial structures and then keep
+[00:39:33] everything after that.
+[00:39:35] Um but that recommendation also depends
+[00:39:37] on how big your probe is.
+[00:39:39] If your probe is only a couple of
+[00:39:42] channels in the forehead,
+[00:39:44] um then your brain and you know, you do
+[00:39:47] a brain task, it might light up all the
+[00:39:49] channels. And so, for that very small
+[00:39:51] probe, brain activity might look pretty
+[00:39:55] global.
+[00:39:56] Whereas in this case, we have sensors
+[00:39:58] all over the whole head, um and so, we
+[00:40:01] can get rid of a lot more components,
+[00:40:04] you know, because we're trying to find
+[00:40:05] things that only affected, you know, a a
+[00:40:08] tenth of the channels uh because we have
+[00:40:10] so many channels um uh
+[00:40:13] that should show no response. Whereas if
+[00:40:16] our probe is very small, all of channels
+[00:40:18] are going to show it in the evoked
+[00:40:19] response, and we can't do this principal
+[00:40:21] component trick anymore.
+[00:40:26] Okay, I already showed that.
+[00:40:28] Um
+[00:40:31] Another way that we can use principal
+[00:40:33] component analysis is
+[00:40:36] um to try to remove motion artifacts.
+[00:40:39] So, same idea. A motion artifact changes
+[00:40:41] the entire probe. It's a very global
+[00:40:43] effect. Um
+[00:40:46] or at least that's the approximation.
+[00:40:48] And so, in that case, principal
+[00:40:49] component analysis can remove that
+[00:40:52] dominant spatial feature. So, what we do
+[00:40:55] in principal component for motion
+[00:40:57] correction is we actually feed in all
+[00:41:00] the data, both wavelengths.
+[00:41:02] Or all the wavelengths, because we say
+[00:41:04] that the motion artifact probably
+[00:41:06] doesn't care it's about the physical
+[00:41:08] movement of the optodes. It doesn't care
+[00:41:10] about wavelength. It's not just
+[00:41:12] oxyhemoglobin or deoxy. It's the whole
+[00:41:14] thing. And so, we have this correlation
+[00:41:17] between the wavelengths.
+[00:41:20] Uh everybody is seeing this huge change.
+[00:41:23] And so, what we do is we compute the
+[00:41:24] spatial covariance on that entire
+[00:41:26] matrix, and do that same trick of
+[00:41:28] removing
+[00:41:30] uh the the strongest components to
+[00:41:32] reduce the motion artifact.
+[00:41:34] When we did this for the physiology, we
+[00:41:36] separately analyzed oxyhemoglobin
+[00:41:39] from deoxyhemoglobin. We split the two
+[00:41:42] uh chromophores of the two wavelengths,
+[00:41:44] because the spatial pattern of blood
+[00:41:47] pressure changes is very different than
+[00:41:48] the spatial pattern of cardiac um
+[00:41:51] uh heart rate changes.
+[00:41:54] So, this is an example. Um this is some
+[00:41:57] data from Teresa Wilcox's um
+[00:42:00] uh lab down at Texas A&M. And Teresa
+[00:42:03] studies babies. And so, this is a um
+[00:42:07] uh rather small probe that's put on the
+[00:42:09] kind of the the the temporal area in the
+[00:42:12] baby.
+[00:42:13] And uh what her lab does is she studies
+[00:42:16] object recognition tasks.
+[00:42:19] And I love this data set because
+[00:42:22] uh
+[00:42:23] what's happening here is
+[00:42:25] uh when the baby is presented with an
+[00:42:28] object, an object comes out on the
+[00:42:30] screen, the baby stares at it and is
+[00:42:32] fixated and doesn't move, the data looks
+[00:42:35] really really nice. So, during these
+[00:42:37] block periods where the task is
+[00:42:39] occurring, we see these really nice
+[00:42:41] evoked repeatable
+[00:42:44] um incredibly beautiful brain signals.
+[00:42:48] However, when the task turns off, the
+[00:42:50] baby's looking around. Where did that
+[00:42:52] object go? It's gets bored, it gets
+[00:42:54] restless, it starts to move. And so,
+[00:42:57] what ends up happening then is during
+[00:42:58] the rest periods, we have this really
+[00:43:00] high level of noise.
+[00:43:02] And so, while this kind of data is so
+[00:43:05] frustrating because while you look at it
+[00:43:08] and you can clearly see these these nice
+[00:43:10] evoked responses, if you try to do
+[00:43:12] statistics on it and say is there a
+[00:43:14] statistical difference between this
+[00:43:16] period and this period, the answer is
+[00:43:18] probably not because the noise is so
+[00:43:21] high during the baseline that you can't
+[00:43:23] um
+[00:43:24] uh
+[00:43:25] you you
+[00:43:25] you don't have the effect size there.
+[00:43:28] This is an example of
+[00:43:31] um non-stationary noise. Our noise is
+[00:43:34] very different during the baseline than
+[00:43:36] it is during the task. And so, one of
+[00:43:38] the problems when you deal with a block
+[00:43:41] average and a T test like that
+[00:43:43] uh is that you're assuming the noise is
+[00:43:46] stationary when you do a T test. And
+[00:43:48] that's not true in in this in this case.
+[00:43:52] But what we can do using that principal
+[00:43:54] component trick is
+[00:43:57] because this artifact shows up on all of
+[00:43:59] our channels and across all of our
+[00:44:01] wavelengths, we can go and we can remove
+[00:44:04] those dominant spatial uh compo-
+[00:44:06] components.
+[00:44:08] So, this is taking that same data after
+[00:44:11] we remove the first component, we see
+[00:44:13] that the noise has dropped down quite a
+[00:44:15] bit. If we remove the first two
+[00:44:17] components, so we've we've um been
+[00:44:19] pretty aggressive in removing signals
+[00:44:22] that are global, um what we see is we
+[00:44:24] can knock down uh the rest periods, the
+[00:44:27] noise in the rest periods,
+[00:44:29] um a substantial amount, um but the
+[00:44:32] activity during the task is fairly
+[00:44:35] untouched. Um Now, if we go a little bit
+[00:44:38] farther and filter maybe the third
+[00:44:41] component or the third and fourth
+[00:44:43] component, now what ends up happening is
+[00:44:45] we start to remove that the brain signal
+[00:44:47] as well. And so, unfortunately, with
+[00:44:50] real data, it's not always clear where
+[00:44:53] the component how many components you
+[00:44:55] should remove uh like it is in this
+[00:44:57] particular data set.
+[00:44:58] Um
+[00:45:02] Okay.
+[00:45:02] So,
+[00:45:06] So, those are all approaches to dealing
+[00:45:09] with noise as a pre-filtering method.
+[00:45:13] Um
+[00:45:15] it can be very powerful if used
+[00:45:17] correctly. The principal components, the
+[00:45:18] band-pass filtering,
+[00:45:20] um and combinations of of of different
+[00:45:23] methods put together can be very uh
+[00:45:25] powerful to remove noise. The problem is
+[00:45:29] it becomes somewhat subjective. How many
+[00:45:31] components should I remove? How what
+[00:45:33] should my band-pass uh filter uh
+[00:45:36] settings be in in in in the Homer II.
+[00:45:39] And um the
+[00:45:41] um because I was the one that got a lot
+[00:45:43] of those emails, especially for the for
+[00:45:45] the Homer I software, um the majority of
+[00:45:48] those questions were related to those
+[00:45:50] kind of um
+[00:45:52] you know, those the emails about how to
+[00:45:54] use Homer were related to those kind of
+[00:45:56] questions. How many components should I
+[00:45:58] remove? And the answer was, well, it
+[00:46:01] depends on your data set. Right?
+[00:46:04] Principal component, if you have a big
+[00:46:05] probe, principal component analysis
+[00:46:08] works better than if you have a small
+[00:46:10] probe.
+[00:46:11] If your um motion artifact is more
+[00:46:14] global,
+[00:46:15] principal component's going to work
+[00:46:17] better than if your motion artifact is
+[00:46:19] more local. Which means that, for
+[00:46:20] example, if you have a um a head cap
+[00:46:23] that's a lot of source detectors across
+[00:46:25] the forehead, but a continuous uh kind
+[00:46:28] of probe, that's going to have
+[00:46:30] kind of experienced motion artifacts
+[00:46:32] very differently than say if you had one
+[00:46:35] patch on the left motor cortex and one
+[00:46:37] patch on the right motor cortex, because
+[00:46:39] when you have two patches, they move a
+[00:46:41] lot more independent. One can One can
+[00:46:43] have the motion artifact and the other
+[00:46:44] one can be be fine. Um and so, depending
+[00:46:47] on how you set up the probe, how many
+[00:46:49] source detectors you had, and how well
+[00:46:52] you strapped, you know, how you strapped
+[00:46:54] this down uh onto the head, um the
+[00:46:57] performance of those methods, the
+[00:46:59] principal component
+[00:47:01] could be very, very different. And so,
+[00:47:03] we'd always be getting this question of,
+[00:47:04] well, what is the optimal method? And
+[00:47:08] unfortunately, I was never really able
+[00:47:10] to answer it, because it really did
+[00:47:11] depend on your data set.
+[00:47:14] And so,
+[00:47:15] um
+[00:47:16] now, um
+[00:47:18] we've introduced uh kind of an
+[00:47:20] alternative approach uh to this.
+[00:47:23] So, realizing the limitation of a lot of
+[00:47:27] these pre-filtering methods were
+[00:47:28] somewhat subjective, um and you kind of
+[00:47:31] had to be a very experienced to know how
+[00:47:33] the method worked uh to use it properly
+[00:47:36] and not uh not overuse it, um
+[00:47:39] we since uh have started to explore more
+[00:47:42] statistical approaches. Ways to be
+[00:47:44] objective by changing the statistics of
+[00:47:48] the model, so changing the assumptions
+[00:47:50] or the generalizations
+[00:47:52] of the linear model. That's the G in
+[00:47:54] GLM, generalized linear model, is to
+[00:47:57] generalize those the assumptions
+[00:48:00] to kind of um
+[00:48:03] become less sensitive to things like
+[00:48:05] outliers and physiology and stuff like
+[00:48:08] that.
+[00:48:09] And so so in the remaining
+[00:48:13] I guess 10 minutes at this point I'll
+[00:48:14] talk about some of that.
+[00:48:17] Uh which is actually the basis for a lot
+[00:48:19] of the methods that we do in the brain
+[00:48:21] analyzer toolbox.
+[00:48:23] And so so when we deal with the
+[00:48:26] statistical model the the GLM the
+[00:48:29] general linear model we might have
+[00:48:30] something like what's shown here. This
+[00:48:32] is simulated data but it but it it it
+[00:48:34] gets the point across. So we have
+[00:48:37] baseline then we do a task the task is
+[00:48:41] associated with a change in the brain
+[00:48:42] signal change in the near signal
+[00:48:45] and you go back to a baseline change in
+[00:48:47] the task again baseline change in the
+[00:48:49] task baseline. And so we'd set up a
+[00:48:52] linear regression where our data Y so
+[00:48:57] that's these time courses here that have
+[00:48:58] both the signal of interest and noise
+[00:49:01] is described by what we call a design
+[00:49:04] matrix X. X encodes the timing of the
+[00:49:08] stimulus events. So it could be a
+[00:49:11] canonical model where we make an
+[00:49:13] assumption about the shape of the curve
+[00:49:15] and try to fit does that the data look
+[00:49:17] like that assumed shape or it could be a
+[00:49:20] deconvolution model where we're trying
+[00:49:23] to estimate the shape. Um but it's still
+[00:49:25] expressed in this form Y equals X times
+[00:49:30] beta. X the design matrix and then beta
+[00:49:33] the coefficients.
+[00:49:35] Um
+[00:49:36] those are the things that we're going to
+[00:49:37] do stats on. Uh is beta statistically
+[00:49:41] non-zero means that that regressor that
+[00:49:45] the task part of the design matrix was
+[00:49:48] statistically non-zero in other words it
+[00:49:51] changed.
+[00:49:52] Um um
+[00:49:54] compared to the noise.
+[00:49:56] And so, when we solve this model, we're
+[00:49:58] going to solve uh for beta, and we're
+[00:50:00] going to do statistics on beta. Is beta
+[00:50:01] non-zero?
+[00:50:03] And when we do that, we make assumptions
+[00:50:06] about the noise in the residual. So, the
+[00:50:09] residual is everything in the data that
+[00:50:12] was not modeled by X and beta. So,
+[00:50:16] everything that's left over in the
+[00:50:18] residual.
+[00:50:19] And when we make those those statistical
+[00:50:22] tests, we assume properties about that
+[00:50:25] noise, about that that epsilon.
+[00:50:27] So, the first thing we end up
+[00:50:29] um
+[00:50:30] Well, so so the first thing we end up
+[00:50:32] assuming when we do a model like that is
+[00:50:34] that the responses add linearly. So,
+[00:50:37] that is when I do the task, I get this
+[00:50:39] brain response. If I do the task again,
+[00:50:40] I get the same brain response. If I do
+[00:50:43] the task twice as long, I get two brain
+[00:50:45] responses added on top of each other.
+[00:50:47] They add linearly.
+[00:50:50] And so, this assumption is uh basically
+[00:50:53] saying that every time I do the task,
+[00:50:55] it's independent of the brain activity
+[00:50:57] that the starting baseline position.
+[00:51:00] Um
+[00:51:02] This is roughly true. Um it's an
+[00:51:05] assumption that's that's reasonably
+[00:51:07] correct. There are scenarios where that
+[00:51:10] starts to break down. Um so, if your
+[00:51:13] tasks are too close together, um so, if
+[00:51:16] you're doing your task right on top of
+[00:51:18] each other, um there is a non-linear
+[00:51:20] effect and that linearity breaks down.
+[00:51:23] If you do your task for too long, so you
+[00:51:26] start tapping your fingers and you do it
+[00:51:28] for 2 minutes, what's going to happen is
+[00:51:31] the brain signal's going to go up, and
+[00:51:32] then it's going to start to habituate.
+[00:51:34] And so, it starts to come back down,
+[00:51:36] drops down to baseline even though
+[00:51:38] you're still tapping your fingers
+[00:51:39] because it's it's this
+[00:51:41] uh habituation effect. Um
+[00:51:44] whether that's a habituation of the
+[00:51:46] blood vessels or neural habituation.
+[00:51:49] Either way, it breaks, uh, that linear
+[00:51:52] assumption.
+[00:51:53] Um, and so, this linear assumption
+[00:51:55] really works if your task is are not too
+[00:51:59] close together. So, a general rule of
+[00:52:01] thumb is may
+[00:52:03] uh, you want the minimum time between
+[00:52:05] the end of one task and the start of the
+[00:52:07] next to be greater than about 4 seconds.
+[00:52:10] Um, and that your task is not too long,
+[00:52:15] uh, that you don't have to worry about
+[00:52:16] these habituation effects. Generally,
+[00:52:19] um, I don't recommend using tasks longer
+[00:52:22] than, um,
+[00:52:24] I'll let some of my my co-investigators
+[00:52:27] go up to about a minute. Um,
+[00:52:31] uh, beyond that, there definitely is,
+[00:52:33] uh, um, habituation and it definitely
+[00:52:35] does depend on the task and and and so
+[00:52:38] on. Um, but we're assuming that this
+[00:52:40] response is is is linear.
+[00:52:43] The second assumption, though, the other
+[00:52:45] assumptions we're making are about the
+[00:52:46] noise itself. So, we first off assume
+[00:52:49] that the noise is normally distributed.
+[00:52:52] That is, if I take that residual, the
+[00:52:54] the noise in my data, and I do a
+[00:52:56] histogram of it, I expect it to be mean
+[00:52:59] zero and I expect it to be normally
+[00:53:02] distributed around zero, something that
+[00:53:04] looks like like this this plot here.
+[00:53:08] However, if you look at real data, it
+[00:53:11] tends to look something much more like
+[00:53:13] this. You have certain frequencies that
+[00:53:15] are more represented than other
+[00:53:17] frequencies. Cardiac, respiratory, blood
+[00:53:19] pressure, we just spent the last hour
+[00:53:21] talking about those. Well, what the the
+[00:53:24] presence of those those colored noise,
+[00:53:26] those structured noise, is is that it
+[00:53:29] your data is not, um, is not normally
+[00:53:32] distributed.
+[00:53:34] Um,
+[00:53:36] and so so so so so you you you break
+[00:53:38] this normal, uh, um,
+[00:53:41] this this assumption of normal
+[00:53:43] distribution of of the data.
+[00:53:45] On top of that, the data often times
+[00:53:48] looks like it comes from multiple
+[00:53:49] distributions. So, that's what we call
+[00:53:52] we call heteroscedastic noise.
+[00:53:54] That you have some noise centered around
+[00:53:57] the cardiac oscillation. Actually, if
+[00:53:59] you looked at noise at that frequency,
+[00:54:01] that probably is normally distributed.
+[00:54:03] But, you also have this other pool of
+[00:54:05] noise that's around the the card the
+[00:54:08] respiratory around the blood pressure
+[00:54:10] around the motion artifacts. And those
+[00:54:12] are also normally distributed, but what
+[00:54:14] you measured is the sum of all those
+[00:54:16] distributions,
+[00:54:17] which when you add all of that up is no
+[00:54:20] longer
+[00:54:21] normally distributed as a whole. So,
+[00:54:23] what heteroscedastic noise means is that
+[00:54:26] it it is
+[00:54:27] composed of multiple distributions.
+[00:54:31] Uh, so we have a distribution for each
+[00:54:33] of these different kinds of
+[00:54:34] physiological components.
+[00:54:37] And motion artifacts tend to be very
+[00:54:40] heavy tailed, which means that if you
+[00:54:43] remember back that time course we saw
+[00:54:45] before, your data's cruising along and
+[00:54:47] all of a sudden you get this motion
+[00:54:48] artifact, which is orders of magnitude
+[00:54:50] bigger than the distribution of of the
+[00:54:52] rest of the noise. So, it's an outlier.
+[00:54:55] In in terms of this histogram, it's
+[00:54:57] these points way out on the tail.
+[00:54:59] They're so much stronger than you would
+[00:55:01] expect from the rest of the noise. And
+[00:55:03] so, they're they're heavy tailed
+[00:55:06] outliers.
+[00:55:09] Um,
+[00:55:10] and so so this is again kind of real
+[00:55:12] data. Looking here is, you know, you
+[00:55:15] have spike artifact, you have a shift
+[00:55:17] artifact. And if you do a histogram of
+[00:55:18] that noise, you end up seeing this very
+[00:55:22] um,
+[00:55:22] lopsided
+[00:55:24] histogram um, with these these motion
+[00:55:27] artifacts in there.
+[00:55:31] The other assumptions that we're making
+[00:55:33] in these general linear models is that
+[00:55:35] our noise is independent. That is, if I
+[00:55:39] made a hundred samples of the data, I
+[00:55:41] have a hundred degrees of freedom.
+[00:55:43] But, the reality is that's not true
+[00:55:46] because our our noise is not
+[00:55:48] independent. Because our blood pressure
+[00:55:51] drifts are slow, if this time point is
+[00:55:53] off, probably the next time point was
+[00:55:55] off, too, and probably the time point
+[00:55:56] after that, and time point after that.
+[00:55:58] This is what we call serially correlated
+[00:56:00] error.
+[00:56:01] The measurements are not independent. We
+[00:56:04] might have a thousand actual
+[00:56:05] measurements time points, but we don't
+[00:56:08] have nearly that many actual independent
+[00:56:10] degrees of freedom because our noise is
+[00:56:13] structured and slow compared to our
+[00:56:15] sample rate.
+[00:56:17] And so,
+[00:56:19] um when you do your t-test and it asks
+[00:56:21] you, "How many degrees of freedom did
+[00:56:23] you have?" the answer is not a thousand.
+[00:56:26] It's much, much less than than your
+[00:56:28] actual number of samples.
+[00:56:30] Uh and if you were to put in a thousand
+[00:56:33] to that to that t-test, you would end up
+[00:56:35] with reporting statist- reporting a
+[00:56:38] statistic that was much more significant
+[00:56:42] artificially than uh it actually is. So,
+[00:56:46] it's an inflated type one error. It's uh
+[00:56:49] we have a high false positive rate
+[00:56:51] because we're saying we have more
+[00:56:52] measurements than we actual more degrees
+[00:56:54] of freedom than we actually did. And the
+[00:56:56] net result is that we
+[00:56:58] uh we over-report how significant events
+[00:57:01] are.
+[00:57:02] Um and so, this results in a high false
+[00:57:05] positive rate.
+[00:57:07] And finally, the
+[00:57:09] um
+[00:57:10] the the last thing to talk about is the
+[00:57:12] fact that the data is non-stationary
+[00:57:14] or the noise is non-stationary. We saw a
+[00:57:16] bunch of examples of that where when I
+[00:57:19] tap my fingers, my heart rate goes up,
+[00:57:21] my physiology goes up, and you get this
+[00:57:23] systemic response
+[00:57:25] uh that is time locked to the actual
+[00:57:28] task itself. Or in that case of Teresa
+[00:57:31] Wilcox's data, the baby started moving
+[00:57:33] around and and and was restless during
+[00:57:37] the fixation periods, but when the task
+[00:57:39] came on, uh the baby was fine. And so,
+[00:57:41] you get this very non-stationary noise
+[00:57:44] term um that uh ends up to affect the
+[00:57:48] uh how well those those uh that t-test
+[00:57:51] is going to work.
+[00:57:52] So, let me show an example of of
+[00:57:55] uh
+[00:57:57] Well, actually, let me before I show an
+[00:57:58] example, um
+[00:58:00] So, ways to deal with this.
+[00:58:03] Uh we've already talked about this idea
+[00:58:05] of pre-filtering. That if I wanted to if
+[00:58:08] I have motion artifacts or I have
+[00:58:10] physiology, I can apply a filter that
+[00:58:13] removes them. Now, my data is cleaner,
+[00:58:16] and by cleaner, what we mean is that it
+[00:58:18] no longer has these assumption these
+[00:58:20] violations to the statistical
+[00:58:23] assumptions. It no longer has
+[00:58:24] heavy-tailed outliers. It no longer has
+[00:58:27] serially correlated errors. My degrees
+[00:58:29] of freedom are correctly estimated.
+[00:58:31] Um
+[00:58:33] If I if I filter my data appropriately,
+[00:58:36] I can
+[00:58:38] get rid of those those problems, and
+[00:58:39] then when I run my t-test, I get a valid
+[00:58:42] answer. But the the problem is as as
+[00:58:45] we've described, knowing where to
+[00:58:46] filter, how many components to remove is
+[00:58:49] an art. Um
+[00:58:52] And if you do it wrong, what happens is
+[00:58:54] it can actually affect your results.
+[00:58:56] Um and so, pre-filtering in terms of
+[00:58:59] this uh
+[00:59:01] linear regression, if we think y = x *
+[00:59:03] beta, what pre-filtering does is it's
+[00:59:06] applying a filter only to the left side
+[00:59:08] of the equation. It's affecting the
+[00:59:10] measurements,
+[00:59:11] but when I solve my design matrix and I
+[00:59:14] solve for beta, the statistics don't
+[00:59:17] actually know about the filter because
+[00:59:19] it was only applied to one side of the
+[00:59:21] model, to the data side, but it wasn't
+[00:59:24] my design matrix wasn't adjusted in the
+[00:59:27] same way.
+[00:59:29] And so, if I filter out data
+[00:59:32] over filter, it can end up distorting
+[00:59:34] the estimate of of the betas.
+[00:59:38] In the case of
+[00:59:40] I'm actually going to skip pre-coloring.
+[00:59:42] But one of the
+[00:59:44] alternative approaches to this is what's
+[00:59:47] called pre-coloring. And pre-coloring is
+[00:59:49] was historically used in fMRI and it's
+[00:59:51] what's used in in near SPM.
+[00:59:54] And the idea of pre-coloring is what you
+[00:59:57] do is you apply a
+[01:00:01] a very strong noise structure to both
+[01:00:05] sides of the equation. So, rather than
+[01:00:08] trying to find a filter that's going to
+[01:00:09] remove the cardiac oscillation, what we
+[01:00:13] do is we we do a spatial or temporal
+[01:00:16] smoothing to the data, but we do that
+[01:00:19] exact same smoothing operator to the
+[01:00:22] design matrix as well.
+[01:00:25] And so, the the problem was in the
+[01:00:28] original data, we had all this noise,
+[01:00:30] but we didn't know what it was. Now,
+[01:00:32] after I've imposed the spatial structure
+[01:00:35] and imposed the smoothing, I still have
+[01:00:37] the noise, but I at least know what it
+[01:00:39] is.
+[01:00:40] Because I've imposed a known structure
+[01:00:42] so strong that it dominates the the
+[01:00:46] statistical properties.
+[01:00:49] And because I now know what those
+[01:00:51] statistical properties are, I can
+[01:00:53] correct for the degrees of freedom. I
+[01:00:55] can I can I can I can
+[01:00:58] get those estimates right because I've
+[01:01:01] applied it to both the left and the
+[01:01:02] right side of the equation, in theory, I
+[01:01:05] haven't really distorted beta. I've just
+[01:01:07] changed the weighting a little bit.
+[01:01:10] And so, my estimate of beta ends up to
+[01:01:12] be undistorted by my my smoothing. Um
+[01:01:17] but what ends up happening is my my my
+[01:01:21] now has properties that I've imposed
+[01:01:23] that I know and I can choose the right
+[01:01:26] t-test for those properties.
+[01:01:28] And so what we do in in in fMRI and near
+[01:01:31] SPM is this idea of pre-coloring where
+[01:01:35] you apply it to the left and the right
+[01:01:36] sides of the equation and then adjust
+[01:01:38] what statistical model you use.
+[01:01:42] And that actually works really well if
+[01:01:45] your noise was this kind of physiology
+[01:01:48] and and and really correlated error and
+[01:01:51] so on.
+[01:01:52] If you have a motion artifact, however,
+[01:01:55] your data cruising and then you have
+[01:01:56] this big jump in the data,
+[01:01:59] you would have to space you would have
+[01:02:01] to smooth it a lot. You would have to be
+[01:02:03] very very aggressive in this
+[01:02:06] pre-coloring before
+[01:02:08] that motion artifact was no longer the
+[01:02:12] dominant feature, right? It's so strong
+[01:02:15] that I would have to really really
+[01:02:16] really smooth the data an incredible
+[01:02:19] amount before I could no longer see that
+[01:02:21] there was a motion artifact there.
+[01:02:23] Whereas the kind of ripples due to
+[01:02:27] blood pressure and stuff like that, I
+[01:02:29] can smooth with a, you know, reasonable
+[01:02:31] amount and and and and kind of cover
+[01:02:34] them up. Motion artifact is so strong,
+[01:02:36] it's really hard to cover up without
+[01:02:38] being super super aggressive.
+[01:02:41] And the the problem there is if you're
+[01:02:44] super super aggressive, you lose
+[01:02:46] sensitivity.
+[01:02:48] So pre-coloring works really well if you
+[01:02:51] have this kind of physiology, but it
+[01:02:53] does not work in the case that you have
+[01:02:56] outliers like what you see with motion
+[01:02:57] artifacts.
+[01:03:00] So what we ended up proposing, my grad
+[01:03:02] student Jeff Barker,
+[01:03:05] back in when did Jeff graduate? 2012-ish
+[01:03:09] or so.
+[01:03:10] So what Jeff was working on, what Jeff
+[01:03:13] came up with was what we call the auto
+[01:03:16] regressive iterative weighted least
+[01:03:19] squares, the ARWLS.
+[01:03:23] And
+[01:03:26] ARIRLS,
+[01:03:28] sorry. Too many acronyms.
+[01:03:30] And what this is is what's called a
+[01:03:33] pre-whitening approach.
+[01:03:35] So, just like the pre-coloring approach,
+[01:03:38] we apply it to both sides of the data.
+[01:03:40] But, instead of trying to cover up to
+[01:03:42] smooth
+[01:03:44] the noise, what we do is we design a
+[01:03:46] filter that tries to remove it. But,
+[01:03:49] unlike the pre-filtering, we apply it to
+[01:03:51] both the left and the right sides of the
+[01:03:53] equation. So, in theory, beta is
+[01:03:55] unbiased.
+[01:03:57] And we design that filter not
+[01:04:00] necessarily to remove motion artifacts
+[01:04:02] and to remove physiology, although
+[01:04:04] that's what it does. But, we design the
+[01:04:06] filter on the basis that at the end of
+[01:04:08] the day, the residuals should be white.
+[01:04:10] It should be uncorrelated. It should be
+[01:04:12] normally distributed. And we design our
+[01:04:15] filter to get the residual to have those
+[01:04:18] properties.
+[01:04:20] And well, it gets those properties by
+[01:04:22] removing the physiology. But, it's a
+[01:04:24] very data-driven approach. We don't
+[01:04:26] enter in, "Oh, I expect the cardiac to
+[01:04:29] be at this frequency and the respiratory
+[01:04:30] to be at this frequency." It's really
+[01:04:32] just anything that made the residual
+[01:04:36] non-normally distributed,
+[01:04:39] we're going to try to remove.
+[01:04:41] And we're doing this again to both sides
+[01:04:43] of the equation. So, although we're
+[01:04:45] heavily filtering the data, we're doing
+[01:04:48] the design matrix, the statistics knows
+[01:04:51] about that filtering that we've applied.
+[01:04:53] And so, the beta ends up to be
+[01:04:55] unbiased and unchanged by this.
+[01:05:00] And so, the way that this method works
+[01:05:02] is we first start off with this model,
+[01:05:04] and we solve for we solve for beta, and
+[01:05:07] we get the residuals.
+[01:05:09] If we look at the residuals like uh
+[01:05:11] maybe what's down here and in this plot
+[01:05:13] here, we see that the residuals have
+[01:05:15] structure. They have physiology, they
+[01:05:18] have drift, they have motion artifacts.
+[01:05:21] And so what we do is we take that
+[01:05:23] residual and we fit an autoregressive
+[01:05:26] model that tries to whiten it. Tries to
+[01:05:28] remove that structure. So so we take
+[01:05:30] that data, we fit a
+[01:05:33] mth order autoregressive model.
+[01:05:35] And from that model, from the
+[01:05:37] coefficients of that model, uh we can
+[01:05:39] design a filter. So what an
+[01:05:41] autoregressive model does is it says the
+[01:05:43] current time point is predicted by a
+[01:05:46] linear combination of its history. And
+[01:05:48] then what's called the innovations, new
+[01:05:51] information that was added unique to
+[01:05:53] this time point.
+[01:05:55] And so the idea of autoregressive
+[01:05:56] filtering is you removed all the the
+[01:05:59] uh influence of the history of the
+[01:06:01] noise.
+[01:06:03] Uh so and you're left with just the
+[01:06:04] innovations, just the unique information
+[01:06:07] that was added at each time point.
+[01:06:09] And so what we do is we can design that
+[01:06:11] filter based on whitening the residual.
+[01:06:15] And then we can go back to the original
+[01:06:16] model and we can apply that filter to
+[01:06:19] both sides of the equation. So now W
+[01:06:22] times Y, the whitened data, equals W
+[01:06:25] times X, the whitened design matrix, uh
+[01:06:29] times beta plus the residual. We solve
+[01:06:31] it again. Now our residual is more
+[01:06:33] white, uh but maybe not perfect. So we
+[01:06:35] then update our our autoregressive
+[01:06:38] filter and redo this. And we keep
+[01:06:40] iterating until uh we reach convergence,
+[01:06:43] until we get um we get um a residual
+[01:06:46] that is that is uh normally distributed
+[01:06:48] um and has the properties that our model
+[01:06:51] our statistical model needs.
+[01:06:54] And so that's the AR part in that
+[01:06:56] equation.
+[01:06:58] But one of the other features of our
+[01:07:01] data is that we have these outliers,
+[01:07:04] these motion artifacts. And so if we
+[01:07:06] took data like this, this green line
+[01:07:08] here, and we did an auto regressive
+[01:07:10] filter,
+[01:07:11] uh we would be left with data that looks
+[01:07:14] like this. So this is now the filtered
+[01:07:16] residual, the whitened residual.
+[01:07:19] And the whitened residual now has
+[01:07:22] There's no dependence on the history.
+[01:07:23] Each point is independent of any other
+[01:07:26] point. Um
+[01:07:28] statistically, but the um we can see
+[01:07:31] that we still have these motion
+[01:07:33] artifacts. This point in time right
+[01:07:35] here, for example, is there was a
+[01:07:38] abnormal amount of innovations,
+[01:07:40] information that was added at this
+[01:07:42] point. It's It's much stronger than the
+[01:07:45] normal amount of information. There was
+[01:07:47] the the um
+[01:07:49] um the normal changes from time point to
+[01:07:51] time point. Um because at this time
+[01:07:53] point the motion artifact just drove it
+[01:07:55] to be a really big outlier.
+[01:07:57] And so what we do then is we do what's
+[01:07:59] called robust regression. So ro- What
+[01:08:02] robust regression does is it's another
+[01:08:05] iterative approach where you take this
+[01:08:08] residual, you compute the studentized uh
+[01:08:11] version of it. So So how many standard
+[01:08:14] deviations is this one time point here
+[01:08:17] compared to the rest of the time points?
+[01:08:19] So this one time point is going to be,
+[01:08:21] you know, I'm just making it up, 10
+[01:08:23] standard deviations away. That's a
+[01:08:24] pretty strong outlier.
+[01:08:27] Which means that it's stat- it's
+[01:08:29] statistically an outlier. And so what we
+[01:08:32] do is we do a weighting that the
+[01:08:34] outliers go to zero. Um
+[01:08:37] data that's within the normal
+[01:08:39] distribution stays at one.
+[01:08:41] Um and there's different versions of
+[01:08:42] this this weighting. We use what's
+[01:08:44] called a Huber bi-square function. But
+[01:08:47] basically it's bounded between zero and
+[01:08:48] one. One, you're good data. Zero, you're
+[01:08:52] a crazy outlier and everything is
+[01:08:54] somewhere in between.
+[01:08:55] And so that gives us a weighting matrix.
+[01:08:59] We then We call that S. We then go back
+[01:09:02] and re-solve the model. We weight these
+[01:09:04] time points uh differently than the cuz
+[01:09:07] they were outliers less than the ones
+[01:09:09] that were not outliers and re-solve.
+[01:09:12] And so, the way that this our method
+[01:09:15] works to correct both the physiology and
+[01:09:17] the motion is that it does both at the
+[01:09:19] same time. It's it's two nested uh
+[01:09:23] iterative loops. The first one is uh is
+[01:09:26] updating the auto regressive. The inner
+[01:09:28] one is updating the weights uh the
+[01:09:30] outliers where is the motion artifacts.
+[01:09:33] And you update both of these these loops
+[01:09:36] until you reach convergence.
+[01:09:40] And so,
+[01:09:41] what that does then is that allows you
+[01:09:44] to solve this general linear model uh
+[01:09:48] and it turns out that you become very
+[01:09:50] insensitive to these errors associated
+[01:09:52] with physiology and motion artifact.
+[01:09:55] There's still noise in the sense that if
+[01:09:58] you had less artifact in there, less
+[01:10:01] motion, uh you would have cleaner data
+[01:10:03] and you would have a bigger effect size.
+[01:10:06] However, by adjusting by generalizing
+[01:10:08] the linear model, we're no longer
+[01:10:10] getting biased results. That is, our
+[01:10:13] betas, our estimate of the uh of the
+[01:10:16] statistics, are correct. The The effect
+[01:10:20] size is just smaller because we have
+[01:10:22] noise in there. But we're not getting
+[01:10:25] high false positives. We're not
+[01:10:26] reporting a result that we're saying
+[01:10:29] there was a ton of brain activity when
+[01:10:30] in reality it was driven by a single
+[01:10:33] motion artifact.
+[01:10:35] And so, this is um
+[01:10:37] these are
+[01:10:38] um
+[01:10:39] uh what we're looking at at this figure
+[01:10:40] here is a set of receiver operator
+[01:10:43] curves. What we do is we take data, we
+[01:10:45] run
+[01:10:46] the algorithm, and and we ask uh how
+[01:10:50] many false positives we had, how many
+[01:10:52] true positives did we have.
+[01:10:54] So, what we do is to generate this is we
+[01:10:56] we take real data, we take then a subset
+[01:11:00] of the data and add known simulated
+[01:11:03] brain activity. So, it's a
+[01:11:05] semi-empirical. It's real noise, but
+[01:11:08] it's a known added truth.
+[01:11:11] We then run it through our algorithm. We
+[01:11:13] ask the channels that we found the brain
+[01:11:15] activity, were those channels that we
+[01:11:17] put it? And we do this thousands and
+[01:11:20] thousands of times and build up this
+[01:11:22] false positive and true positive rate.
+[01:11:24] And so, that's what we're looking at
+[01:11:26] here is the plot of true positives
+[01:11:28] versus false positives.
+[01:11:30] The better the model is, the more to the
+[01:11:34] left-hand corner you are. So, a perfect
+[01:11:36] model would always get it right, never
+[01:11:38] get it wrong, which would be a corner up
+[01:11:41] at the at 1 0. So, so the corner up
+[01:11:43] there.
+[01:11:44] Um so, the more pulled to the left-hand
+[01:11:47] the upper left-hand corner, the better
+[01:11:49] the model is.
+[01:11:51] And what we're looking at here is we're
+[01:11:52] looking at the same data doing a
+[01:11:55] unweighted version, what's called
+[01:11:57] ordinary least squares, which is the the
+[01:11:59] methods that that Homer 1 and 2 used,
+[01:12:02] um versus this proposed algorithm.
+[01:12:05] And we see when there's no motion
+[01:12:07] artifacts, everyone kind of does equally
+[01:12:09] well. It doesn't really matter if you're
+[01:12:11] using my algorithm or not. But as you
+[01:12:13] start to put in motion artifacts, spike
+[01:12:16] or shift artifacts, what happens is that
+[01:12:19] this this robust version is insensitive
+[01:12:22] to it. So, or is far less sensitive to
+[01:12:26] it than the ordinary least squares. And
+[01:12:28] so, the the green lines here, the the
+[01:12:31] black and the green line takes a pretty
+[01:12:32] big hit when you introduce artifacts in
+[01:12:35] there, that your sensitivity is not
+[01:12:37] nearly as good, whereas the proposed
+[01:12:41] method actually still performs almost as
+[01:12:43] well.
+[01:12:45] The bottom row here,
+[01:12:48] um and I'm going to actually
+[01:12:50] zoom Let's get rid of this so we can
+[01:12:52] just see it a little bit better. Uh what
+[01:12:54] we're looking at in this this bottom row
+[01:12:56] here is the type one error control.
+[01:12:59] And so what this is is this is a plot
+[01:13:02] the x-axis is what MATLAB told me the
+[01:13:05] p-value should be. That is based on the
+[01:13:08] that t-statistic and the theory around
+[01:13:11] that with the number of degrees of
+[01:13:12] freedom my data had,
+[01:13:14] what did I expect the p-value to be?
+[01:13:17] The y-axis is what the p-value actually
+[01:13:20] was, what the false positive rate
+[01:13:22] actually was. So if I ran a thousand
+[01:13:24] simulations, how many of those were
+[01:13:26] actually false positives?
+[01:13:29] So a perfect model, you would expect a p
+[01:13:31] of 0.05,
+[01:13:33] I run that and 5% of that is is a false
+[01:13:37] positive. So if I ran a thousand
+[01:13:39] simulations, you expect on average to
+[01:13:41] have 50 of them uh by chance meeting
+[01:13:44] that that p-value.
+[01:13:47] So the closer you are to the diagonal,
+[01:13:51] the more accurate your model is. MATLAB
+[01:13:53] told you exactly what it was.
+[01:13:55] But if you're above the axis like
+[01:13:57] ordinary squares here, the black line,
+[01:14:00] it means that you have your data is
+[01:14:04] falsely report being reported as
+[01:14:06] significant when it actually wasn't. So
+[01:14:09] in this case, let's take 0.05 here. At
+[01:14:12] 0.05, if I read up, you find roughly
+[01:14:16] somewhere 35 40% of your data is a false
+[01:14:20] positive.
+[01:14:21] So you were willing to accept 5%
+[01:14:25] and then you ran simulations and you
+[01:14:26] found it was closer to 40%. So 40% of
+[01:14:30] your data was wrong. Um which is a huge
+[01:14:33] uncontrolled type one error.
+[01:14:35] And the reason this arises is because
+[01:14:38] when we do that ordinary squares, we're
+[01:14:41] using the wrong degrees of freedom. Our
+[01:14:42] model didn't know that our it was
+[01:14:44] assuming our noise was unstructured in
+[01:14:47] reality, it was very structured. And so
+[01:14:50] that the ordinary squares got the model
+[01:14:52] wrong or got the statistics wrong.
+[01:14:55] Um whereas when we correct for that, and
+[01:14:58] this is the green line here, uh
+[01:15:01] what MATLAB tells me is exactly what I
+[01:15:03] end up finding when I run simulations.
+[01:15:06] And that's for the the no even in the
+[01:15:08] noise-free case or the motion-free case
+[01:15:12] uh where the area under the curve for
+[01:15:14] all the methods was the same.
+[01:15:16] Um
+[01:15:17] the ordinary squares was still under
+[01:15:19] reporting the stats.
+[01:15:21] And I don't know which one is which
+[01:15:23] because I moved them, but they both look
+[01:15:25] pretty similar, so we'll just go with
+[01:15:26] that. Um
+[01:15:28] when you introduce motion artifacts, the
+[01:15:31] same thing holds true. The ordinary
+[01:15:33] least squares not only does it lose
+[01:15:35] sensitivity to the motion artifacts, but
+[01:15:37] it still gets the stats wrong. Um and so
+[01:15:40] we have both uh a loss in sensitivity
+[01:15:44] and an uncontrolled type one error. Um
+[01:15:47] whereas the proposed method kind of
+[01:15:49] performs well for for uh all of it no
+[01:15:51] matter what.
+[01:15:54] Okay. Uh last thing, I'm I'm running 20
+[01:15:57] minutes behind because I I talk way too
+[01:16:00] much. Um
+[01:16:03] one of the things that we've recently
+[01:16:04] done, so this is a paper that's um
+[01:16:06] actually the response to review just
+[01:16:08] came back this morning. Um so it's not
+[01:16:10] accepted yet. Um
+[01:16:13] but one of the one of the uh things that
+[01:16:17] we've been working on is how do you use
+[01:16:19] short separation data? What is the most
+[01:16:22] efficient way to use it in light of
+[01:16:25] these kind of errors that we see with
+[01:16:27] what happens when you don't get the
+[01:16:28] statistics right?
+[01:16:30] And so what we ended up doing was we
+[01:16:31] took
+[01:16:32] um took some data with short separation
+[01:16:35] and ran those same um receiver operator
+[01:16:38] curves, the sensitivity specificity
+[01:16:40] analysis, to compare different methods.
+[01:16:43] And so we compared Well, what happens
+[01:16:45] when you do PCA? What happens when you
+[01:16:47] do band pass filtering? What happens
+[01:16:49] when you do short separation and you
+[01:16:52] remove it from the data as a
+[01:16:53] pre-processing step like what was in
+[01:16:55] that Greg
+[01:16:57] um paper that I had um many slides ago
+[01:17:00] versus what happens if you put it into
+[01:17:03] the linear regression itself. And so
+[01:17:05] putting into linear regression, your
+[01:17:07] stats actually know about what you did.
+[01:17:09] Whereas in the pre-filtering, it's done
+[01:17:11] ahead of time.
+[01:17:13] And so we went and we compared all these
+[01:17:15] different approaches. We surveyed the
+[01:17:17] literature and found all the different
+[01:17:19] ways that which short separation had
+[01:17:21] been proposed to be used to clean up the
+[01:17:25] the the the data. And what we ended up
+[01:17:27] finding, so we did those um those rock
+[01:17:30] curves, we took two different types of
+[01:17:33] data to generate those rock curves. We
+[01:17:35] took uh the first type of data we
+[01:17:37] collected from subjects and we had them
+[01:17:40] hold their breath. So we did a 30-second
+[01:17:43] breath hold task in a block design. So
+[01:17:46] if we look at the raw data, um
+[01:17:48] we have this very strong global
+[01:17:50] physiology that was changing uh during
+[01:17:53] the breath hold periods.
+[01:17:55] Right? It's systemic, uh but it's it's
+[01:17:58] kind of it's task driven.
+[01:18:01] And so what we did was that we used that
+[01:18:02] data and we
+[01:18:05] added in like I described for the rock
+[01:18:08] analysis, we add a known
+[01:18:12] uh truth to a subset of the data.
+[01:18:15] So we either added it that was had the
+[01:18:17] exact same timing as the breath hold. So
+[01:18:20] worst case scenario, we have this very
+[01:18:22] very global systemic physiology and it
+[01:18:25] has exactly the same time course as the
+[01:18:28] brain activity we're trying to find.
+[01:18:31] Versus we added it as uh with a random
+[01:18:34] jitter. So we have really strong
+[01:18:36] physiology, but at least it doesn't have
+[01:18:38] the same time time course as the the
+[01:18:42] evoked response of interest.
+[01:18:45] And then we took another data set that
+[01:18:46] was just resting. So, we had these three
+[01:18:48] different data sets. Worst case
+[01:18:50] scenario, strong physiology phase
+[01:18:52] locked. Medium scenario, strong
+[01:18:54] physiology, but not phase locked, not
+[01:18:57] time locked. And then resting physio, so
+[01:19:00] kind of normal levels of physiology. Um
+[01:19:04] Um
+[01:19:05] And so, what we did was we ended up
+[01:19:07] comparing the various methods.
+[01:19:10] And
+[01:19:11] this is a very busy slide, so I'm just
+[01:19:13] going to switch to this one.
+[01:19:16] Uh this is that type one error control.
+[01:19:18] So, again, what MATLAB
+[01:19:21] said the P value should be along the X
+[01:19:23] axis X axis versus what it actually was.
+[01:19:27] And and
+[01:19:29] here this is at the 0.05 threshold. So,
+[01:19:32] if you if you do the ordinary least
+[01:19:34] squares without correcting anything,
+[01:19:36] just like we saw before, you have a huge
+[01:19:38] false positive rate. In fact, it's even
+[01:19:40] worse when you have physio we have
+[01:19:42] this this breath hold
+[01:19:45] level of physiology.
+[01:19:47] If you do these methods to correct for
+[01:19:50] it that I just described, you are able
+[01:19:52] to control it
+[01:19:54] a lot better. So, in the case that the
+[01:19:58] the resting data, the not breath hold
+[01:20:00] data, you actually control it perfectly
+[01:20:02] well, just so we saw before.
+[01:20:05] In the case that you have breath hold,
+[01:20:06] but it doesn't have the same timing, you
+[01:20:08] actually also control it almost
+[01:20:10] perfectly. You get rid of the rid of
+[01:20:12] that physiology and have
+[01:20:15] really quite tight control of the type
+[01:20:17] one error.
+[01:20:19] In the that worst case scenario, when
+[01:20:20] the breath hold was there and had the
+[01:20:23] same timing,
+[01:20:24] you can't control for it perfectly. You
+[01:20:27] can't you can't perfectly separate out.
+[01:20:29] So, you actually end up with
+[01:20:31] you still end up with a false positive
+[01:20:33] rate. But the false positive rate at say
+[01:20:36] 0.05 is on the order of about 20% for
+[01:20:39] this AR model where it was almost I
+[01:20:42] think it was 70 or 80% for the ordinary
+[01:20:44] least squares.
+[01:20:46] So so we do a lot better
+[01:20:49] in controlling under this worst-case
+[01:20:50] scenario
+[01:20:52] than using uncorrected models. But we
+[01:20:55] don't do perfect and that's again
+[01:20:57] because it had the exact same time
+[01:20:59] course as
+[01:21:00] the response of of what we're trying to
+[01:21:02] estimate.
+[01:21:04] When it didn't have the same time
+[01:21:06] course, we were able to actually
+[01:21:07] perfectly control.
+[01:21:12] And
+[01:21:13] so so
+[01:21:14] I realize I'm way over in time because I
+[01:21:16] I just talk
+[01:21:18] way too much. So maybe this is a good
+[01:21:20] time. What I wanted to do was I wanted
+[01:21:22] to switch over and show exactly how to
+[01:21:24] do this in the toolbox. I wanted to show
+[01:21:28] how to do all these different methods
+[01:21:29] with the linear regression and so on.
+[01:21:32] But if there's questions at this point,
+[01:21:35] maybe it's a good time to answer
+[01:21:36] questions.
+[01:21:38] Yeah, so thank you. Thank you, Dr.
+[01:21:41] Hubert.
+[01:21:41] I don't know why I thought that would
+[01:21:43] take me 45 minutes to go through. I I
+[01:21:45] took twice as much time as I planned. Um
+[01:21:48] Don't worry. Everyone is enjoying a lot,
+[01:21:50] so don't worry. It's it's fine.
+[01:21:53] We do have a couple of questions. It's
+[01:21:55] good also to have a little break.
+[01:21:58] So I would just maybe we would just ask
+[01:22:01] two questions and then we move on to to
+[01:22:03] your next part.
+[01:22:04] Okay.
+[01:22:05] But one one of the questions actually
+[01:22:07] about the PCA.
+[01:22:09] So what what exactly when we are talking
+[01:22:11] about the dominant signal, right? What
+[01:22:13] exactly what it means? It means that
+[01:22:15] it's
+[01:22:16] how many channels it it's affecting or
+[01:22:18] the intensity of of it of these
+[01:22:20] channels? What is exactly
+[01:22:23] What it is is the dominant feature of
+[01:22:26] spatial covariance.
+[01:22:29] So, what that what that means is if
+[01:22:35] um
+[01:22:37] um something that shows up in all the
+[01:22:41] you know, is correlated across all the
+[01:22:43] channels.
+[01:22:44] Um so, it's not necessary So, if it only
+[01:22:48] showed up on one channel and was really
+[01:22:50] strong amplitude, that wouldn't um be
+[01:22:54] corrected in the PCA. It has to be It
+[01:22:58] doesn't matter
+[01:22:59] that the amplitude varies from channel
+[01:23:01] to channel. It can be really strong in
+[01:23:03] one channel and and or really big
+[01:23:05] amplitude in one channel and a weaker
+[01:23:07] amplitude in the other channel, but if
+[01:23:10] it's correlated,
+[01:23:12] meaning it has the exact same time
+[01:23:14] course, then it's going to get removed.
+[01:23:17] So, think you take your data and you
+[01:23:19] normalize so that all the channels have
+[01:23:21] the same
+[01:23:22] um
+[01:23:23] uh variance, the same errors.
+[01:23:26] Um and if it's um core you know, and
+[01:23:30] then if it's correlated across all the
+[01:23:32] space, then it's going to get removed by
+[01:23:34] the PCA.
+[01:23:35] Does that make make sense?
+[01:23:37] Yeah, definitely. Um
+[01:23:39] Ashley, would you like to ask the the
+[01:23:41] next question?
+[01:23:44] Oh, you're you're not you're muted, I
+[01:23:46] guess.
+[01:23:52] Okay, I will go. I have some problems.
+[01:23:54] Okay, no problem. Um so, the next
+[01:23:57] question actually will be about the the
+[01:24:00] HBR data, so the deoxy data.
+[01:24:03] Okay.
+[01:24:03] How this this filtering affects the
+[01:24:05] deoxy data? And and because sometimes we
+[01:24:08] see um
+[01:24:10] significant results in the oxidator, but
+[01:24:12] you cannot see in the deoxy. And this
+[01:24:14] could be a factor of the filter or is,
+[01:24:16] you know, other than of course you get
+[01:24:19] less data for for deoxy.
+[01:24:21] Yeah, I mean, it's that that's always
+[01:24:23] been a a question and I I can show a
+[01:24:26] little bit of that in the toolbox.
+[01:24:28] With this idea that with NIRs, unlike
+[01:24:32] any other modality, we're inherently
+[01:24:34] multivariate. We might meaning we
+[01:24:36] measure two things, oxy and
+[01:24:38] deoxyhemoglobin.
+[01:24:39] They're partially correlated
+[01:24:42] uh in that they're not independent
+[01:24:43] measures. Uh brain activity, you expect
+[01:24:45] one to go up, the other to go down. Um
+[01:24:49] and and so do you define your stats
+[01:24:51] based on oxy or deoxy or somehow both?
+[01:24:54] Um the answer is probably somehow both.
+[01:24:57] The question is, what does somehow mean?
+[01:24:59] And there's different approaches for for
+[01:25:00] dealing with that.
+[01:25:02] The The reality is in the brain, when
+[01:25:04] you do a task, your uh
+[01:25:07] that oxy and deoxy is driven by flow and
+[01:25:09] metabolism.
+[01:25:11] But the the oxyhemoglobin change is
+[01:25:15] generally about three times bigger, goes
+[01:25:18] up about three times larger than the
+[01:25:20] deoxy goes down.
+[01:25:22] So, if their noise was completely equal,
+[01:25:26] um you would still have about three
+[01:25:28] times bigger effect size in
+[01:25:30] oxyhemoglobin than you do in deoxy.
+[01:25:33] Okay?
+[01:25:34] However, the noise is also not equal.
+[01:25:36] You tend to have your oxyhemoglobin,
+[01:25:39] which is more arterial, tends to be more
+[01:25:41] driven by cardiac oscillations.
+[01:25:45] Whereas, which you can easily filter out
+[01:25:47] because they're high frequency. Whereas,
+[01:25:50] the deoxyhemoglobin tends to be more
+[01:25:52] respiratory. It tends to be more blood
+[01:25:54] pressure. It tends to be more of these
+[01:25:57] uh venous uh signals. Uh these these
+[01:26:00] pressure wave signals.
+[01:26:01] So, not only is you know, if the noise
+[01:26:05] was equal, your effect size would be
+[01:26:06] better on oxy. The noise is not equal.
+[01:26:09] It's actually worse on deoxy than it is
+[01:26:10] on oxy. So, um and on top of that,
+[01:26:14] depending on which wavelengths you're
+[01:26:16] using,
+[01:26:18] so the near X systems which use 780 or
+[01:26:21] 780 850, um those wavelengths are
+[01:26:27] um more sen- they're they're both
+[01:26:29] sensitive to oxy and deoxy.
+[01:26:32] Whereas some of the other instruments
+[01:26:34] like the Tech and uses 830 690. 830 690,
+[01:26:39] the 690 is more deoxy, the 830 is more
+[01:26:42] oxy.
+[01:26:43] Um
+[01:26:45] And
+[01:26:46] uh in addition, the lower the
+[01:26:48] wavelength, the higher
+[01:26:49] uh the the scattering, which means that
+[01:26:53] that 690 is a noisier measurement than
+[01:26:55] the 830.
+[01:26:56] So, in the case of like Tech and or some
+[01:26:59] of these other instruments that use
+[01:27:00] other the 690 830 combination, your
+[01:27:03] noise is higher on deoxy because the
+[01:27:05] measurements are you uh you you your
+[01:27:08] body absorbs more of that light. Um so,
+[01:27:10] it's like all things are working against
+[01:27:13] measuring deoxyhemoglobin.
+[01:27:15] Um so, for that reason, you know,
+[01:27:19] uh generally, your your statistics on
+[01:27:21] deoxy are at least, you know,
+[01:27:25] three times smaller effect sizes than uh
+[01:27:28] for oxy.
+[01:27:30] That was a really long-winded argument.
+[01:27:31] No, it's okay.
+[01:27:33] Uh just just for a one one um
+[01:27:36] kind of a correction. So, we use
+[01:27:37] actually 760 uh one of our wavelength.
+[01:27:41] 760.
+[01:27:41] I read it from your file. I don't you
+[01:27:44] know, if you change it, I the code takes
+[01:27:46] account for it.
+[01:27:47] Okay,
+[01:27:48] no problem. Uh just one last question.
+[01:27:50] We we've received this question uh
+[01:27:53] uh with some people now. This new
+[01:27:54] approach called TDRR,
+[01:27:57] temporal derivative distribution repair.
+[01:27:59] Yeah, which is the Frank Fishburn uh
+[01:28:02] paper, yeah.
+[01:28:03] Yes, so uh so some of the question you
+[01:28:06] could comment a little bit.
+[01:28:08] What does it do? So, so
+[01:28:10] um
+[01:28:11] when we do the so so
+[01:28:14] um
+[01:28:16] what I described with the the this AR
+[01:28:20] weighted least squares, right? Where we
+[01:28:21] fit the data, we take the residual, we
+[01:28:24] design a filter to remove it, we design
+[01:28:26] a waiting function to downweight
+[01:28:28] outliers. And this is all done as a
+[01:28:30] single step as part of the GLM.
+[01:28:33] What the TDDR code does is is actually
+[01:28:36] similar, but does it as a preprocessing
+[01:28:39] step. Um and so what it does is it takes
+[01:28:42] the data, it calculates an
+[01:28:45] autoregressive model. So it takes the
+[01:28:48] the the data and fits it to find this
+[01:28:50] autoregressive structure. It whitens it,
+[01:28:53] so now you're left with this
+[01:28:54] innovations. And I had that slide of
+[01:28:58] like here's the data and has motion
+[01:28:59] artifacts and after you whiten the
+[01:29:01] innovations,
+[01:29:02] uh the motion artifact is a strong
+[01:29:04] outlier.
+[01:29:05] So what it does then, the TDDR code, is
+[01:29:09] it downweights the outliers. It zeros
+[01:29:12] them out. So if you were a strong
+[01:29:13] outlier, I'm going to replace you with
+[01:29:15] zero.
+[01:29:17] We then so our innovations is whitened.
+[01:29:20] There is is the innovations is
+[01:29:22] downweighted to remove outliers. We then
+[01:29:25] filter we then reapply the
+[01:29:28] autoregressive in the other direction to
+[01:29:29] bring us back into the original data
+[01:29:31] space. So now what happens is we put all
+[01:29:34] that that structure back into our data,
+[01:29:37] uh but we've downweighted these strong
+[01:29:40] uh
+[01:29:41] uh time points where the innovation was
+[01:29:42] driving uh because of the motion
+[01:29:44] artifact.
+[01:29:46] So it's done as a preprocessing step,
+[01:29:48] which means that we've removed these
+[01:29:51] outliers, but when we then do our
+[01:29:53] statistics, they don't know about it.
+[01:29:56] Um
+[01:29:57] so you you do have the potential to kind
+[01:30:00] of overfit and and and or over correct.
+[01:30:04] Um but the correction is done based on
+[01:30:07] whether or not this time point was
+[01:30:08] statistically an outlier compared to the
+[01:30:11] rest of the time points. If that makes
+[01:30:13] sense.
+[01:30:14] Um the downside of doing that as a
+[01:30:16] pre-processing compared to doing it as
+[01:30:18] part of the GLM is it doesn't know about
+[01:30:22] the events, the task. And so whereas
+[01:30:25] when we do it in the GLM, it the model
+[01:30:27] includes the tasks. Whereas in the TDR,
+[01:30:30] it's just driven completely based on the
+[01:30:33] data.
+[01:30:34] Um
+[01:30:35] Okay.
+[01:30:35] So TDR works really well for say motion
+[01:30:38] uh correction of resting state data.
+[01:30:40] Um where you don't have a task. Um but
+[01:30:45] Uh okay.
+[01:30:46] Okay. Thank you very much. Uh we can we
+[01:30:49] can proceed to the next part.
+[01:30:51] Okay.
+[01:30:52] Okay.

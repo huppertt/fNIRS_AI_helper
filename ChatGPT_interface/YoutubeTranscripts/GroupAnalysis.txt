@@ -1,0 +1,2668 @@
+[00:00:00] Very good.
+[00:00:02] Okay, so hello everyone. Welcome to
+[00:00:05] today's webinar.
+[00:00:06] The webinar today is of course organized
+[00:00:08] by NIRx. This is a fNIRS company that
+[00:00:11] manufactures innovative fNIRS solutions.
+[00:00:16] So at at NIRx we pride ourselves in the
+[00:00:18] quality of our solutions specifically,
+[00:00:20] but also in promoting fNIRS in general
+[00:00:22] and giving the opportunity for everyone
+[00:00:24] to learn something new uh in the field.
+[00:00:27] So when I say innovative, today's
+[00:00:28] webinar is a great example of that. Uh
+[00:00:31] as you know our NIRSport 2 platform now
+[00:00:33] supports hyperscanning from even a
+[00:00:35] single device,
+[00:00:36] making recording for multiple subjects
+[00:00:38] uh even easier than before.
+[00:00:40] Uh but now that you have this multiple
+[00:00:42] subject recording,
+[00:00:44] uh you might ask how do you analyze the
+[00:00:46] data?
+[00:00:47] So this is where our expert guest
+[00:00:49] speaker today will help us understand
+[00:00:51] that more.
+[00:00:52] But uh before I start, let me introduce
+[00:00:54] myself, my colleagues, uh our speaker,
+[00:00:57] and some specific considerations for the
+[00:00:59] webinar today.
+[00:01:01] So
+[00:01:03] we are NIRx. Um
+[00:01:05] this is uh
+[00:01:07] a collection of great uh shots of all of
+[00:01:09] us working hard, the team uh
+[00:01:11] specifically in Berlin working with
+[00:01:14] hardware, trying to understand um with
+[00:01:16] our research uh collaborators what is
+[00:01:19] the next step in in innovating uh our
+[00:01:21] solutions.
+[00:01:22] So my name is Jeremy Burnison. I'm the
+[00:01:24] US scientific consultant team lead. Um
+[00:01:27] I'll be moderating today uh along with
+[00:01:30] me is Amy and Alina who'll be helping uh
+[00:01:33] coordinate all the back-end things,
+[00:01:36] and uh collecting your questions,
+[00:01:38] helping us run the show.
+[00:01:41] Uh for the webinar, um
+[00:01:43] keep in mind that you are all muted, so
+[00:01:46] that will help us all be able to hear
+[00:01:48] our guest speaker
+[00:01:50] and not have additional audio
+[00:01:52] overlaid.
+[00:01:54] The questions are are welcome at any
+[00:01:55] time. You can use the Zoom chat to post
+[00:01:58] any questions that you have
+[00:02:00] um and we can let speaker know
+[00:02:02] about those questions and you can fill
+[00:02:04] those as it's relevant to the topics
+[00:02:06] that
+[00:02:07] that are current.
+[00:02:09] Uh content will be available on the
+[00:02:10] website after today.
+[00:02:13] Um you can look at today's webinar and
+[00:02:15] past webinars at the URL
+[00:02:18] uh included here.
+[00:02:20] And then further questions, you know,
+[00:02:22] you can always reach out to us at
+[00:02:23] consulting@nirx.net
+[00:02:25] about any topics that came up today or
+[00:02:27] about anything going on in the fNIRS
+[00:02:28] community in general.
+[00:02:31] So,
+[00:02:32] um to introduce our guest speaker today,
+[00:02:35] Dr. Ted Huppert is an associate
+[00:02:37] professor of radiology with secondary
+[00:02:39] appointments in bioengineering,
+[00:02:42] the Clinical and Translational Science
+[00:02:43] Institute, and Center for Neural Basis
+[00:02:45] of Cognition.
+[00:02:47] He's also a core faculty member of the
+[00:02:48] UPMC Magnetic Resonance Research Center.
+[00:02:52] Ted has authored more than 65
+[00:02:54] peer-reviewed publications on brain
+[00:02:55] imaging methodology including NIRS, MEG,
+[00:02:59] MRI, and lots of multimodal methods.
+[00:03:02] He's a founding member of the fNIRS or
+[00:03:04] the Society for fNIRS
+[00:03:06] as well, and so we will welcome him
+[00:03:08] today.
+[00:03:09] Uh and I'll slowly pass the mic
+[00:03:12] to Ted so that he can start.
+[00:03:14] Let me adjust.
+[00:03:18] Stop sharing.
+[00:03:22] Okay, and so you guys can see my screen
+[00:03:24] now.
+[00:03:25] Yep. All right, excellent. So, thank you
+[00:03:27] Jeremy. Um so so
+[00:03:30] it I'm Ted Huppert. Um
+[00:03:32] I'm a uh associate professor at the
+[00:03:35] University of Pittsburgh. Um actually my
+[00:03:37] affiliation changed, so Jeremy, I'll
+[00:03:39] have to update your your your
+[00:03:41] introduction slide, but I'm I'm now
+[00:03:43] faculty in electrical and computer
+[00:03:45] engineering. So, I left radiology and
+[00:03:48] I'm now in the engineering uh school.
+[00:03:51] Um but I still do exactly the same
+[00:03:52] thing, which is near's methodology.
+[00:03:55] So, today what I'm going to talk to you
+[00:03:57] guys about is um models for second level
+[00:04:01] group analysis of of near's. So, you
+[00:04:05] know, you've collected your your study,
+[00:04:07] you have, you know, multiple subjects,
+[00:04:10] and you want to, you know, say something
+[00:04:11] about the group. Um, so how do you
+[00:04:13] combine your near's data for group level
+[00:04:16] analysis?
+[00:04:17] And so, I'm going to start off kind of
+[00:04:19] with the question of, you know, what
+[00:04:21] what's unique about this? You know, why
+[00:04:23] can't we just take our data, throw it
+[00:04:26] into SPSS, or, you know, throw it into
+[00:04:28] our favorite MRI analysis software, and
+[00:04:31] just do our group average just like
+[00:04:33] everything else?
+[00:04:34] And the the reason is because there are
+[00:04:37] features of the near's data that other
+[00:04:40] modalities really don't have.
+[00:04:42] And so, if you want to do your your
+[00:04:45] statistics
+[00:04:46] um better,
+[00:04:48] um
+[00:04:48] I'm I'm I'm not trying to say the other
+[00:04:50] methods are wrong per se, but, you know,
+[00:04:52] if you want to do it slightly better,
+[00:04:54] um you need to account for some of these
+[00:04:56] issues, some of these uniqueness of the
+[00:04:59] near's.
+[00:05:00] And so, I'm going to go through these
+[00:05:01] these um in a a lot more detail in the
+[00:05:04] the next couple slides.
+[00:05:06] Um
+[00:05:08] So, the the first one, really, right, is
+[00:05:11] we have a really strong heterogeneity of
+[00:05:13] the signal, right? I'm going to get very
+[00:05:15] different signal-to-noise whether I'm,
+[00:05:18] you know, scanning myself or, you know,
+[00:05:21] Chewbacca, right? Hair is different,
+[00:05:23] skin skin pigmentation affects that,
+[00:05:26] skull thickness affects that. Um
+[00:05:29] you know, there there's a lot of um
+[00:05:32] heterogeneity in our signal that we
+[00:05:34] don't have in something like MRI. Right?
+[00:05:38] You put somebody in MRI and you scan
+[00:05:40] them, and it doesn't really matter, you
+[00:05:42] know, what their hair color is, you
+[00:05:43] know, it doesn't matter uh what part of
+[00:05:46] the brain you're looking at, you have
+[00:05:48] the same signal to noise pretty much
+[00:05:49] everywhere.
+[00:05:50] Right? But in the case of NIRS, we
+[00:05:53] don't.
+[00:05:54] So that's how does this end up affecting
+[00:05:56] us is that we really have uneven
+[00:05:58] statistical power.
+[00:06:00] Right? So the measurements So if I was
+[00:06:03] trying to do, let's say an an example
+[00:06:05] of, you know,
+[00:06:07] well, how does the brain activity in
+[00:06:08] humans compare to Wookiees, right? So
+[00:06:13] Chewbacca has a lot more hair, my signal
+[00:06:15] to noise is going to be a lot worse,
+[00:06:16] right? Which means to to be equally
+[00:06:19] powered between those two groups, I'm
+[00:06:21] going to have to have a lot more
+[00:06:23] participants,
+[00:06:24] you know, from
+[00:06:26] you know, from the the Wookiee group.
+[00:06:29] Um
+[00:06:30] I'm sorry. I'm showing how dorky I am
+[00:06:32] now. I should I should I should have not
+[00:06:34] done that as an example.
+[00:06:36] Um
+[00:06:37] but right? So so so this this is it's an
+[00:06:41] uneven power issue, right? If we wanted
+[00:06:45] to say
+[00:06:46] something like, you know, does
+[00:06:50] is there a bigger difference between,
+[00:06:53] you know, task A and task B in one
+[00:06:55] population versus another,
+[00:06:58] if the other population has a lot more
+[00:07:00] noise, that means with the same number
+[00:07:02] of trials, with the same number of
+[00:07:04] subjects, it's going to be harder to
+[00:07:06] reach that 0.05 significance value. So
+[00:07:10] we might end up saying that, "Hey, you
+[00:07:12] know, a bunch of bald, you know,
+[00:07:14] subjects have have a difference in this
+[00:07:17] condition that we don't see in, you
+[00:07:20] know, people with hair. Therefore, you
+[00:07:22] know, baldness must increase brain
+[00:07:24] activity." No.
+[00:07:26] Baldness decreased the noise, right? Our
+[00:07:29] signal to noise was was was better. And
+[00:07:32] so we have to really think about how
+[00:07:33] some of this stuff affects our NIRS
+[00:07:36] measurements, particularly when we have
+[00:07:38] systematic biases, we're trying to
+[00:07:40] compare different groups that have
+[00:07:42] different characteristics of this
+[00:07:44] in this this this regime.
+[00:07:49] Another thing that affects that
+[00:07:50] heterogeneity, however, is really just
+[00:07:52] the underlying structure of the head.
+[00:07:55] So, this is a paper
+[00:07:57] that we published a couple years ago. I
+[00:07:58] have the citation, I think, on the next
+[00:08:00] slide
+[00:08:01] from Ashley White Man. And what we did
+[00:08:03] in this study was we actually took
+[00:08:06] I think it was about 100 MRIs from kids.
+[00:08:08] It was aged I think 6 to 11 was the
+[00:08:12] range we looked. And and we segmented
+[00:08:14] all these and we looked at the
+[00:08:16] properties of how thick was the skull,
+[00:08:18] how deep is the brain, what is the
+[00:08:21] variability in the folding patterns.
+[00:08:24] If you put your your optode over a 10-20
+[00:08:27] point, how variable is the underlying
+[00:08:29] brain region that you're actually
+[00:08:31] measuring? And we looked at this as a
+[00:08:32] function of gender, we looked at the
+[00:08:33] function of age. It's a very detailed
+[00:08:37] paper that looks at all these
+[00:08:38] dimensions, but one of the things I'll
+[00:08:40] point out here is so what we're looking
+[00:08:42] at on this slide is the difference in
+[00:08:44] the scalp to brain
+[00:08:47] distance between females and males.
+[00:08:51] And what we ended up finding, right, was
+[00:08:52] that the
+[00:08:54] particularly in the frontal the frontal
+[00:08:56] sinus there, that females actually have
+[00:08:59] a slightly bigger frontal sinus.
+[00:09:02] About on average, you know, 3 3 mm. So,
+[00:09:05] it's not a huge difference. You know,
+[00:09:08] the males tend to have thicker skulls,
+[00:09:11] which is kind of a statement about
+[00:09:13] males, I guess, beyond their anatomy.
+[00:09:17] And you know, but that 3 mm
+[00:09:21] 3 mm difference between these two
+[00:09:23] populations, while it doesn't sound like
+[00:09:25] a lot, it actually amounted to about a
+[00:09:28] 20% difference in the partial volume.
+[00:09:32] Which means that if the
+[00:09:35] the brain activity was exactly the same.
+[00:09:38] My NIRS measurements in the males would
+[00:09:42] have been stronger because the brain is
+[00:09:45] closer to the
+[00:09:46] to the scalp. Right? So, that same
+[00:09:49] measurement is going to be different
+[00:09:50] between those two populations simply
+[00:09:52] based on their average brain anatomy.
+[00:09:55] Right? And so, these are things that
+[00:09:57] kind of come in
+[00:09:58] that we have to think about when we
+[00:09:59] start doing group analysis that we don't
+[00:10:02] have with other modalities.
+[00:10:04] Um this is another example. Here's the
+[00:10:06] citation down on the bottom right for
+[00:10:09] Ashley's paper.
+[00:10:10] Um this was looking at
+[00:10:13] again kind of females on the left, males
+[00:10:15] on on the right, but this was looking at
+[00:10:17] variability in the brain folding. Right?
+[00:10:19] So, if I put a an optode on the head um
+[00:10:24] or on a 10-20 position, how variable is
+[00:10:28] the anatomy that I'm actually measuring?
+[00:10:30] Right? How different is is the folding?
+[00:10:32] And so, this is basically looking at
+[00:10:36] um um that that variability. And males
+[00:10:38] actually have slightly more variability
+[00:10:40] than than than females do. Um
+[00:10:44] and this changed with age and the most
+[00:10:46] likely represent reason is because the
+[00:10:50] age range that we looked at, the males
+[00:10:52] are developing. It it's a it's a broader
+[00:10:56] development.
+[00:10:57] Um they're all kind of going at at
+[00:10:59] you know, as you get some at the low end
+[00:11:01] of development, some at the higher end
+[00:11:02] of development, whereas the females
+[00:11:04] starting earlier and so, they're all a
+[00:11:06] little bit on average farther through
+[00:11:08] the development and so, they're not
+[00:11:09] changing as much. Um and that's that's
+[00:11:11] probably what's driving
+[00:11:13] some of this.
+[00:11:14] Um but again, kind of
+[00:11:16] uneven statistical power if I wanted to
+[00:11:19] compare those two different groups. And
+[00:11:21] so, we have to kind of think about how
+[00:11:22] that affects our NIRS data.
+[00:11:26] Another issue
+[00:11:28] that we have with NIRS that we don't
+[00:11:30] have as much with other modalities is or
+[00:11:34] it's it's at least not as evident in
+[00:11:37] other modalities is the fact that we we
+[00:11:40] don't we have specially structured
+[00:11:42] noise, right? So this is a paper from
+[00:11:44] Mariangela, right, that looked at whole
+[00:11:46] head
+[00:11:49] mirrors imaging and basically mapped out
+[00:11:51] the top row is the cardiac cycle where
+[00:11:54] you kind of see this pulsation kind of
+[00:11:56] doing the the the whole head at once. On
+[00:11:59] the bottom is a is the respiratory
+[00:12:02] signal where you tend to see this kind
+[00:12:04] of rolling wave going from the back to
+[00:12:06] the front. This is
+[00:12:08] the x-axis here is time, right? So so
+[00:12:11] sorry. Top one is respiratory, bottom
+[00:12:14] one is is is
+[00:12:15] cardiac.
+[00:12:16] Um
+[00:12:18] but you get this spatial structure,
+[00:12:20] right? Which means that a channel, you
+[00:12:23] know, two channels that are nearby in
+[00:12:25] space share noise structures, right?
+[00:12:29] They're not independent measures. And so
+[00:12:31] we can't treat our channels as we have,
+[00:12:34] you know, 50 independent measures just
+[00:12:35] cuz we have 50 channels.
+[00:12:37] We actually have fewer than that. And
+[00:12:39] when you throw oxy and deoxy into the
+[00:12:41] mix, which again are partially
+[00:12:43] correlated, you know, again we don't
+[00:12:45] have um
+[00:12:48] the our degrees of freedom does not
+[00:12:49] match our number of measures. And so
+[00:12:51] when we run our statistics, we have to
+[00:12:53] account for that non-independence. Most
+[00:12:56] of the statistical models are going to
+[00:12:58] assume independent measures and
+[00:13:01] therefore if we just use them out of the
+[00:13:02] box, we're going to overestimate our
+[00:13:04] stats in in most cases. So we need to
+[00:13:07] correct for that. Um
+[00:13:10] another issue that we have with mirrors
+[00:13:13] is the pro placement idea, right? We put
+[00:13:16] our cap on the head and we try to be as
+[00:13:19] precise as we can.
+[00:13:22] You know, so if you use a near x cap,
+[00:13:23] it's all in the 10 20. You put that on
+[00:13:25] the head, maybe you try to landmark it,
+[00:13:27] you know, my cap is 2 cm above the, you
+[00:13:30] know, bridge of the eyebrows, and you
+[00:13:32] try to to measure it out like that. But,
+[00:13:35] you're not perfect, right? And and doing
+[00:13:37] doing that takes more time for the
+[00:13:39] setup. So, it's this trade-off between
+[00:13:42] how much time do I want to spend setting
+[00:13:44] up versus
+[00:13:45] you know, collecting more data.
+[00:13:47] Um and you know, over the years there's
+[00:13:49] been a couple of um
+[00:13:51] methods for trying to do registration,
+[00:13:54] right? To know where my probe is
+[00:13:55] precisely on the head of the subject. Um
+[00:13:58] so, this is a paper by Uli Kovalenko's
+[00:14:00] lab from from Michigan, where they
+[00:14:02] basically used um 3D scanners, uh so
+[00:14:06] structured cameras with um and compared
+[00:14:09] that to MRI and so on. And so, they
+[00:14:12] they, you know,
+[00:14:13] just show I just wanted to show that
+[00:14:15] these methods are available out there,
+[00:14:17] okay? We're still they're still work in
+[00:14:19] progress in in many cases, right? Here's
+[00:14:21] another uh version of that, where a
+[00:14:24] padded and took uh MRIs and kind of
+[00:14:27] mapped out the variability between the
+[00:14:30] MNI space, the brain volume space, and
+[00:14:32] the 10-20 space. So, you can kind of get
+[00:14:35] a probabilistic map of if you measured
+[00:14:38] right here, you know, what is the
+[00:14:40] distribution of areas that you you
+[00:14:42] measured from. Um
+[00:14:44] both of these approaches, both the
+[00:14:46] registration and then these these um
+[00:14:48] these probabilistic atlases, are useful,
+[00:14:53] maybe. We just haven't figured out how
+[00:14:55] to use them, right? Because it's it's
+[00:14:57] one thing to actually measure the
+[00:14:59] position of the optodes on the head,
+[00:15:02] right? And know that, you know, subject
+[00:15:05] five's cap was a little bit askew.
+[00:15:08] It's another thing to actually do
+[00:15:09] something about it and incorporate that
+[00:15:12] into your analysis. So, right now, kind
+[00:15:14] of the the, you know, the approach might
+[00:15:17] be if you
+[00:15:19] look at your subject, you might throw
+[00:15:21] out any subjects that have a probe
+[00:15:23] that's, you know, off by
+[00:15:26] more than whatever centimeters, you
+[00:15:28] know, displacement, right? You're only
+[00:15:30] keeping ones that were aligned. Um what
+[00:15:33] I'll show later in the talk is methods
+[00:15:35] that we're developing to try to realign
+[00:15:37] things to keep more of that data and
+[00:15:39] account for this variability when we do
+[00:15:41] the group level. But again, it's
+[00:15:42] something we need to consider when we do
+[00:15:44] group analysis is we do have these
+[00:15:47] errors introduced by putting the probe
+[00:15:49] on the head. Um we also have obviously
+[00:15:52] differences with head size,
+[00:15:55] right?
+[00:15:56] Is if we're doing a longitudinal study,
+[00:15:59] the head's growing, right? And so your
+[00:16:01] head size is changing.
+[00:16:04] Which gives you kind of there's two
+[00:16:06] approaches to collecting that data,
+[00:16:08] right? And neither one is perfect.
+[00:16:10] The The first approach, um kind of if
+[00:16:13] you're using kind of a standard
+[00:16:14] near-infrared cap, which is where
+[00:16:16] they're positioned in the 10-20 space,
+[00:16:19] is that you just use a bigger head cap,
+[00:16:21] right? It's the same 10-20 positions
+[00:16:23] where all your optodes are, um but
+[00:16:26] you're using a bigger cap. So the plus
+[00:16:28] side of that is by keeping the 10-20
+[00:16:31] positions constant, you're kind of
+[00:16:33] measuring over the same region.
+[00:16:36] Uh so so, you know, it's the same
+[00:16:38] channel that's over Broadman area 46 for
+[00:16:41] all the subjects.
+[00:16:43] The downside of that though is as the
+[00:16:45] cap size grows, as the head as the head
+[00:16:48] gets bigger, your signal-to-noise goes
+[00:16:50] down, right? Because the further apart
+[00:16:53] your source-detector spacing, the less
+[00:16:55] signal you're going to get, and so it
+[00:16:57] ends up affecting your signal to noise.
+[00:16:59] So if you're doing a study like that
+[00:17:00] longitudinally and use the same 10-20
+[00:17:03] positions across the lifespan there,
+[00:17:06] you're going to have less power at the
+[00:17:09] older kids compared to the younger kids
+[00:17:12] because the source-detector spacing is
+[00:17:13] going to be bigger at the the older kids
+[00:17:15] versus the younger kids, right? The
+[00:17:18] other option, right, would be to keep
+[00:17:20] the source-detector spacing constant,
+[00:17:23] right? So, if you keep the spacing
+[00:17:24] constant,
+[00:17:26] now we have this issue of as the head
+[00:17:28] size grows, those channels are not over
+[00:17:30] the same region, right? So, if we
+[00:17:32] anchored onto the forehead and it's kind
+[00:17:34] of a headband, let's say, like the the
+[00:17:36] Artinis system, for example, right? It's
+[00:17:39] a It's a headband. As your head grows,
+[00:17:42] the the edges of that of those that
+[00:17:44] headband is kind of moving in relative
+[00:17:46] to, you know, to the sides of your head.
+[00:17:48] So, those channels are not over the same
+[00:17:51] region. Um but, your source-detector
+[00:17:53] spacing is the same. So, you keep
+[00:17:55] signal-to-noise constant, but you're
+[00:17:57] changing what regions you're actually
+[00:17:59] measuring from.
+[00:18:00] These are the kind of the two
+[00:18:01] approaches. I don't know uh really what
+[00:18:03] the best way to do it yet, but it's
+[00:18:05] something we need I'm going to talk
+[00:18:07] about a little bit later uh with how you
+[00:18:09] might deal with some of these things.
+[00:18:13] Finally, um with NIRS, there's this
+[00:18:17] issue of blind spots.
+[00:18:19] So, typically,
+[00:18:21] um I'd probably say about 95% of the
+[00:18:23] NIRS field, we collect with what's
+[00:18:26] called a nearest-neighbor probe. So,
+[00:18:28] this is a a probe where the source
+[00:18:30] detectors are arranged, each detector is
+[00:18:33] only seeing the source that's closest to
+[00:18:36] it, right? And so, you have this this
+[00:18:38] grid of source detectors,
+[00:18:40] but you end up with blind spots. Your
+[00:18:43] measurement is most sensitive between
+[00:18:45] the source detector, but directly
+[00:18:46] beneath the source or beneath the
+[00:18:48] detector is kind of a blind spot. You
+[00:18:50] don't have measurements that are
+[00:18:51] actually crossing that area. And so,
+[00:18:54] this creates, with low-density probes,
+[00:18:57] this creates this this artifact where,
+[00:19:00] depending on where the brain activity is
+[00:19:02] relative to your probe layout, you can
+[00:19:05] have blind spots and not see uh the
+[00:19:08] brain activity even though it was the
+[00:19:10] same um that you know, same in all
+[00:19:13] scenarios. So this was an example this
+[00:19:14] is Danny Joseph's work that I did with
+[00:19:17] him back at Harvard and what he actually
+[00:19:20] he had a phantom so he had this this
+[00:19:22] this phantom and he had a target that he
+[00:19:24] actually moved around under that so it
+[00:19:26] was actual measurements and what you see
+[00:19:28] on the right then
+[00:19:30] for the first column is if we only use
+[00:19:33] the nearest measurements right depending
+[00:19:36] on where that target is and that's the
+[00:19:38] dotted circle. As the target moves
+[00:19:40] around so on the first one you know
+[00:19:43] first row we can see it's a pretty good
+[00:19:45] measurement second one very good
+[00:19:47] measurement but the third and the fourth
+[00:19:49] row we almost see nothing at all the the
+[00:19:52] target has moved into a blind spot on
+[00:19:54] the probe.
+[00:19:55] Right?
+[00:19:56] If we introduce high density
+[00:19:58] measurements is and and that's what you
+[00:20:00] see in the the second and third column
+[00:20:02] is higher density
+[00:20:04] measurements where we're doing all these
+[00:20:06] crisscrossed
+[00:20:08] source detector pairs and measuring all
+[00:20:09] these different combinations we can fill
+[00:20:12] in those blind spots and so kind of no
+[00:20:15] matter where the target is we get an
+[00:20:17] accurate reconstruction.
+[00:20:20] The downside of that though is you know
+[00:20:22] you need a system that can do high
+[00:20:23] density right you need a lot more source
+[00:20:26] detector pairs
+[00:20:27] the probe is a lot denser which means it
+[00:20:30] kind of weighs more it's it's harder to
+[00:20:32] put on the head it's harder to get
+[00:20:33] around hair and so on
+[00:20:36] a number of the companies now are doing
+[00:20:38] high density near X being one of them
+[00:20:41] you know but it's still not the status
+[00:20:44] quo.
+[00:20:45] I I I still say that about 95% of
+[00:20:47] studies are dealing with only this
+[00:20:50] nearest neighbor.
+[00:20:51] On on top of that if you collected data
+[00:20:53] in the past it probably was nearest
+[00:20:54] neighbor so telling you that you wasted
+[00:20:57] all the NIH's money collecting nearest
+[00:20:59] neighbor and you should have gone and do
+[00:21:01] the high density that that's a very you
+[00:21:03] know what do I do with data I already
+[00:21:06] have, right? You you you So so so
+[00:21:10] um a lot of times we're dealing with
+[00:21:12] this low density.
+[00:21:14] Um
+[00:21:15] Um and you know, that low density kind
+[00:21:18] of comes in uh in the context of head
+[00:21:20] size as well. So if we take that example
+[00:21:23] of like the Artinis where it's a
+[00:21:26] headband, it's pinned, it's anchored on
+[00:21:28] the forehead, and as the head grows, the
+[00:21:31] headband doesn't stretch as far or
+[00:21:33] doesn't reach as far brain regions. What
+[00:21:36] happens is also that that brain activity
+[00:21:38] is moving in and out of blind spots. And
+[00:21:41] so this is a plot This is just looking
+[00:21:42] at, you know, changes over a 10 cm
+[00:21:45] head circumference
+[00:21:47] um
+[00:21:47] where if, you know, um we see in the
+[00:21:50] bottom um plots, there's we're plotting
+[00:21:53] out the signal-to-noise in two channels,
+[00:21:55] right? And so the red channel, the green
+[00:21:58] channel, as the brain as the head gets
+[00:22:00] bigger, we kind of shift from one
+[00:22:03] channel to the other, right? In terms of
+[00:22:05] where where the sensitivity is. And this
+[00:22:08] is This is plotting out the effect size,
+[00:22:09] so we see that we get about a twofold
+[00:22:12] change in effect size by changing, you
+[00:22:15] know, this this positioning of of the
+[00:22:17] target relative to the probe.
+[00:22:20] Um you know, so that's that's a really
+[00:22:22] significant
+[00:22:24] um increase in the noise that's
+[00:22:26] introduced by this variability due to
+[00:22:29] kind of where you put the probe.
+[00:22:31] Um
+[00:22:33] So how do we how do we deal with these
+[00:22:35] things? So that's all everything that
+[00:22:38] was kind of unique, and I'm sure there's
+[00:22:40] some things I didn't think of with uh
+[00:22:43] you know, with NIRs data. Most of the
+[00:22:44] other modalities don't have this. So how
+[00:22:47] can we start to account for this in our
+[00:22:51] analysis models, right? So the first one
+[00:22:55] um is dealing with this heterogeneity.
+[00:22:58] Um That's actually turns out it's it's
+[00:23:00] reasonably easy to do,
+[00:23:02] um
+[00:23:03] but you have to write kind of custom
+[00:23:04] code to do it. It's not something SPSS
+[00:23:07] can can necessarily do.
+[00:23:10] And so before I introduce that, let's
+[00:23:11] let's talk a little bit about
+[00:23:15] math,
+[00:23:16] about how a group level model is
+[00:23:18] actually run,
+[00:23:20] kind of viewing it from a matrix
+[00:23:22] perspective.
+[00:23:23] Can you guys see my mouse cursor?
+[00:23:27] Yep. Yep. Okay. So that'll make it
+[00:23:29] easier to
+[00:23:31] to write. So let's imagine the case that
+[00:23:33] we have three subjects. Subject 1 2 3,
+[00:23:37] each subject does two tasks, a task A
+[00:23:40] and task B. So we have our data, right?
+[00:23:42] So we have a total of six measurements.
+[00:23:46] This is the brain activity of subject
+[00:23:48] one
+[00:23:49] doing the A task, subject one doing the
+[00:23:51] B task, and so on.
+[00:23:52] And we want to average this data
+[00:23:54] together. We want to average all the A's
+[00:23:56] and all the B's, right? So what we would
+[00:23:59] do is we can think about this writing it
+[00:24:01] out in matrix form, right? So subject
+[00:24:05] one, the data for their A task is, you
+[00:24:09] know,
+[00:24:10] one times the average of A, and zero
+[00:24:13] times the average of B, right? And their
+[00:24:16] B1 picks out the average B term. So we
+[00:24:18] can get this into kind of a matrix form
+[00:24:21] like this. Our measurements,
+[00:24:24] you know, over here, our measurements
+[00:24:26] for each subject in each condition are
+[00:24:29] this kind of design matrix times the
+[00:24:31] average. So this this parameter here is
+[00:24:34] the average of condition A across all
+[00:24:36] the subjects and the average of
+[00:24:38] condition B all across all the subjects.
+[00:24:40] And so it's kind of this, you know, we
+[00:24:42] usually don't think of group averages as
+[00:24:44] matrix, as
+[00:24:46] as the regression model,
+[00:24:48] but I just wanted to kind of show that
+[00:24:50] it it can be.
+[00:24:52] And when you're in this kind of
+[00:24:54] regression model like this, we can do we
+[00:24:58] can account for then the these
+[00:25:01] differences in the the noise and the
+[00:25:03] very the heterogeneity and so on.
+[00:25:06] So, let's start with our base model that
+[00:25:08] I just showed. We have our three
+[00:25:10] subjects, each one is doing a couple
+[00:25:12] tasks. This L matrix is this matrix of
+[00:25:15] ones and zeros that kind of picks out
+[00:25:17] which which of the parameters goes with
+[00:25:19] which of the measurements, okay? So, we
+[00:25:21] have our standard model like this.
+[00:25:24] So,
+[00:25:25] the first thing we can do is we can say,
+[00:25:28] "Well, actually all of those
+[00:25:29] measurements, all of those betas that
+[00:25:31] came from different subjects and
+[00:25:32] different tasks and different channels,
+[00:25:35] you know, there's noise associated with
+[00:25:37] that that I've measured when I did my
+[00:25:40] first level model. When I ran my GLM,
+[00:25:42] when I took the average of here's the
+[00:25:45] response over time, I have error bars.
+[00:25:48] And not only do I have error bars, but I
+[00:25:49] know covariance. I know that this
+[00:25:51] channel is not independent of that
+[00:25:53] channel and so on. So, I get this matrix
+[00:25:56] which we're going to call the covariance
+[00:25:59] of of beta, right? This this matrix of
+[00:26:02] how those estimates relate to each
+[00:26:05] other,
+[00:26:06] right? And I can take that matrix, and
+[00:26:09] if I do this this decomposition, what's
+[00:26:12] called a Cholesky decomposition, but
+[00:26:14] it's basically you think of it as a
+[00:26:15] matrix square root,
+[00:26:18] I can I can define a whitening filter
+[00:26:22] that basically when I apply that
+[00:26:23] whitening filter to the the the
+[00:26:26] measurements, now the noise all the
+[00:26:29] noise becomes independent. The noise is
+[00:26:31] now
+[00:26:32] all that structure that was in the noise
+[00:26:34] gets removed. Okay? And
+[00:26:37] if you're familiar with the way that we
+[00:26:39] do our GLM in the first the first level
+[00:26:41] models, this is this is the same idea,
+[00:26:43] right? Is that we're taking our
+[00:26:45] whitening filter and we apply it to both
+[00:26:49] the left and the right hand sides of the
+[00:26:51] equation, right? So, in doing that, in
+[00:26:54] theory, these these
+[00:26:56] these what we're trying to estimate is
+[00:26:58] unchanged. We've done it fairly to both
+[00:27:01] the left and the right side of the
+[00:27:03] equation.
+[00:27:04] But, what ends up happening is this
+[00:27:06] Oops, I lost my mouse cursor. This noise
+[00:27:08] term, now when we apply that whitening
+[00:27:11] to the noise term, the noise term is now
+[00:27:13] independent, which our T test required
+[00:27:16] those measurements to be independent for
+[00:27:18] the T test to actually be valid.
+[00:27:20] And so so, um we apply this whitening
+[00:27:24] based on the first-level noise model.
+[00:27:28] So, subjects that have more noise get
+[00:27:31] down-weighted in the average compared to
+[00:27:33] subjects that have have less noise,
+[00:27:35] okay?
+[00:27:37] The second thing we can do, however, is
+[00:27:41] even if we we do that, you you you'll
+[00:27:43] occasionally find a subject that their
+[00:27:46] brain response was just, you know,
+[00:27:48] different.
+[00:27:50] You know, it was it was much higher or
+[00:27:52] much lower or or whatever compared to
+[00:27:54] the other subjects, right? Maybe this
+[00:27:56] was a motion artifact that we didn't
+[00:27:58] properly account for that skewed our our
+[00:28:00] first-level um estimate,
+[00:28:03] right? But, if I if I was to include
+[00:28:05] that subject um in my analysis and it
+[00:28:08] was so different from the rest, what
+[00:28:11] happens is you have too much leverage on
+[00:28:14] that one subject, right? That subject is
+[00:28:17] really determining the group average,
+[00:28:19] right? Uh because it was so much
+[00:28:21] stronger, so much bigger, so much more
+[00:28:23] significant than the rest of the the the
+[00:28:26] the subjects, right? So, you never
+[00:28:29] really want one measurement or one
+[00:28:31] subject to dictate, you know, the
+[00:28:33] answer. You want kind of everyone to be
+[00:28:35] contributing uh to get the best group
+[00:28:37] answer.
+[00:28:38] And so, the
+[00:28:40] the way that you would do this, right,
+[00:28:41] is to remove the outlier. That subject
+[00:28:43] that was so different from everyone
+[00:28:45] else, he's an outlier. Um and so, you
+[00:28:48] want to remove remove that. So, there's
+[00:28:51] two approaches to do that. One would be
+[00:28:54] to just take that subject and just throw
+[00:28:56] it out of your data.
+[00:28:58] The other way to do it would be to do
+[00:29:00] some sort of robust statistic.
+[00:29:03] And so, what robust statistics does is
+[00:29:06] it estimates the model.
+[00:29:08] It estimates
+[00:29:10] kind of if I took the subject out, how
+[00:29:13] different how much did it change the
+[00:29:15] model, right? So, if I pull a subject
+[00:29:17] out and all of a sudden I get a very
+[00:29:19] very different answer, that subject had
+[00:29:21] very high leverage. It was really
+[00:29:23] pulling the answer in in one way or the
+[00:29:25] other, right? And so, what you do is you
+[00:29:29] compute the probability of being an
+[00:29:30] outlier
+[00:29:32] and you down weight the the subjects
+[00:29:34] based on that. So, you create this
+[00:29:36] matrix S
+[00:29:38] that again you're going to apply to both
+[00:29:40] the left and the right hand sides of the
+[00:29:42] equation. And subjects that had high
+[00:29:45] noise or that were strong outliers are
+[00:29:48] going to get down weighted
+[00:29:50] such that you're if you look at your
+[00:29:52] data, you look at your noise, you've got
+[00:29:53] a normal distribution. You're trying to
+[00:29:55] remove those outliers at at the tails of
+[00:29:57] that distribution.
+[00:29:59] So, there's a couple ways to do this. In
+[00:30:00] our code, we use the Huber bi-squared
+[00:30:02] function, which is kind of the default
+[00:30:04] MATLAB robust fit
+[00:30:07] code. It's the same method that gets
+[00:30:09] used in our first level first level GLM
+[00:30:11] models.
+[00:30:12] Um
+[00:30:14] but the idea is again kind of you're
+[00:30:16] taking those subjects and let's say he
+[00:30:19] was only the subject was only one
+[00:30:21] standard deviation away. It's it's sort
+[00:30:23] of an outlier, but not really. It gets
+[00:30:25] down weighted a little bit, but not
+[00:30:27] fully. Right? The subject that's five
+[00:30:29] standard deviations away, this S term
+[00:30:32] goes to zero for that subject. He's
+[00:30:34] really a strong outlier. And so, this
+[00:30:36] Huber bi-squared is kind of a continuous
+[00:30:38] weighting.
+[00:30:40] As you get become more and more in an
+[00:30:41] outlier, it it approaches zero, so you
+[00:30:44] don't include that data at all, but
+[00:30:46] things are kind of fuzzy in the middle
+[00:30:48] get a little bit of weight uh to
+[00:30:50] contribute to the answer.
+[00:30:51] Um, and so so we can do these whitening
+[00:30:54] filters, this robust stats and this this
+[00:30:57] pre-whitening to our group level model
+[00:31:00] in the same way that we did it in the
+[00:31:02] first level uh GLM.
+[00:31:05] You know,
+[00:31:06] actually it becomes a lot more
+[00:31:07] complicated when you throw channels in
+[00:31:09] there. Um, so not just one channel one
+[00:31:13] measurement per subject, but a whole
+[00:31:15] bunch of channels. Um,
+[00:31:17] um, but it's the same basic idea, right?
+[00:31:19] Is we write this out in matrix form and
+[00:31:22] whiten and do a robust statistic on both
+[00:31:25] sides.
+[00:31:26] Uh, so the top equation here and I'm
+[00:31:28] sorry this is crazy noisy, right? But
+[00:31:31] this is a mixed effects model in that
+[00:31:33] term in that that model. You have the
+[00:31:34] main effect and then you have the mixed
+[00:31:36] effects here
+[00:31:38] um or the the the main effect and the
+[00:31:40] random effect.
+[00:31:42] Main effect and the covariate. Um, and
+[00:31:44] you can go and you can solve it this
+[00:31:46] way.
+[00:31:47] Um, you can take that and if you do
+[00:31:49] instead of having this, you know, this
+[00:31:51] ones and zeros design matrix, you
+[00:31:53] Kronecker that onto um
+[00:31:56] an identity matrix of number channels,
+[00:31:59] now you're actually solving all the
+[00:32:00] channels at the same time to estimate
+[00:32:02] these group terms. So why that's
+[00:32:04] important to solve all the channels at
+[00:32:07] the same time is because actually as I
+[00:32:10] said in the beginning, we have
+[00:32:11] structured noise. Channel one and two
+[00:32:13] are not independent. Oxy and deoxy are
+[00:32:15] not independent. And so we need to
+[00:32:18] account for that in our statistics too.
+[00:32:20] And so that's one of the things that
+[00:32:22] gets coded up into W, into this
+[00:32:24] covariance uh this whitening filter is
+[00:32:27] to separate out the noise of oxy and
+[00:32:30] deoxy to kind of make those measurements
+[00:32:32] more independent. Um,
+[00:32:37] and so with a again kind of this idea of
+[00:32:40] really thinking about it as a matrix,
+[00:32:43] right? We can think about, you know, how
+[00:32:46] we start to encode things. So, this is
+[00:32:48] an example that is Dan's slide, I'm
+[00:32:50] sorry, but this is an example where we
+[00:32:53] have um
+[00:32:54] you know, a number of subjects
+[00:32:56] do it um
+[00:32:58] and we want to look at age as a
+[00:33:00] covariate, right? And so, in this case,
+[00:33:04] what we're doing is we're estimating uh
+[00:33:06] a low, medium, and high condition and
+[00:33:09] we're estimating separately how age
+[00:33:13] affected the low condition, how age
+[00:33:15] affected the medium condition, how age
+[00:33:17] affected the high condition, right? So,
+[00:33:19] you end up with a total of in the this
+[00:33:21] case six
+[00:33:22] statistics that we're trying to
+[00:33:24] estimate, right? The main effect of low,
+[00:33:27] medium, high task and how did age
+[00:33:30] modulate each of these independently.
+[00:33:33] So, it's potential that age would only
+[00:33:36] affect the let's say high difficulty
+[00:33:39] task, but not the low difficulty task,
+[00:33:41] right? Um we could also frame this if we
+[00:33:44] wanted one term for age, what we'd do is
+[00:33:47] instead of having three columns here,
+[00:33:49] one for how age modulated each condition
+[00:33:52] independently, we'd have one column um
+[00:33:55] where all of these terms depend on a
+[00:33:58] single parameter uh that modulates age.
+[00:34:01] And so, that would be the case that I I
+[00:34:03] expect age to have an effect on all
+[00:34:07] three conditions in the same way,
+[00:34:09] right? And and so, we can by setting up
+[00:34:12] these these models, we can test
+[00:34:14] different things and it changes a little
+[00:34:16] bit of the structure of the of the of
+[00:34:18] the matrix form in the middle.
+[00:34:21] So,
+[00:34:22] we do this in our um
+[00:34:25] um
+[00:34:26] uh NIRS toolbox, the analyzer toolbox.
+[00:34:30] Um and I'm going to show examples of
+[00:34:31] this, uh, later on, but we use what's
+[00:34:33] called Wilkinson's notation. Um, it's
+[00:34:37] the same that's kind of behind the
+[00:34:38] scenes. It's using a function in MATLAB
+[00:34:40] called fitLME. Uh, the Wilkinson's
+[00:34:43] notation is how you define models in
+[00:34:45] that fitLME. Um, I believe it's also,
+[00:34:49] um, an option for specifying mixed
+[00:34:51] effects models in SPSS.
+[00:34:53] Um,
+[00:34:55] but here's some examples of what a
+[00:34:57] formula would look like. So, the
+[00:34:59] formulas always begin with, uh, on the
+[00:35:02] left-hand side, um, what are you trying
+[00:35:04] to model? So, we're always trying to
+[00:35:06] model the betas coming from our first
+[00:35:09] level, um, statistics. Um, so, so, for
+[00:35:13] the most part, it'll always be beta on
+[00:35:15] the left-hand side. It'll also accept t
+[00:35:17] stat, um, as as an option, but for the
+[00:35:20] most part, the left-hand side is going
+[00:35:21] to be beta. And then you get this tilde,
+[00:35:24] uh, which effectively is equals to. Um,
+[00:35:28] -1
+[00:35:30] means I do not want to include an a, um,
+[00:35:34] an intercept term.
+[00:35:36] So, I don't want to remove the average
+[00:35:40] of all my data. I want to I want to I
+[00:35:42] want to model it based on the
+[00:35:44] conditions, not kind of this this not DC
+[00:35:48] term to the model. So, so, the the the
+[00:35:51] first several of the beta tilde -1, for
+[00:35:54] the most part, that's going to your
+[00:35:56] equations are always going to begin with
+[00:35:58] that.
+[00:35:59] And then, what you do is you would add
+[00:36:03] your covariates that you want over here.
+[00:36:05] So, condition is a keyword. Uh, it's
+[00:36:08] it's the task condition.
+[00:36:10] You can also use any uh, variable that's
+[00:36:13] in, uh, what we call the demographics
+[00:36:16] field in the toolbox. It's it's, um,
+[00:36:18] it's a a, um,
+[00:36:21] um, a number or um, string or whatever
+[00:36:24] that's attached onto a subject. So, it
+[00:36:25] could be what group they are, you know,
+[00:36:27] group A or group B. Could be their age
+[00:36:30] as a numeric value. Um it could be
+[00:36:34] um so, it could be categorical, it could
+[00:36:36] be um numeric, can also be um
+[00:36:41] why am I drawing a blank on on on it
+[00:36:43] right now? Um
+[00:36:45] it'll come to me.
+[00:36:46] Um but but it it can also be um
+[00:36:50] Uh
+[00:36:51] God, I can't remember. But like low,
+[00:36:52] medium, high. Uh medium is greater or
+[00:36:55] greater than or equal to low and high is
+[00:36:58] greater than or equal to medium. And so,
+[00:37:00] it has this kind of They're not They're
+[00:37:03] They're three different levels, but
+[00:37:05] there's an order that that matters. I I
+[00:37:07] forget what that's called. Um we coded
+[00:37:09] that up, too.
+[00:37:10] Um it's bad that I can do math, but I
+[00:37:12] can't remember exactly what the names
+[00:37:15] are. Anyway, so so those covariates,
+[00:37:18] um the allowable covariates that can go
+[00:37:20] into your formula are anything that's in
+[00:37:24] your demographics
+[00:37:26] So, if I have group as one of my entries
+[00:37:29] in the demographic, I'm allowed to use
+[00:37:31] that in in the formula. It does have to
+[00:37:33] be spelled exactly the same. It does
+[00:37:35] have to have the same um capitalization.
+[00:37:38] So, group with an uppercase G is
+[00:37:40] different than group with a lowercase G,
+[00:37:42] and then it has to exactly match what's
+[00:37:44] in your demographics.
+[00:37:46] Um but this Let's look at it. So, this
+[00:37:47] top one basically is modeling the beta
+[00:37:50] as a function of condition. So, what's
+[00:37:52] going to happen is I'm going to end up
+[00:37:54] with one statistic for each condition.
+[00:37:57] Uh so, if I have, let's say, tapping
+[00:37:59] left and tapping right, I'm going to end
+[00:38:01] up with two images.
+[00:38:03] This last term here, this one vertical
+[00:38:05] line subject, um that's how Wilkinson's
+[00:38:08] notation denotes random effects. So,
+[00:38:11] what we're going to do is we're going to
+[00:38:13] treat subject as a random effect. So,
+[00:38:15] all of the data that came from one
+[00:38:17] subject is going to have uh uh, you
+[00:38:20] know, kind of be lumped together for the
+[00:38:22] noise, the the the covariance covariance
+[00:38:25] estimates um, separately from all the
+[00:38:28] data that came from subject two. So,
+[00:38:30] again, kind of you can use any
+[00:38:31] demographic in this random effects. Uh,
+[00:38:34] so it might be subject, it might be
+[00:38:36] group, it might be age. You want to
+[00:38:38] account for age um, as a nuisance
+[00:38:40] regressor or as a as a nuisance um,
+[00:38:43] effect.
+[00:38:44] So, that's an example down here.
+[00:38:47] So, this one here, group colon
+[00:38:50] condition.
+[00:38:51] What the colon does is it says, "I want
+[00:38:54] a condition for everyone in my groups."
+[00:38:57] So, let's say, again, left hand right
+[00:38:59] hand tapping, but let's say I have two
+[00:39:01] groups, you young and old. Um, I'm going
+[00:39:04] to end up with four images. Young left
+[00:39:07] hand tapping, young right hand tapping,
+[00:39:09] old, you know, the the two as well.
+[00:39:12] Um, so I'm I'm basically I'm having a
+[00:39:15] term for the condition that's separate
+[00:39:18] for each member of the group. Okay?
+[00:39:21] That's as opposed to, oops,
+[00:39:25] as opposed to the model here, where I
+[00:39:27] don't have the uh, group colon
+[00:39:30] condition.
+[00:39:31] I have group plus condition plus group
+[00:39:34] times condition.
+[00:39:36] So, what that means is I'm going to have
+[00:39:39] one term associated with being in the
+[00:39:41] young group, one term associated with
+[00:39:43] being in the old the older group. That
+[00:39:46] term
+[00:39:47] um, applies regardless of which
+[00:39:49] condition you're in.
+[00:39:51] Right? So, my data is, you know, I'm
+[00:39:53] young, so that's the, you know, I've got
+[00:39:55] that term, and then I've got plus
+[00:39:57] whatever the condition is, and so so
+[00:39:59] that's uh, that that's a a separate
+[00:40:02] model. I'm estimating those two
+[00:40:03] parameters separately from each other,
+[00:40:05] and they apply um,
+[00:40:07] and then the group times condition is
+[00:40:10] actually the interaction.
+[00:40:12] So, so in this case, we're going to have
+[00:40:14] these these kind of cross terms.
+[00:40:17] Um, but I'm going to still end up with
+[00:40:20] um
+[00:40:21] um the kind of this this
+[00:40:24] main effect of group, a main effect of
+[00:40:26] condition, and then dealing with the
+[00:40:29] interactions uses nuisance regressors
+[00:40:31] there. So, with this kind of model I'm
+[00:40:33] able to ask the question, you know, did
+[00:40:36] group membership matter? Um and did, you
+[00:40:40] know, condition matter independent of
+[00:40:42] group
+[00:40:43] group membership? Um
+[00:40:46] So, just kind of example kind of in
+[00:40:49] matrix form again, this is
+[00:40:52] condition plus condition by age, which
+[00:40:55] means I'm going to get a term for each
+[00:40:57] condition. So, I'm going to get an
+[00:40:59] average left-hand and average right-hand
+[00:41:02] independent of condition, and then I'm
+[00:41:04] going to get a estimate of how that was
+[00:41:08] modulated by age.
+[00:41:11] Right? So, so let's let's let's say
+[00:41:15] I have, you know, a range of ages and
+[00:41:18] they're doing finger tapping. This first
+[00:41:20] term will be what is the averaged aged
+[00:41:23] kids' left-handed response and the
+[00:41:26] average age kids' right-handed response.
+[00:41:29] And then the the intercept term. And
+[00:41:31] then we're going to have a slope term of
+[00:41:33] how much did that average age response
+[00:41:37] change as I went to an older subject?
+[00:41:40] So, if I if I took out a subject and I
+[00:41:41] said, "What is the brain activity for a
+[00:41:43] 10-year-old?" It would be the average
+[00:41:45] age kid and then, you know, their age
+[00:41:49] times the slope term to figure out where
+[00:41:51] they are on that line. Um
+[00:41:54] here's another example. This is
+[00:41:57] kind of the same thing, but dealing with
+[00:41:58] a random effect at the end for for for
+[00:42:01] for subject.
+[00:42:03] Okay. So, why is this important? Why why
+[00:42:06] is doing these whitening and and and and
+[00:42:09] stuff important? So,
+[00:42:11] um I think this is this was a slide from
+[00:42:14] our neurotoolbox paper,
+[00:42:16] um but it's basically looking at we did
+[00:42:18] some simulations where So, on the column
+[00:42:21] on the left, we have no outliers. All
+[00:42:24] that we simulated multiple subjects, and
+[00:42:27] they all had the same distribution,
+[00:42:29] right? And so, there's no one subject
+[00:42:31] that's driving the result worse than or
+[00:42:33] differently than others.
+[00:42:35] And um
+[00:42:37] so, this is this is the rock curves kind
+[00:42:39] of comparing the different methods. This
+[00:42:40] is the type one error curves comparing
+[00:42:43] the different methods.
+[00:42:44] In that case, because there's no
+[00:42:46] outliers, it really doesn't matter
+[00:42:48] whether or not we do a robust fit or
+[00:42:50] not, right? We didn't have outliers, and
+[00:42:53] so fixing doing a robust stat remove the
+[00:42:56] outliers didn't actually do anything cuz
+[00:42:58] there were no outliers.
+[00:42:59] But the point is it didn't actually
+[00:43:01] hurt. It you know, we get the same
+[00:43:03] answer with and without the robust
+[00:43:05] statistic.
+[00:43:07] If we deal with um a data set like this
+[00:43:10] where we have, you know, a lot of good
+[00:43:12] data, but whatever this blue and this
+[00:43:14] red subject here, they're clearly
+[00:43:17] outliers, right? Their noise is so much
+[00:43:19] higher than everybody else, but everyone
+[00:43:21] else is kind of still in this this
+[00:43:22] ballpark. So, they've got two outliers
+[00:43:24] in this case. Now, if I do my rock
+[00:43:27] testing uh my my my sensitivity
+[00:43:30] specificity curve, I find I take a
+[00:43:32] pretty big hit or Well, one, I take a a
+[00:43:36] hit because there's more noise, um but
+[00:43:39] now the robust versus the non-robust
+[00:43:42] Sorry, the robust is this curve, and the
+[00:43:43] non-robust is the the blue um green one.
+[00:43:47] Um there's a pretty big difference. If I
+[00:43:49] do the robust stat, um I get the red
+[00:43:53] line. I actually have a lot more
+[00:43:55] uh sensitivity than if I do uh the
+[00:43:57] non-robust. So, in this case with
+[00:43:59] outliers, now there is a big difference
+[00:44:01] between robust and non-robust. So, kind
+[00:44:04] of the idea is you should probably
+[00:44:05] always do robust statistics even if you
+[00:44:09] don't have outliers, never hurts
+[00:44:11] and often times it makes it it makes it
+[00:44:13] better.
+[00:44:14] Um
+[00:44:16] Okay.
+[00:44:18] So, I'm really running out of time. I'm
+[00:44:20] not going I'm talking way too slowly.
+[00:44:23] All right, so that was how we deal with
+[00:44:25] some of that heterogeneity. We can also
+[00:44:27] start to deal with this
+[00:44:28] this this variability.
+[00:44:30] And so,
+[00:44:32] um
+[00:44:32] one of the ways that we can deal with
+[00:44:34] this variability was a paper published
+[00:44:36] by um
+[00:44:38] uh
+[00:44:40] um us about a year ago, two years ago.
+[00:44:43] And um
+[00:44:45] one of the ways we can do this is by
+[00:44:47] region of interest analysis. So, if I
+[00:44:50] know that
+[00:44:52] um a kid with a bigger head my region of
+[00:44:55] interest is on these channels, whereas a
+[00:44:57] kid with a smaller head it's on these
+[00:44:59] channels. I can actually tailor my
+[00:45:01] region of interest definitions to the
+[00:45:03] size of the head, you know, the location
+[00:45:06] of the probe and the size of the head.
+[00:45:08] And and so, when we do a region of
+[00:45:10] interest average,
+[00:45:12] um we really think about it like this
+[00:45:14] that we have our betas. This is the
+[00:45:17] amplitude across all the channels, so
+[00:45:19] it's a vector of number of channels.
+[00:45:22] And we take a contrast vector C and we
+[00:45:25] multiply it by the beta, so we're
+[00:45:27] picking out which channels we want to
+[00:45:29] contribute to the region of interest.
+[00:45:31] So, in this example here with uh you
+[00:45:33] know, we have five channels and we want
+[00:45:35] to pick out channels two, three, and
+[00:45:36] five. So, we put zeros on one and four
+[00:45:40] and we put uh weights on uh two, three,
+[00:45:43] and five and that's basically then
+[00:45:45] calculating the average of channels two,
+[00:45:48] three, and five.
+[00:45:49] Um so, that's our contrast vector. This
+[00:45:51] is a uniform weight. It would say that I
+[00:45:54] want channels two and three and five to
+[00:45:56] all contribute exactly the same to that
+[00:45:59] region of interest average.
+[00:46:01] So, so um what we did was based on this
+[00:46:05] idea of I know where the channels are, I
+[00:46:08] know what the optical forward model is.
+[00:46:12] Did I Did I do that? Yeah. I know what
+[00:46:14] the optical forward model is of here's
+[00:46:17] my here's my in my location of my probe,
+[00:46:19] here's my an underlying anatomy and
+[00:46:21] atlas or the individual subject. I can
+[00:46:24] actually predict which channels would
+[00:46:26] have seen Broadmann area 46, right? And
+[00:46:29] I can Moreover, I can come up with a
+[00:46:31] waiting. Um,
+[00:46:33] you know, this this channel right here,
+[00:46:34] source two detector two,
+[00:46:37] um, was most sensitive to, in this case,
+[00:46:40] Broadmann area 45.
+[00:46:42] Um,
+[00:46:43] oops.
+[00:46:44] This channel is a little bit less
+[00:46:45] sensitive. This channel is not very
+[00:46:47] sensitive at all. This channel is not
+[00:46:48] sensitive at all, right? And so, I can
+[00:46:51] come up with this tapered weight where
+[00:46:54] I'm computing, you know, if
+[00:46:58] Broadmann area 45 was active,
+[00:47:01] what should my data have looked like in
+[00:47:03] channel space? And that's my hypothesis.
+[00:47:06] And so, if you go and you use a C
+[00:47:09] matrix, this contrast matrix that's
+[00:47:12] tapered,
+[00:47:13] that weights the channels where you
+[00:47:15] expected the activity to be more than
+[00:47:17] the channels that you didn't, it's
+[00:47:20] testing the hypothesis
+[00:47:22] of is your measurement consistent with
+[00:47:26] this underlying brain region.
+[00:47:28] So, you're testing the null hypothesis
+[00:47:29] what is the probability that Broadmann
+[00:47:32] area 45 was not involved in this
+[00:47:35] was not uninvolved in this this task.
+[00:47:38] It's a null hypothesis, so it's kind of
+[00:47:40] confusing to think, right? So, just
+[00:47:43] because you you meet that threshold
+[00:47:45] doesn't mean that we BA45 was involved,
+[00:47:48] but it means that we can't rule out that
+[00:47:49] it wasn't. Um, if if that makes sense.
+[00:47:53] Um, it's the nature of a null
+[00:47:54] hypothesis. And so, by using this
+[00:47:57] tapered weight, we can actually adjust
+[00:48:00] for head size. We can adjust for
+[00:48:01] anatomy. We can adjust for probe
+[00:48:03] positioning. So we can take that data
+[00:48:05] that
+[00:48:05] um Ulia Kolderman was collecting with
+[00:48:07] the the photometry and adjust where our
+[00:48:11] region of interest was for each subject.
+[00:48:14] Okay? So this is looking at at um how
+[00:48:17] that affects our results. So we looked
+[00:48:19] at it in this this paper, so there's a
+[00:48:21] citation uh on the bottom right. Um
+[00:48:24] looking at it for both a low-density and
+[00:48:26] a high-density probe.
+[00:48:28] Really this only really affects the
+[00:48:29] low-density probe, right? Is if you have
+[00:48:32] blind spots,
+[00:48:34] um
+[00:48:35] you know, you're really affected by
+[00:48:37] which channels um contribute to this
+[00:48:39] average. Um and and how much weight you
+[00:48:42] give to those, which is being accounted
+[00:48:44] for in this model.
+[00:48:45] With a high-density probe where you have
+[00:48:47] uniform sensitivity, it doesn't matter
+[00:48:50] nearly as much.
+[00:48:52] Um
+[00:48:53] Um but again, most people are in that
+[00:48:56] realm of the low-density probe at the
+[00:48:57] moment.
+[00:48:58] So in the NIRs toolbox, we already have
+[00:49:01] this method coded up. It's it's
+[00:49:04] um So so this is some some uh
+[00:49:07] screenshots from the NIRs toolbox.
+[00:49:09] So
+[00:49:11] the first thing So we have this code
+[00:49:13] nirs.testing,
+[00:49:15] uh which allows us to generate kind of
+[00:49:16] fictitious data. So
+[00:49:18] nirs.testing.simdata.registered
+[00:49:21] creates a um
+[00:49:22] a data set where the probe has been
+[00:49:25] registered. So if I say probe.draw, it
+[00:49:27] draws it out in 3D. I see where it is in
+[00:49:30] the 10-20 space.
+[00:49:31] So
+[00:49:33] there's a method on the probe called get
+[00:49:35] head size
+[00:49:37] that will return back
+[00:49:39] what the head size for this probe was
+[00:49:41] based on. So the the default, if you're
+[00:49:44] reading in data from NIRx or using this
+[00:49:47] this simdata function, is that it's
+[00:49:49] registered to the Colin 27 Atlas. So
+[00:49:52] Colin actually has a pretty big head.
+[00:49:54] It's a 52 and 1/2 cm head circumference.
+[00:49:57] It's a pretty big head.
+[00:49:59] Um
+[00:49:59] and so, the location of your probe, you
+[00:50:02] know, what Brodmann area you're over is
+[00:50:04] the channel over is based on that pretty
+[00:50:07] big head, right? But, in the toolbox,
+[00:50:10] what we can do is we can actually resize
+[00:50:12] it.
+[00:50:13] Um so, if we we take the you know, so
+[00:50:15] you see the current head, it's this
+[00:50:17] dictionary of three elements, the
+[00:50:20] circumference, the inion to nasion
+[00:50:23] distance, and the left to right ear
+[00:50:24] point distance as you might measure it
+[00:50:26] over the top of the head with a with a a
+[00:50:29] tape measure.
+[00:50:30] Um so, it specifies all three of those.
+[00:50:33] We can go and we can go create a new
+[00:50:35] dictionary. Here, we've only put the
+[00:50:37] head circumference. So, we only have one
+[00:50:39] measurement, not all three.
+[00:50:41] Um if I have one measurement, what it
+[00:50:44] does is it resizes the whole thing
+[00:50:46] uniformly.
+[00:50:47] If it has three, then it's dealing with
+[00:50:50] the head as as an oval. So, you could
+[00:50:52] potentially have a uh a longer elongate
+[00:50:55] the head or make the head wider, and you
+[00:50:57] can account for that. If you just tell
+[00:50:59] me circumference, it keeps the other
+[00:51:00] dimensions um
+[00:51:02] uh the ratio of the other dimensions
+[00:51:04] constant.
+[00:51:06] But, you can go and you can create a new
+[00:51:08] head size,
+[00:51:09] and then we can use this function called
+[00:51:11] resize uh fixed probe that takes in the
+[00:51:15] old probe and the new head size, and
+[00:51:18] basically re-registers it um
+[00:51:21] to what would that probe have looked
+[00:51:22] like um on someone that had a smaller
+[00:51:26] head. Um
+[00:51:28] and so so so so so we can go re-register
+[00:51:31] this. And this is really the case of
+[00:51:33] probes that are anchored, like the
+[00:51:35] Artinis probe, where it's anchored onto
+[00:51:38] a particular position, like the
+[00:51:40] forehead, and so it's looking at how far
+[00:51:42] did this stretch um like like that. It's
+[00:51:46] also though with the near x data, it it
+[00:51:49] it'll look the exact same cuz you're
+[00:51:50] you're in the 1020, you're kind of stuck
+[00:51:53] in that 1020 cap, but kind of the
+[00:51:55] underlying head will be different size.
+[00:51:58] So, now when I calculate that forward
+[00:52:00] model of how much did this channel
+[00:52:04] uh sense BA46, the forward model is
+[00:52:06] different. And and so, it will account
+[00:52:08] for that um in in the models. So, there
+[00:52:10] is utility in the near x data to do
+[00:52:12] this. Um
+[00:52:14] How do you might do this in your own
+[00:52:16] data?
+[00:52:17] Um unfortunately, we don't have a great
+[00:52:18] module for this quite yet. Um so, you
+[00:52:21] have to do it a little bit manually.
+[00:52:23] But, what you do is you would take each
+[00:52:26] So, say I have five subjects, I would go
+[00:52:28] and I would resize the the probe based
+[00:52:32] on the head circumference of those five
+[00:52:34] subjects, right? So, I take my my probe
+[00:52:38] and I can I can um
+[00:52:40] uh
+[00:52:41] resize it and assign it back to that
+[00:52:43] subject's data. So, now I have five
+[00:52:45] subjects that I've adjusted the probe
+[00:52:48] based on their head size.
+[00:52:50] So, then what I can do is I can go and I
+[00:52:52] can computer region of interest unique
+[00:52:55] for each of those five subjects. So, if
+[00:52:57] I if I do a a for loop over the number
+[00:53:00] of subjects,
+[00:53:01] I can use this command called convert
+[00:53:04] labels to region of interest. And so,
+[00:53:06] what that does is that takes in the
+[00:53:08] probe, uh which includes the head size,
+[00:53:11] and it takes in the regions that you
+[00:53:13] want to use. So, Brodmann area 46, uh
+[00:53:17] there's a number of um a lot of regions
+[00:53:19] that are coded up. There's a function
+[00:53:21] called near x utility.list
+[00:53:23] uh labels or something of that nature,
+[00:53:26] list ROI labels, that will actually tell
+[00:53:28] you what the what your options are. But,
+[00:53:31] you put in an uh one of those labels
+[00:53:32] like BA46, and you'll get this table of
+[00:53:36] weights based on the head that head
+[00:53:39] size. So, So see, "Oh, channel five is
+[00:53:41] the most sensitive, channel six a little
+[00:53:43] bit less sensitive, etc. You can then go
+[00:53:45] and apply that those weights to compute
+[00:53:49] a region of interest for that subject.
+[00:53:51] So that the ROI average function
+[00:53:54] has actually two outputs. I'm I'm sorry,
+[00:53:57] I'm missing a
+[00:53:59] a square bracket there. But it's it's
+[00:54:01] got two two outputs. The first output is
+[00:54:04] just a table, right? So it's here's the
+[00:54:06] stats, here's what you asked for, here's
+[00:54:08] the T test, the beta, degrees of
+[00:54:09] freedom, etc.
+[00:54:11] The second
+[00:54:13] output argument is actually that same
+[00:54:16] information but in a structure that I
+[00:54:18] can pass into later parts of the nearest
+[00:54:20] toolbox.
+[00:54:22] So
+[00:54:23] what this notation of tilde comma
+[00:54:27] ROI stats is throw away the first term.
+[00:54:30] I I could have captured it, but tilde
+[00:54:32] just means throw it away, I don't care
+[00:54:33] about it. And give me the second term.
+[00:54:36] And so the second term, what you can do
+[00:54:38] is now you can take that second term and
+[00:54:41] you can feed it into your mixed effects
+[00:54:43] code, your your group average code. And
+[00:54:46] so now this is taking the region of
+[00:54:48] interest that's defined based on each
+[00:54:50] subject individually and averaging them
+[00:54:53] together. It has all those features of
+[00:54:57] correcting for, you know, the off
+[00:54:59] diagonals of this region was not
+[00:55:01] independent because it shared a lot of
+[00:55:03] channels with the, you know, between
+[00:55:05] them and and so on and that gets all
+[00:55:06] accounted for
+[00:55:08] when you do this group average models.
+[00:55:11] Okay. So with that we can account for
+[00:55:13] variabilities in probe place.
+[00:55:16] Um
+[00:55:19] I don't know, maybe I want to skip this
+[00:55:21] cuz I'm running out of time.
+[00:55:23] We also have methods to deal with this
+[00:55:25] with imagery construction.
+[00:55:27] If you
+[00:55:29] Um basically what you do is you take
+[00:55:31] that same group level model, but instead
+[00:55:33] of modeling each channel with an
+[00:55:36] identity operator that spans the
+[00:55:38] channels, you take that that banana
+[00:55:40] matrix, that forward operator, you
+[00:55:42] insert it into your code, it becomes
+[00:55:44] this giant model that does both group
+[00:55:46] level and imagery reconstruction at the
+[00:55:48] same time. Um
+[00:55:51] Um the the this was Let's see, where's
+[00:55:54] my citation? This was introduced in a
+[00:55:56] couple of papers from our lab. But, the
+[00:55:58] idea in doing a joint reconstruction is
+[00:56:03] you can think I'm taking four of my
+[00:56:06] subjects and I'm trying to find
+[00:56:09] you know, take the fifth subject and I'm
+[00:56:11] trying to use those four subjects as a
+[00:56:13] prior to the fifth subject. So, so in
+[00:56:15] other words, I'm trying to find the
+[00:56:17] solution where all of my subjects were
+[00:56:18] self-consistent. And so, in imagery
+[00:56:21] reconstruction just on one subject, um
+[00:56:24] there is a number of solutions that
+[00:56:26] could have given that data, one of which
+[00:56:27] is it's in a blind spot. Um
+[00:56:30] but, I look to the other subjects to
+[00:56:32] kind of figure out which of those
+[00:56:33] solutions is the best. And then, I end
+[00:56:35] up with a group level model based on
+[00:56:37] everyone that corrects for the blind
+[00:56:39] spots and so on. Um you get a lot better
+[00:56:43] um effect sizes. You you almost uh
+[00:56:45] double your effect size when you account
+[00:56:47] for that that variability in doing your
+[00:56:49] group analysis. Uh I'm sorry.
+[00:56:52] Um so, I have like
+[00:56:54] Yeah, feel free to to take time on all
+[00:56:56] the different topics that you have.
+[00:56:58] Okay.
+[00:56:59] Um feel like you need to rush through.
+[00:57:00] Yeah.
+[00:57:01] Okay.
+[00:57:01] Um
+[00:57:04] So, so so so that's that these methods
+[00:57:08] are all coded up in uh the toolbox
+[00:57:11] already. There is a method called
+[00:57:13] imagery reconstruction um mixed effects,
+[00:57:16] um which does the takes the exact same
+[00:57:20] formulas that the standard mixed effects
+[00:57:23] code does, but it also then takes these
+[00:57:26] forward models uh for each subject. And
+[00:57:29] so, so So can take in their head
+[00:57:31] anatomy, it can take in the probe, it it
+[00:57:33] takes in the where did the light go?
+[00:57:36] Um and it then does this joint
+[00:57:38] reconstruction solving that mixed
+[00:57:40] effects model but using the the uh the
+[00:57:44] imaging matrices instead of um the data.
+[00:57:48] Instead of the channels. So so you end
+[00:57:49] up with these images then of here's my
+[00:57:52] group level brain activity. And this is
+[00:57:55] the group level that was predicted from
+[00:57:58] all of the subjects. Um and and it's
+[00:58:02] shown on uh typically I use the first
+[00:58:04] subject to show the anatomy.
+[00:58:06] Um
+[00:58:08] So so um
+[00:58:11] So we can do group level
+[00:58:12] reconstructions. And depending on what
+[00:58:15] level of data you have, I'm sorry, I'm
+[00:58:17] I'm jumping back a little bit. Depending
+[00:58:19] on what level of data you have, if you
+[00:58:21] have a structural MRI for each subject,
+[00:58:24] we can use that. We can take in their
+[00:58:26] individual anatomy and in that case
+[00:58:29] we're actually accounting for the fact
+[00:58:30] that the motor cortex, when you fold it
+[00:58:33] up onto the brain, is in a slightly
+[00:58:36] different position compared to the motor
+[00:58:38] cortex of someone else. Right? And so
+[00:58:41] we're using this concept of this free
+[00:58:43] surfer concept of you can take the
+[00:58:45] brain, you can inflate it to a sphere,
+[00:58:48] and you can you can align
+[00:58:51] um regions on that sphere. So here we
+[00:58:53] see this this region that's looks kind
+[00:58:56] of like Africa a little bit. This is
+[00:58:58] actually Broadmann This is that same
+[00:59:01] region
+[00:59:03] once you fold it into the brain that you
+[00:59:06] see it's in a slightly different
+[00:59:07] position in each subject because their
+[00:59:09] folding pattern is different. But what
+[00:59:12] we do is we estimate it in this space
+[00:59:16] where that parameter is the same motor
+[00:59:19] cortex, the same whatever region in
+[00:59:21] every subject, despite the fact that it
+[00:59:24] might have changed its volume between
+[00:59:26] subjects, it changed its folding
+[00:59:28] pattern, it changed the sensitivity
+[00:59:29] relative to the probe. So, we're able to
+[00:59:31] account for that full anatomy and that
+[00:59:33] full variability by doing this this
+[00:59:35] model.
+[00:59:37] If you don't have an individual MRI, we
+[00:59:39] can do it with an atlas, but obviously
+[00:59:41] there we're not accounting for the
+[00:59:43] folding patterns anymore. But, we will
+[00:59:45] be accounting for head size, we will be
+[00:59:47] accounting for probe placement.
+[00:59:49] So, depending on what level of data you
+[00:59:51] have,
+[00:59:53] obviously the more data you have, the
+[00:59:55] more we can correct for.
+[00:59:57] Um but, we can actually with these
+[00:59:59] methods incorporate all of those
+[01:00:01] different possibilities into into the
+[01:00:03] analysis.
+[01:00:05] Okay. And I'm not going to specify how
+[01:00:06] we solve it cuz this is way too much
+[01:00:08] math.
+[01:00:10] Um
+[01:00:12] So, I wanted at the very end I've got
+[01:00:14] about four slides left. I just wanted to
+[01:00:16] go through a couple of things that we
+[01:00:18] often see
+[01:00:20] people ask questions of how do you do
+[01:00:22] this with in the group level model. So,
+[01:00:25] one of the challenging one of the
+[01:00:29] footnotes, I guess, in the near stool
+[01:00:30] box is that you can only test conditions
+[01:00:34] that appear in the same variable in the
+[01:00:36] same structure.
+[01:00:38] So,
+[01:00:39] let's take the example of I have I have
+[01:00:42] two subjects, subject one and subject
+[01:00:44] two.
+[01:00:45] Subject one did or let's say let's say
+[01:00:49] um
+[01:00:50] um this is the same subject on two
+[01:00:52] different visits. Let's say a pre and a
+[01:00:54] post. So, the pre was A, the post was B.
+[01:00:57] Maybe it's an intervention study or
+[01:00:59] something. I can't directly estimate
+[01:01:03] what is the brain activity difference of
+[01:01:05] A minus B.
+[01:01:06] Right? Because A was only in this scan
+[01:01:09] and B was only in this scan, and so they
+[01:01:11] appear in different variables, right?
+[01:01:14] And so, what you can do, there's a
+[01:01:16] function called combined stats.
+[01:01:19] Combined stats will only work if you
+[01:01:22] don't have any overlap. So, one has A,
+[01:01:26] one has B, you don't have any that have
+[01:01:28] both. Um and in that case, you can just
+[01:01:31] concatenate things. And so, this
+[01:01:33] combined stats will concatenate your
+[01:01:35] data. So, it'll take those two files,
+[01:01:38] it'll concatenate it into one bigger
+[01:01:40] file that has both A and B as
+[01:01:43] conditions. And so, now you can do a
+[01:01:45] test of, you know, what is A minus B.
+[01:01:48] So, why you might want to do this is,
+[01:01:50] let's say you wanted to do you had an
+[01:01:53] intervention study. Each subject comes
+[01:01:55] in for two visits, a pre and a post. And
+[01:01:59] you want to look at, you know, did their
+[01:02:03] pre-post difference vary with age?
+[01:02:08] Right? So, what you would do in that
+[01:02:10] case is you would take the um you know,
+[01:02:14] the the the pre and post for each
+[01:02:17] subject, you would combine it into a
+[01:02:19] single file into a single variable.
+[01:02:21] You would then compute the T test of pre
+[01:02:24] minus post. So, you have that difference
+[01:02:27] image for each subject, and then you can
+[01:02:30] feed that into your random effects that
+[01:02:32] you can look at how did that difference
+[01:02:34] vary with age?
+[01:02:37] That's different than if you took the
+[01:02:38] data and just fed it in directly because
+[01:02:41] you would have a how did the pre-task
+[01:02:43] vary with age and how did the post-task
+[01:02:46] vary with age?
+[01:02:47] Right? But in feeding it, doing the
+[01:02:50] difference and then feeding the
+[01:02:51] difference in, it doesn't matter where
+[01:02:53] they started,
+[01:02:55] it's it's how did the difference vary?
+[01:02:57] So, you're kind of um defining baseline
+[01:03:00] by their pre-condition, their pre-task,
+[01:03:02] or you know, the the pre-training or
+[01:03:04] whatever.
+[01:03:05] Um so, this is oftentimes uh one of the
+[01:03:07] things that we get these questions about
+[01:03:09] is, it won't let me compare A and B, and
+[01:03:13] it's because they're not in the same
+[01:03:14] structure. And so, you have to to put
+[01:03:16] them into the same structure. The
+[01:03:18] combined stats is the easiest way to do
+[01:03:20] it,
+[01:03:21] um but only it only does concatenation.
+[01:03:24] There's another version. So, the second
+[01:03:26] option is if you have a subject that say
+[01:03:29] has
+[01:03:30] um this subject has A and B, this file
+[01:03:33] has just B. So, I've got B in both, but
+[01:03:35] I've only got A in one.
+[01:03:38] Um we have this module called subject
+[01:03:40] level stats that allows you to do that
+[01:03:43] same kind of operation of putting them
+[01:03:45] together. What it's actually going to do
+[01:03:46] in this case is going to average B for
+[01:03:49] the two files, um but it's just going to
+[01:03:51] copy over A cuz it only has one instance
+[01:03:53] of it. Um with the subject subject level
+[01:03:56] stats, just like the mixed effects code,
+[01:03:59] you actually have a formula. So, you can
+[01:04:02] So, this is just a simple give me one
+[01:04:04] estimate for each condition. Um but um
+[01:04:08] you can actually write mixed effects
+[01:04:10] formulas in here if say you had three
+[01:04:12] visits and you wanted to look at um you
+[01:04:16] know, how their brain activity across
+[01:04:18] the three three visits correlated with
+[01:04:21] improvements in reaction time or
+[01:04:22] something like that. So, you'd put
+[01:04:24] reaction time into the demographics, and
+[01:04:27] then you would ask you could run that
+[01:04:29] and it'll it'll take all the subjects
+[01:04:32] it'll take all the data for each subject
+[01:04:35] and run this mixed effects model, and
+[01:04:36] then you can feed that into uh a later
+[01:04:39] group level model.
+[01:04:41] Uh the sort field here is what it uses
+[01:04:43] to denote, you know, So, this is again a
+[01:04:45] demographic, um but you use that same
+[01:04:48] label um on each to denote which files
+[01:04:52] go to which subject. Um
+[01:04:55] Um
+[01:04:57] Oops.
+[01:04:58] Um
+[01:05:00] Another thing to point out, both the
+[01:05:02] um
+[01:05:03] the subject level stats and the mixed
+[01:05:05] effects code have this flag called
+[01:05:07] include diagnostics.
+[01:05:10] So, on both of that, what the include
+[01:05:12] diagnostics does is behind the scenes
+[01:05:17] it's running this fitLME function. So,
+[01:05:19] it's it's running this internal MATLAB
+[01:05:21] that does that that solves the mixed
+[01:05:23] effects model.
+[01:05:25] Once that's MATLAB's done with it, I
+[01:05:27] only take a small bit of that of that
+[01:05:29] estimate back. I care what the beta is
+[01:05:32] and I care what the the the noise
+[01:05:33] structure is, but there's a lot in that
+[01:05:35] variable that MATLAB solved for that I
+[01:05:37] don't just throw out otherwise.
+[01:05:40] If you have the include diagnostics,
+[01:05:42] what it does is it keeps that whole
+[01:05:44] structure.
+[01:05:45] And so, one of the thing and it stores
+[01:05:47] it in this
+[01:05:48] model field. And so, one of the things
+[01:05:51] you can do is you can do ANOVA testing
+[01:05:54] on your model. You can then go and you
+[01:05:57] can plot scattergrams of the data that
+[01:06:00] went into that model. So, you have brain
+[01:06:01] activity versus age, and you can
+[01:06:03] actually show the scattergrams with
+[01:06:05] error bars and and so on.
+[01:06:07] Um so, so there's a demo
+[01:06:11] example showing scatter bars with mixed
+[01:06:13] effects, pretty self-explanatory, but
+[01:06:15] kind of walks you through some of the
+[01:06:17] things you can do with saving that that
+[01:06:20] include diagnostics, which creates this
+[01:06:22] model and saves it. Your data is going
+[01:06:24] to be bigger cuz I'm saving all these
+[01:06:26] extra variables, but there is
+[01:06:28] information there that you can use for
+[01:06:31] for scatter plots or find outliers and
+[01:06:34] and and so on.
+[01:06:35] Um
+[01:06:36] If you look at the diagnostics or you
+[01:06:39] look at the
+[01:06:41] um the stats that come back from your
+[01:06:42] group level model.
+[01:06:44] One of the other questions that we
+[01:06:46] always get asked is, why do I have so
+[01:06:49] many degrees of freedom?
+[01:06:51] So, in this case, I fed in um
+[01:06:54] I I think if you run that demo code, I
+[01:06:55] think it feeds in something like five
+[01:06:57] subjects, calculates this group average,
+[01:07:00] but if you look at it, it says I have
+[01:07:02] 160 degrees of freedom or 160
+[01:07:04] observations.
+[01:07:06] Why so high? I only have five subjects.
+[01:07:09] The answer is because, if you remember
+[01:07:12] back the way that I said we did the
+[01:07:13] mixed effects model, we feed in all the
+[01:07:16] all the channels at the same time, which
+[01:07:19] means that we're solving everything at
+[01:07:21] the same
+[01:07:22] By solving everything at the same time,
+[01:07:24] we had 160 measurements.
+[01:07:27] Now, some of those and and that
+[01:07:29] covariance structure
+[01:07:31] is what's linking some of those
+[01:07:32] measurements to each other. Channel 1
+[01:07:34] and Channel 2 are not independent of
+[01:07:36] each other, but they both contain
+[01:07:38] information about the brain response on
+[01:07:41] Channel 1, right? Because that noise
+[01:07:43] structure was not independent. And so,
+[01:07:47] what ends up happening is we're fitting
+[01:07:50] a bigger model. We have more degrees of
+[01:07:52] freedom cuz we put everything into that
+[01:07:54] model.
+[01:07:56] Um when we go and we solve it, it turns
+[01:07:58] out it can you know, we put more in, the
+[01:07:59] variability's higher, so the T test goes
+[01:08:01] down,
+[01:08:02] but your degrees of freedom went up. And
+[01:08:05] so, you end up kind of
+[01:08:07] sort of breaking even in terms of, you
+[01:08:10] know, what the P value is, right? But
+[01:08:13] you've accounted for this this this
+[01:08:14] noise this noise structure.
+[01:08:17] The other way we could have done it is
+[01:08:19] we could have modeled done the model on
+[01:08:22] each channel independently, not modeled
+[01:08:24] this structure, but then we would have
+[01:08:26] had to correct the degrees of freedom
+[01:08:28] because we didn't have 12 channels of
+[01:08:30] data, we had much less because they
+[01:08:32] shared information. Um and it turns out
+[01:08:34] it's much easier to whiten um
+[01:08:37] um and and do it that way and and then
+[01:08:40] use the higher degrees of freedom uh to
+[01:08:42] get the P value than it is to go the
+[01:08:44] other way of
+[01:08:46] um and so on. But these are all tools
+[01:08:48] that are in there that we often get
+[01:08:49] asked about because, you know, in your
+[01:08:51] paper in your grant, you want a plot of
+[01:08:54] what is the brain activity, you know, I
+[01:08:57] want to see brain activity along the Y
+[01:08:58] axis, age across the X axis, and I want
+[01:09:01] to scatter plot of that.
+[01:09:02] Um if you take this data from the group
+[01:09:06] the channel stats, you fit it into any
+[01:09:08] of the region of interest code, all of
+[01:09:09] that model is propagated. So, you now
+[01:09:12] end up with that same model field, but
+[01:09:14] it's on the region of interest rather
+[01:09:15] than the channels.
+[01:09:17] Um
+[01:09:20] Okay, so finally, um I guess the last
+[01:09:22] question,
+[01:09:23] um
+[01:09:24] you know, I I I said there were two ways
+[01:09:25] to deal with outliers. One is just to
+[01:09:27] throw it out of your data completely.
+[01:09:29] The other is to down weight it, so it
+[01:09:31] contributes a little bit, but not fully.
+[01:09:34] So, there is a command in the toolbox.
+[01:09:37] There's a module called remove outlier
+[01:09:39] subjects.
+[01:09:41] And
+[01:09:42] it's behind the scenes. It's running
+[01:09:46] this this utility called um group-level
+[01:09:49] leverage stats.
+[01:09:50] So, what this does, what what leverage
+[01:09:53] is,
+[01:09:54] is how much did my answer change if I
+[01:09:58] removed this this this measurement,
+[01:10:01] right? So, so it it basically comes down
+[01:10:04] to kind of like an F test, sort of. Uh
+[01:10:08] here's the model with, you know, five
+[01:10:10] measurements. Here's that same model
+[01:10:11] with only four of those measurements.
+[01:10:13] You know, did did my F test change? My
+[01:10:17] degrees of freedom changed between those
+[01:10:18] two? Was it a significant change in in
+[01:10:22] in in the in the result?
+[01:10:24] Um and so, what you do then is you
+[01:10:25] compute the leverage and you compute the
+[01:10:27] probability of that as you take things
+[01:10:29] out of your code or out of your model.
+[01:10:32] So, we can take So, so what this this
+[01:10:36] group leverage stat does is it gives
+[01:10:39] this giant table
+[01:10:42] of
+[01:10:43] um So, I'm only showing the first five
+[01:10:45] rows of it. So, you'll have file index.
+[01:10:48] So, you have one entry you'll have a
+[01:10:50] bunch entries for each um um
+[01:10:54] scan.
+[01:10:55] Each subject.
+[01:10:57] You'll have all the source detectors,
+[01:10:58] you'll have oxy deoxy, you'll have all
+[01:11:00] the conditions. So, this just becomes a
+[01:11:02] giant matrix. It's going to be 160 long
+[01:11:04] or or something of that nature. Um and
+[01:11:08] so you end up with an overall
+[01:11:11] um
+[01:11:12] p-value.
+[01:11:13] What is the probability of
+[01:11:16] um
+[01:11:17] removing, sorry,
+[01:11:19] um and overall, what is the probability
+[01:11:21] of if I removed all the data associated
+[01:11:23] with this subject, it would have changed
+[01:11:25] the answer. The and it's the F test over
+[01:11:28] all the channels. Right? So so so if I
+[01:11:31] changed
+[01:11:32] um
+[01:11:33] I could have a subject that affected a
+[01:11:36] little bit affected all the channels.
+[01:11:38] That kind of sums up to something like a
+[01:11:40] big change or it could have been a
+[01:11:42] subject that there was just one channel
+[01:11:44] that was such a strong outlier that you
+[01:11:47] know, it it it just pulled the the whole
+[01:11:49] result. Um this is the probability if I
+[01:11:52] removed all the channels for that
+[01:11:54] subject, the answer would have changed.
+[01:11:57] You can then look at um per condition.
+[01:12:00] What is the probability if I removed
+[01:12:02] just this condition, did the answer
+[01:12:04] change? So, we get an answer for oxy.
+[01:12:07] You see all the oxy's are the same value
+[01:12:09] because I've removed the same condition.
+[01:12:11] Um and and all the deoxy's are the same
+[01:12:15] value. Um and then we end up with a
+[01:12:18] value per channel. Right? If I remove
+[01:12:20] this one channel, did it make a
+[01:12:22] difference? Right? So,
+[01:12:25] there's a number of ways to define
+[01:12:27] outliers, right? We can define it this
+[01:12:29] channel is an outlier, this condition is
+[01:12:31] an outlier, this subject is an outlier.
+[01:12:33] Right? What we do in the remove outlier
+[01:12:36] stats is we actually use that subject
+[01:12:38] level.
+[01:12:38] So, we define the
+[01:12:41] um from the that file, all the
+[01:12:44] conditions within that file, if I
+[01:12:46] removed the that whole file, did it
+[01:12:49] change the answer?
+[01:12:51] Um and that's the I calculate a P value
+[01:12:54] for that. And if I have if that P value
+[01:12:57] exceeds the cutoff, I can I remove that
+[01:13:00] um because that file had too much pull
+[01:13:03] on the data. Okay?
+[01:13:06] So, you do have to specify a formula.
+[01:13:09] Um, it doesn't have to be your complete
+[01:13:10] formula. It can be
+[01:13:11] kind of this generic uh just give me an
+[01:13:13] answer for the conditions.
+[01:13:16] Um, but because what we're doing is
+[01:13:18] we're solving the mixed effects model
+[01:13:20] without that subject, I have to know
+[01:13:22] which mixed effects model to solve. So,
+[01:13:24] you do give me a formula for how I
+[01:13:27] define I'm an outlier based on that
+[01:13:29] formula. Um,
+[01:13:31] you know, cuz if if if if that subject
+[01:13:33] just they were an outlier based on age
+[01:13:36] and then I had a formula that didn't
+[01:13:37] have age in it, then it it wouldn't um
+[01:13:39] necessarily get removed.
+[01:13:41] This last flag in here, this allow
+[01:13:43] partial removal, what it does is if I
+[01:13:47] have typically I don't have one scan per
+[01:13:50] subject, you know, I had them do finger
+[01:13:52] tapping, you know, three scans of five
+[01:13:54] minutes each, right? So, I end up with
+[01:13:56] five entries uh there.
+[01:13:58] What this will do is that will tell me
+[01:14:00] file number one was bad, right? But what
+[01:14:04] do I do with the rest of the files? They
+[01:14:06] they weren't bad, but I had one file
+[01:14:08] that was bad for that subject. So, this
+[01:14:11] allow partial removal, what it will do
+[01:14:13] is it will remove just that bad file,
+[01:14:16] but leave the other ones in.
+[01:14:18] If it's false, if I'm not allowing
+[01:14:20] partial removal, then it's going to take
+[01:14:23] all the files out even though only one
+[01:14:25] of them was bad.
+[01:14:27] If that if that makes sense. So, so
+[01:14:30] um
+[01:14:30] the the the the reason why that becomes
+[01:14:33] important is if I removed, you know,
+[01:14:37] maybe the the you know, one type of
+[01:14:39] scan, so let's say the finger tapping,
+[01:14:42] but I left the foot tapping in,
+[01:14:44] it means I'm going to be
+[01:14:46] uh have a different power for that one
+[01:14:48] task because it's going to have n minus
+[01:14:50] one subjects versus the other task that
+[01:14:52] has n. So in that case, if you want to
+[01:14:55] keep degrees of freedom constant, you
+[01:14:57] want to remove, you know, all the files
+[01:14:59] associated with that subject. Um but
+[01:15:02] it's it's that's where that that option
+[01:15:04] comes in. Okay?
+[01:15:07] So that's all I had. I'm sorry that I
+[01:15:09] went way over for time.
+[01:15:12] Um
+[01:15:13] Do we want to we want to ask answer
+[01:15:15] questions or anything pop up in the
+[01:15:18] chat?
+[01:15:21] Yes, there's one question
+[01:15:23] that came up pretty early and and that
+[01:15:25] was about
+[01:15:27] group level analysis with functional
+[01:15:29] connectivity.
+[01:15:30] Ah. So I don't know if that's enough for
+[01:15:32] you to expand on. Yeah, yes. So so so we
+[01:15:34] do have
+[01:15:36] in in the toolbox
+[01:15:39] I'm going to switch
+[01:15:41] what which uh
+[01:15:43] screen I'm showing.
+[01:15:45] I'm going to find my MATLAB.
+[01:15:49] Oh, shh.
+[01:15:54] Okay, so you should be able to see my
+[01:15:55] MATLAB now. So we have
+[01:15:58] um
+[01:15:58] job job equals nearest.modules.
+[01:16:03] Um
+[01:16:06] if you hit tab, you start typing like MI
+[01:16:09] for mixed effects
+[01:16:11] um and you hit tab, it'll kind of give
+[01:16:13] this pop up that gives you all the
+[01:16:15] options that you can fill in. So this
+[01:16:17] one called mixed effects connectivity.
+[01:16:19] And what mixed effects connectivity does
+[01:16:22] is it's exactly the same as the regular
+[01:16:26] mixed effects, but this takes in a
+[01:16:28] connectivity matrix.
+[01:16:30] Um
+[01:16:31] notice your formula
+[01:16:33] went from what was typically, you know,
+[01:16:35] beta tilde a negative one plus
+[01:16:37] condition, now it's R tilde uh because
+[01:16:40] you want to look at the correlation, how
+[01:16:42] the correlation um changes. Um it
+[01:16:45] actually always uses the Z-transform uh
+[01:16:48] of that, but it's R tilde cuz you want
+[01:16:50] to look at correlation. Um
+[01:16:52] it takes in the exact same um
+[01:16:55] demographics, you know, so if I have
+[01:16:57] demographics in the subject, I can use
+[01:17:00] any of those. So I can look at how did
+[01:17:02] the condition how did the connectivity
+[01:17:03] vary with age um and so on. Um it it
+[01:17:08] Again, the robust statistic is in there
+[01:17:10] if whether or not you want to do an
+[01:17:12] outlier an iterative outlier. Um as I
+[01:17:15] said, the robust statistic is
+[01:17:17] you know, pretty much always
+[01:17:19] recommended, but it does take a lot
+[01:17:21] longer to solve because you're solving
+[01:17:23] it iteratively,
+[01:17:25] run it once, take some subjects out, run
+[01:17:27] it again, take some you know, take some
+[01:17:28] data out and and and so on. So so it
+[01:17:31] takes a lot longer. Um generally, um
+[01:17:34] unless you have crazy outliers, it
+[01:17:36] doesn't make that big of a difference.
+[01:17:37] So often times what we do is we run it
+[01:17:39] without uh get a get a, you know, sense
+[01:17:42] that oh, the code's working, the
+[01:17:43] analysis is working and so on. And then
+[01:17:45] when we go and, you know, get our final
+[01:17:47] end uh sample size and are ready to
+[01:17:50] publish the paper or whatever, then
+[01:17:51] we'll run it with the robust. Um but it
+[01:17:53] it it's generally several fold longer to
+[01:17:56] to run. Um but you just use this mixed
+[01:17:58] effects connectivity model in the same
+[01:18:00] way that we use the um the the channel
+[01:18:03] stats one.
+[01:18:08] And and this I this I was going to say
+[01:18:10] this will work on both functional
+[01:18:12] connectivity, also work on hyper
+[01:18:13] scanning. So if at the first level you
+[01:18:15] run the hyper scanning code, um which
+[01:18:20] I've lost my mouse. Where's my mouse?
+[01:18:24] Ah, there's my mouse. So it's job equals
+[01:18:26] nearstatmodules. dot
+[01:18:28] hyper scanning.
+[01:18:30] Um so if you run this this model to
+[01:18:33] compute your connectivity um from the
+[01:18:35] hyper scanning uh data, then what it'll
+[01:18:38] do is you can feed that hyper scanning
+[01:18:40] subject level results into the group
+[01:18:43] level using that mixed effects
+[01:18:45] connectivity code.
+[01:18:49] Very good.
+[01:18:50] Um
+[01:18:53] I see there's a
+[01:18:55] question about conjunction analysis.
+[01:18:58] So there is a near stat
+[01:19:01] near stat math dots
+[01:19:06] junction.
+[01:19:08] So
+[01:19:09] I don't remember how this works. So
+[01:19:11] let's
+[01:19:14] Uh
+[01:19:15] and I'm going to have to fix my share
+[01:19:16] screen.
+[01:19:18] Hold please.
+[01:19:24] Okay. So
+[01:19:26] um
+[01:19:27] So so this this
+[01:19:29] conjunction analysis code takes in the
+[01:19:33] stats variable.
+[01:19:34] It takes in and then it takes in the
+[01:19:39] conditions that you want to compare or
+[01:19:41] you want to do the the
+[01:19:43] you know,
+[01:19:44] give me the conjunction of of conditions
+[01:19:46] A and B.
+[01:19:48] Um and then it takes in a type. So the
+[01:19:53] So so there's there's basically
+[01:19:56] and I'm trying to remember oh, it's
+[01:19:58] cited right here. There's this
+[01:20:00] this Tom Nichols paper which is an fMRI
+[01:20:03] paper. He's part of the SPM group.
+[01:20:07] So it's a 2005 neuroimage that talks
+[01:20:09] about conjunction analysis in the
+[01:20:11] context of fMRI.
+[01:20:13] And really kind of says
+[01:20:16] basically there's two ways to do
+[01:20:17] conjunction analysis and unfortunately
+[01:20:19] most people are doing it wrong. Um I
+[01:20:22] coded up both the methods here. The
+[01:20:23] default is the one that gets recommended
+[01:20:25] by Tom Nichols. And basically what it
+[01:20:28] amounts to is kind of the difference
+[01:20:31] between a logical and and a logical or.
+[01:20:35] So, what most people do, kind of the the
+[01:20:38] um
+[01:20:39] um
+[01:20:39] the the uh I think it's called the
+[01:20:41] global they call it the global in
+[01:20:44] in the Tom Nichols paper, is you'd say,
+[01:20:48] "Give me the conjunction of task A and
+[01:20:50] task B."
+[01:20:51] And so, if it's
+[01:20:53] significant in A or B, it comes out as a
+[01:20:57] significant area in the conjunction
+[01:20:59] analysis. So, it's kind of the logical
+[01:21:01] or. It's A or B.
+[01:21:03] In the other version, the the true
+[01:21:05] conjunction analysis as as Tom Nichols
+[01:21:09] refers to, is the and. It has to be
+[01:21:12] significant in both. So, channels that
+[01:21:15] are significant in A and in B. And so,
+[01:21:19] you're going to end up with a much
+[01:21:20] smaller subset than what was in A by
+[01:21:23] itself or in B by itself. So, that's the
+[01:21:25] proper way to do it. Um the reason
+[01:21:29] people don't do their conjunction
+[01:21:30] analysis like that is very often things
+[01:21:32] don't survive.
+[01:21:33] Right? Is because you're asking for it
+[01:21:35] had to occur in both conditions and so,
+[01:21:38] all of a sudden all your brain activity
+[01:21:39] gets wiped. But if I turn the flag this
+[01:21:41] other way, I get some nice answers. So,
+[01:21:43] I'm going to turn the flag the other way
+[01:21:45] cuz it looks prettier.
+[01:21:47] Um and so, that paper by Tom Nichols
+[01:21:48] kind of goes into the fallacy of doing
+[01:21:51] that global correction. But what you
+[01:21:53] would do is So, you would say, um
+[01:21:56] you know, say we have two stats, you
+[01:21:58] would just say um stats conjunction
+[01:22:02] equals near start math. dot
+[01:22:06] conjunction given, you know, subject
+[01:22:09] stats.
+[01:22:12] Um and I want to compare conditions A
+[01:22:16] and
+[01:22:18] uh
+[01:22:19] B.
+[01:22:20] Something like that. And I want to use
+[01:22:23] the default, but if I want to be
+[01:22:24] specific, I want to use the conjunction
+[01:22:26] version. So, you'd run something like
+[01:22:28] that, and what it's going to do is it's
+[01:22:29] going to give me brain It's going to
+[01:22:31] return a stats variable that is the
+[01:22:35] intersection of A and B. For
+[01:22:38] Okay?
+[01:22:39] Um
+[01:22:42] All right. Um
+[01:22:44] There was another question about um
+[01:22:46] doing resting state analysis with the
+[01:22:48] toolbox.
+[01:22:50] Okay. There's some special analysis
+[01:22:52] steps with resting state that that you
+[01:22:54] should keep in mind. So, so there's um
+[01:22:58] nirs.modules.
+[01:23:01] connectivity.
+[01:23:03] And sorry, can I bring this up?
+[01:23:07] So, so so um
+[01:23:10] there there is a paper the first author
+[01:23:12] um I think is Hendrick Santosa. Um I'm
+[01:23:15] on it. It's a couple years back that
+[01:23:17] talks about a resting state connectivity
+[01:23:19] within um actually I'm going to say
+[01:23:21] job.site.
+[01:23:23] So, there's the paper.
+[01:23:25] Um
+[01:23:26] Little trick on on my toolbox is if you
+[01:23:29] uh many of the modules that have papers
+[01:23:31] behind them, if you say job.site, it'll
+[01:23:35] actually give the citation. Or if you
+[01:23:37] have a whole pipeline, if you say
+[01:23:38] job.site, it'll list all the papers that
+[01:23:40] you should be citing if you use this
+[01:23:42] pipeline. Anyway, here's the here's the
+[01:23:44] Santosa paper um that talks about the
+[01:23:47] the resting state connectivity. But,
+[01:23:49] this is the module that you use uh is
+[01:23:52] nirs.modules.connectivity.
+[01:23:55] Um
+[01:23:55] it's got
+[01:23:57] the first entry here is what version of
+[01:24:01] the correlation do you want to use for
+[01:24:03] the connectivity?
+[01:24:05] And so, in that Santosa paper, we
+[01:24:06] actually compared a whole bunch of
+[01:24:08] different ways to calculate
+[01:24:09] connectivity. Um this was the one that
+[01:24:11] was highly recommended, which is a
+[01:24:14] pre-whitening with a robust statistic.
+[01:24:17] Um but, that's that's kind of the
+[01:24:18] default, but you can change it. Um we
+[01:24:21] have partial correlation, we have grand
+[01:24:22] jurors, we have there's wavelet
+[01:24:24] coherence. Um, there's a number of
+[01:24:26] different things in that same year's
+[01:24:28] stats um
+[01:24:30] uh
+[01:24:31] that folder. So,
+[01:24:32] partial correlation, wavelet coherence,
+[01:24:34] cross-correlation, and ARMA version of
+[01:24:38] um correlation, grand jurors, etc.
+[01:24:41] Um, you can replace this entry with any
+[01:24:44] of those functions instead.
+[01:24:46] Divide events, what divide events does
+[01:24:49] is if you have tasks,
+[01:24:53] it'll actually can compute the
+[01:24:55] functional connectivity for each task
+[01:24:57] separately.
+[01:24:58] So, um let's say you did 2 minutes of
+[01:25:02] eyes open and 2 minutes of eyes closed,
+[01:25:04] you mark this as two different
+[01:25:05] conditions, you'll end up with two
+[01:25:07] different stats variables um
+[01:25:10] eyes open and eyes closed and you can
+[01:25:12] calculate the T test of what connections
+[01:25:14] change between those two.
+[01:25:16] So, if this is true and you have tasks
+[01:25:19] in there, it'll separate out and give
+[01:25:21] you an estimate for each task and if you
+[01:25:23] have rest period that isn't a specific
+[01:25:26] task, it'll give that, too.
+[01:25:27] Um
+[01:25:30] if you're dividing the events,
+[01:25:33] then it obeys these next two flags,
+[01:25:36] which is the minimum event duration and
+[01:25:39] um the ignore time.
+[01:25:41] So, so
+[01:25:43] you don't want to be doing resting state
+[01:25:45] connectivity on something that's too
+[01:25:46] short. So, if you if you are dividing
+[01:25:50] your events, this specifies the minimum
+[01:25:52] duration of a task that it's going to
+[01:25:55] try to estimate. So, it'll estimate
+[01:25:58] anything in this case greater than
+[01:25:59] 30-second blocks and it'll give you an
+[01:26:01] estimate. So, if I had 30-second finger
+[01:26:04] tapping on-off, um actually
+[01:26:07] if I had 40-second finger tapping
+[01:26:08] on-off, it'll compute the connectivity
+[01:26:12] during the finger tapping versus during
+[01:26:14] the rest the rest period and give me two
+[01:26:16] different statistical answers.
+[01:26:18] Why I had to go to 40 seconds is this
+[01:26:21] next flag, which is the ignore,
+[01:26:23] um, which is how much time does it
+[01:26:25] ignore during transitions? So, when you
+[01:26:29] start tapping your finger, the things
+[01:26:30] are changing, you want to reach the
+[01:26:32] steady state, it ignores the first 10
+[01:26:35] seconds after an event changes, um,
+[01:26:38] which is why the finger tapping had to
+[01:26:40] be 40 seconds long because I'm going to
+[01:26:42] ignore 10 seconds with and and only
+[01:26:45] estimate
+[01:26:46] if it's greater than 30 seconds
+[01:26:47] remaining.
+[01:26:49] Does that make sense?
+[01:26:50] There There is, um, the other version of
+[01:26:53] this, the hyper scanning, exact same
+[01:26:55] thing, right? It's got what function do
+[01:26:58] you want to use, whether or not I want
+[01:27:00] to divide the events or not. Um,
+[01:27:05] um, it's got this link on it,
+[01:27:09] which, um,
+[01:27:11] what the link is, let's see, job.link.
+[01:27:16] It's, um,
+[01:27:18] job.link.
+[01:27:21] Uh,
+[01:27:22] properties down here. These.
+[01:27:25] Okay. So, so, so it's it's it's got it's
+[01:27:29] has to have four entries in it.
+[01:27:31] Um, those entries are the index. So, so
+[01:27:35] in near X data, this automatically gets
+[01:27:39] populated because if you're running with
+[01:27:41] the hyper scan option in near X, I save
+[01:27:44] that information and then put it
+[01:27:46] somewhere that this function can
+[01:27:47] actually figure it out afterwards.
+[01:27:49] If it's not, if it's tech in or
+[01:27:51] something else, then you have two files,
+[01:27:54] file, you know, this file was subject A,
+[01:27:56] this file was subject B. This table is
+[01:27:59] where you tell me these two files were
+[01:28:01] done at the same time. So, you would say
+[01:28:03] what index is file scan A, what index is
+[01:28:07] scan B, this offset, generally zero, but
+[01:28:11] it allows you to shift one relative to
+[01:28:14] the other if say you had two different
+[01:28:15] instruments collecting the data and one
+[01:28:18] was delayed by 5 seconds or something
+[01:28:20] you know hit start 5 seconds after in in
+[01:28:23] instrument two. So I have to shift the
+[01:28:26] data and have to ignore the first 5
+[01:28:27] seconds of the first file, right? So you
+[01:28:30] can specify this table in which case
+[01:28:33] it's going to pull file one and file two
+[01:28:36] based on this table, shift them if
+[01:28:38] needed in most cases you won't, and do
+[01:28:41] the connectivity that way.
+[01:28:43] Um
+[01:28:45] The other feature that is a little bit
+[01:28:48] different here is this flag called
+[01:28:50] symmetric.
+[01:28:52] So
+[01:28:53] if you're doing resting state
+[01:28:54] connectivity
+[01:28:56] sometimes
+[01:28:58] who is subject A and who is is subject B
+[01:29:00] is completely arbitrary, right? If it's
+[01:29:02] two healthy adult subjects doing the
+[01:29:04] task, it doesn't matter who I labeled A
+[01:29:06] and B, I could have swapped them.
+[01:29:08] What the symmetric function does is it
+[01:29:10] does swap them and it computes it both
+[01:29:12] ways so that it makes sure that there's
+[01:29:14] no connections that went from A to B
+[01:29:16] that didn't go from B to A, right?
+[01:29:18] Because A and B should be label
+[01:29:20] independent, right? There's other
+[01:29:23] experiments in which it does matter. So
+[01:29:25] a parent child. Here's the parent,
+[01:29:28] here's the child. That's not an
+[01:29:29] interchangeable definition, right? In
+[01:29:32] that case I'd want symmetric to be false
+[01:29:36] because there might be connections that
+[01:29:37] went from the parent to the child that
+[01:29:39] didn't go back, right? So what that flag
+[01:29:42] does, that symmetry flag is used if you
+[01:29:46] should use it if there's if the A and B
+[01:29:48] definitions are arbitrary. If they're
+[01:29:50] not arbitrary, then turning it off
+[01:29:54] will will allow you to estimate you know
+[01:29:57] parent child but not child parent
+[01:29:59] if that made sense.
+[01:30:01] Um I forget what the oh,
+[01:30:04] there is this this flag on here for
+[01:30:07] estimate null where um um
+[01:30:11] if it's false like it is here, what it
+[01:30:13] does is it computes the stats based on
+[01:30:16] just our standard correlation. If it's
+[01:30:18] true, what it does is a bootstrapping,
+[01:30:21] mixes up all the pairs, and computes a
+[01:30:23] null distribution, and then does a
+[01:30:25] statistical test against that. It will
+[01:30:27] take a lot of time to to compute that.
+[01:30:30] Um
+[01:30:31] um but but it is in the code here.
+[01:30:33] Um
+[01:30:36] Okay.
+[01:30:38] Very good. So, the next question we have
+[01:30:40] a few more.
+[01:30:41] How can we use FEM for image
+[01:30:43] reconstruction in sort of a prox lab?
+[01:30:46] Could you show a pipeline for that? I
+[01:30:48] don't know how
+[01:30:49] there is um edit near us dot
+[01:30:53] um near us
+[01:30:57] uh
+[01:30:59] Yeah.
+[01:31:01] Go to
+[01:31:03] near us toolbox demos. So, you go to the
+[01:31:05] demos folder.
+[01:31:07] Um there is a demo in here
+[01:31:11] called forward model demo.
+[01:31:17] And so, what the forward model demo does
+[01:31:20] is this actually walks you through, you
+[01:31:23] know, how do you set up a um a model in
+[01:31:27] uh near fast with the finite element
+[01:31:29] code. Um it does the same thing with the
+[01:31:33] boundary element code in in near fast.
+[01:31:36] Um so, here's the boundary element
+[01:31:38] version. Um
+[01:31:40] it it'll do the MCXtreme if you have it
+[01:31:42] installed on your computer. That's the
+[01:31:44] GPU version from um Chin-Chin Fang. Um
+[01:31:48] and then it has kind of the closed-form
+[01:31:51] theoretical solution, which is what the
+[01:31:52] approximate slab does. Um which is we
+[01:31:56] know the banana function for a
+[01:31:59] semi-infinite homogeneous medium, which
+[01:32:01] the head is most definitely not.
+[01:32:03] So, what you do is in the imagery
+[01:32:07] construction
+[01:32:11] So, in the imagery construction function
+[01:32:14] you get this Jacobian field.
+[01:32:19] And so, it's a dictionary. And so, what
+[01:32:22] you would do is you can put in say
+[01:32:24] default uh oops, you have to spell it
+[01:32:27] right.
+[01:32:28] Um and you would put in your you know,
+[01:32:31] the the Jacobian, the forward model that
+[01:32:33] you want to use. So, default will use
+[01:32:35] that same forward model for each
+[01:32:37] subject. If you type in the subject the
+[01:32:40] subject name like Ted it'll only use
+[01:32:44] that Jacobian for subjects that are
+[01:32:46] labeled as Ted. So, in that case you
+[01:32:48] need a Jacobian for every subject. If
+[01:32:51] it's not one of the ones you've
+[01:32:53] explicitly labeled, then it'll go to the
+[01:32:55] default. So, the Jacobian that you give
+[01:32:57] it, what you do is you
+[01:33:01] Let's say FEM is nears.forward.
+[01:33:05] We can pull up the near fast FEM code.
+[01:33:09] Oops. Let me bring that up to the top
+[01:33:11] again. So, we can bring up the
+[01:33:14] um
+[01:33:15] So, what we can do is we have to fill in
+[01:33:18] these details.
+[01:33:19] So, let's do
+[01:33:22] um
+[01:33:23] uh meshes
+[01:33:26] nears.registration.
+[01:33:30] Colin
+[01:33:31] uh
+[01:33:35] Let's just take that mesh. Okay. So, So,
+[01:33:37] here's the mesh.
+[01:33:39] Um
+[01:33:39] if you say mesh.draw,
+[01:33:41] it's going to draw Colin's head
+[01:33:43] um
+[01:33:45] somewhere.
+[01:33:46] Maybe on my other screen. My computer is
+[01:33:48] doing a lot right now.
+[01:33:50] Oh, there it is.
+[01:33:52] Okay. So, there's Colin's head. Um
+[01:33:54] let's turn that off.
+[01:33:55] Um
+[01:33:56] but what you can then is you would say
+[01:34:00] um
+[01:34:01] you would have to assign the mesh field
+[01:34:08] to be that Colin 27 head.
+[01:34:10] Um and I think actually what we need to
+[01:34:12] do is we need to do this one that
+[01:34:14] converts that mesh from right now that
+[01:34:18] Colin head is a boundary element mesh.
+[01:34:20] It's got five layers, the skin, the
+[01:34:23] skull, the brain, that's it. Um
+[01:34:25] I forgot what the skin, skull, there's
+[01:34:28] one at the skin interface, one at the
+[01:34:30] skull interface, one CSF interface,
+[01:34:33] uh gray matter, white matter. I think
+[01:34:35] are the five. Um
+[01:34:37] and so so so so what it does this
+[01:34:39] convert to FEM will in the back end
+[01:34:43] it'll call um Chin-Chin Fang's ISO to
+[01:34:46] mesh
+[01:34:47] feeding it those boundary elements and
+[01:34:49] create a full finite element mesh from
+[01:34:51] that. Um it takes a while so I'm not
+[01:34:53] going to run it right now. But you would
+[01:34:55] take that mesh, you convert boundary
+[01:34:58] element to finite element,
+[01:35:00] put it there. Um
+[01:35:02] then what you would need to do is you
+[01:35:04] would need to put the probe and so here
+[01:35:06] you would assign your registered probe
+[01:35:08] from the stats 30
+[01:35:10] um and then the properties what you
+[01:35:13] would do is you would say nearest.media
+[01:35:16] oops
+[01:35:17] media.um
+[01:35:21] you know, something like brain
+[01:35:23] at
+[01:35:25] or something.
+[01:35:28] Right, so that's the optical properties
+[01:35:30] of the brain at 780 nm.
+[01:35:33] So so the so you would enter in the pro
+[01:35:36] you'd fill in that mesh, probe, and
+[01:35:39] properties field. The FM is the
+[01:35:42] frequency modulation in megahertz. So if
+[01:35:45] you wanted to generate um frequency
+[01:35:47] domain data, you could. And then you
+[01:35:49] would say um you know,
+[01:35:51] this is not going to work, but for uh
+[01:35:53] forward model uh dot Jacobian and
+[01:35:57] that'll go and it'll run near fast in
+[01:35:59] the background and return back the
+[01:36:00] Jacobian. Um,
+[01:36:02] you can also do
+[01:36:04] that spectral.
+[01:36:07] Um, so there's two versions. There's one
+[01:36:09] that solves in UA and then one that
+[01:36:11] combines oxy deoxy to solve in oxy deoxy
+[01:36:15] space. Spectral is is the one that
+[01:36:17] solves in oxy deoxy space. So, you would
+[01:36:20] go and you would create this Jacobian
+[01:36:22] like that. You would then assign it to
+[01:36:25] the job
+[01:36:28] job dot Jacobian and you assign it, you
+[01:36:30] know, Ted.
+[01:36:32] And that's that's my my Jacobian and you
+[01:36:34] would repeat that and then so when you
+[01:36:36] ran the job, it would use that subject's
+[01:36:40] uh forward model.
+[01:36:41] The process is exactly the same as using
+[01:36:44] the slab um, the approximate slab of you
+[01:36:47] create the object, assign the mesh, etc.
+[01:36:50] It's just instead of slab use near stuff
+[01:36:53] forward dot um
+[01:36:55] near fast FEM or near fast
+[01:36:57] FEM.
+[01:36:58] MC lab is the Monte Carlo from Chin-Chin
+[01:37:01] Fang. MCX lab is the GPU Monte Carlo
+[01:37:04] from from Chin-Chin Fang.
+[01:37:07] Does that make sense?
+[01:37:09] It was a long-winded solution or
+[01:37:11] long-winded answer. But if you look at
+[01:37:12] that forward model demo, it does go
+[01:37:14] through how to compute all the different
+[01:37:16] forward models.
+[01:37:17] So.
+[01:37:20] Perfect. I think that
+[01:37:22] is probably very helpful.
+[01:37:24] So, the next one is probably widely
+[01:37:26] applicable. What is the best solution
+[01:37:27] for dealing with the blind spots in like
+[01:37:30] a low density recording if you you've
+[01:37:32] already got your data?
+[01:37:34] What do you suggest?
+[01:37:36] So, so
+[01:37:38] um
+[01:37:42] Yeah, I mean, it it again it kind of
+[01:37:44] depends a little bit on um
+[01:37:47] what other data you have available.
+[01:37:49] So, if you have head size, for example,
+[01:37:52] what you can do is the code like I just
+[01:37:54] showed that you can pull up you know,
+[01:37:56] kind of adjust for head size, compute a
+[01:37:58] region of interest, or you know, you
+[01:38:01] have food localization or something
+[01:38:03] something like like that. Um if every
+[01:38:06] single subject was collected exactly the
+[01:38:08] same way and every single subject the
+[01:38:11] brain activity was in exactly the same
+[01:38:13] blind spot, it's kind of a we don't have
+[01:38:16] really can't do anything about it. But,
+[01:38:19] if you have some variability in where
+[01:38:21] the probe was that you know and you can
+[01:38:23] account for,
+[01:38:24] you can actually use that variability to
+[01:38:26] your advantage to say, "Hey, this
+[01:38:29] subject it wasn't a blind spot, but
+[01:38:30] these subjects it wasn't. Here's the
+[01:38:32] solution that's consistent with
+[01:38:34] everybody together like that."
+[01:38:36] Right? So, so
+[01:38:39] um
+[01:38:39] So, if you have head size and can
+[01:38:41] re-register, then you can pull out the
+[01:38:43] region of interest stuff, which will
+[01:38:45] kind of correct for the blind spot a
+[01:38:46] bit.
+[01:38:48] Um and so, you're pooling channels
+[01:38:50] multiple channels to get a better
+[01:38:52] estimate. Um
+[01:38:54] Um you're of course compressing your
+[01:38:55] data though cuz you you've gone from
+[01:38:57] channel space to a limited number of
+[01:38:59] regions of interest. Um but, that's
+[01:39:02] that's kind of the best way to do it. Um
+[01:39:04] again, if you didn't measure it in
+[01:39:06] anyone, right, then it's it's it's it it
+[01:39:10] is what it is. Um
+[01:39:12] you just don't have any information
+[01:39:13] about that part of the brain. So.
+[01:39:16] Makes sense. This This next question
+[01:39:18] actually is you're kind of already
+[01:39:19] touching on, but it's
+[01:39:21] phrased, "Why would you recommend the
+[01:39:22] ROI channel waiting versus group level
+[01:39:25] imagery construction?
+[01:39:27] How do they compare in this low-density
+[01:39:29] setup?" So, so
+[01:39:32] um
+[01:39:33] Image reconstruction
+[01:39:35] is a
+[01:39:38] right, we're going from a limited number
+[01:39:40] of source detector pairs to a
+[01:39:42] high-dimensional space.
+[01:39:44] We're making a lot of assumptions about
+[01:39:47] the optical forward model, about how
+[01:39:49] light travels through the tissue and the
+[01:39:50] radiative transport equation, about
+[01:39:52] registration, about anatomy, right? If
+[01:39:55] you have that information, you have a
+[01:39:56] structural MRI, if you have the
+[01:39:58] registration, you might be you're kind
+[01:40:01] of offering additional good information
+[01:40:03] that is helping to constrain the problem
+[01:40:05] a bit. If you're just guessing at the
+[01:40:07] registration and using an atlas-based
+[01:40:10] anatomy,
+[01:40:11] um you're not entering new information
+[01:40:14] into the into the problem.
+[01:40:16] Um so, the imagery construction, because
+[01:40:19] it's ill-posed and underdetermined,
+[01:40:22] is a it's a it's a mathematically less
+[01:40:26] stable solution.
+[01:40:28] Okay? So, you take a hit in the effect
+[01:40:30] size going from channel space to imagery
+[01:40:33] construction space. Generally,
+[01:40:36] um you know, your your um
+[01:40:38] your effect size goes down. It becomes
+[01:40:40] harder to see things. Um your type one
+[01:40:43] or type two error goes up. You're you've
+[01:40:45] got more false negatives. Um
+[01:40:49] So, in that sense,
+[01:40:51] staying in uh channel space or going to
+[01:40:54] region of interest space is actually
+[01:40:55] preferred to imagery reconstruction.
+[01:40:58] Unless you really wanted to say
+[01:41:00] something about the underlying brain
+[01:41:02] and, you know, blind spots and stuff
+[01:41:05] like that, then imagery reconstruction
+[01:41:06] might benefit, but only if you actually
+[01:41:10] offer additional information in that,
+[01:41:12] right? If you reconstructed every and
+[01:41:15] everyone's probe was exactly the same,
+[01:41:16] reconstructed onto the exact same brain
+[01:41:18] for everyone, and you didn't have any
+[01:41:20] individualized information, the only
+[01:41:22] advantage going to image space is it
+[01:41:24] looks prettier. Um
+[01:41:27] Um but you actually took a hit in
+[01:41:29] sensitivity to do it.
+[01:41:30] Um so, generally, I would strongly
+[01:41:34] recommend um
+[01:41:37] staying in channel space or going to
+[01:41:38] region of interest space is the is the
+[01:41:40] best solution. It It's certainly the one
+[01:41:43] that makes the least number of
+[01:41:44] assumptions about your data.
+[01:41:47] So.
+[01:41:51] Perfect. I think that makes sense.
+[01:41:54] Um any other questions
+[01:41:58] that come up? I think
+[01:42:00] I think we got a good response to the
+[01:42:02] FEM um
+[01:42:04] demonstration was really helpful.
+[01:42:08] I I'm just looking through the the
+[01:42:09] questions. I think we hit them all, too.
+[01:42:11] So. Yeah. Um
+[01:42:14] I have these were the questions from
+[01:42:16] before. Uh did I hit all these? I didn't
+[01:42:19] talk about registration, but there's a
+[01:42:20] demo for that. It's
+[01:42:22] you know, registration demo. It's in
+[01:42:24] that demo folder.
+[01:42:25] Um
+[01:42:27] I think I hit everything else, though.
+[01:42:31] I think so. Um
+[01:42:33] Okay.
+[01:42:34] Yeah.
+[01:42:35] Okay.
+[01:42:38] Well, thank you very much, Ted, and
+[01:42:39] thank you everybody for attending. I
+[01:42:41] think we all probably learned a lot.
+[01:42:43] Um very helpful, as always. Appreciate
+[01:42:46] it very much. Um let us all know
+[01:42:49] if you ever have any questions, and
+[01:42:52] thank you so much. All right.
+[01:42:54] All right.
+[01:42:56] Thank you. Bye.

@@ -6,6 +6,8 @@ recommendations.
 **Scope:** Pipeline modules that the current Pipeline Manager displays when
 “Show Advanced Modules” is unchecked. This is a UI classification, not a claim
 that the operations are universally appropriate, risk-free, or beginner-level.
+For cross-toolbox examples and evidence coverage of these basic modules, see
+[Basic Modality Workflows](basic-modality-workflows.md).
 
 ## How the classification works
 
@@ -41,7 +43,7 @@ time series.
 | Trim Pre/Post Baseline | `preproccessing.TrimBaseline` | Trims time-series data around the stimulus interval. Defaults: keep up to 30 seconds before the first event and after the last event; do not reset time; trim auxiliary time series. |
 | Band-Pass Filter | `filters.bandpass_filter` | Filters the selected time series. Defaults: 0.016–1 Hz, fourth-order Butterworth. The documented guidance cautions that the lower cutoff should remain below the slowest stimulus frequency. |
 | PCA Filter | `filters.pca_filter` | Applies a PCA-based filter. Defaults: `ncomp=0.8` and separate processing by data type. The option describes values from 0 to 1 as the fraction of variance removed; values at least 1 select a component count. |
-| TDDR | `motion_correction.TDDR` | Applies Temporal Derivative Distribution Repair motion correction. Defaults: treat positive and negative shifts separately and apply PCA before TDDR. |
+| TDDR | `motion_correction.TDDR` | Applies Temporal Derivative Distribution Repair motion correction. Defaults: treat positive and negative shifts separately and apply PCA before TDDR. See [Video-Lecture Context](video-lecture-context.md) for guidance and cautions. |
 | GLM Model | `glm.GLM` | Fits a first-level General Linear Model and stores statistics. Default noise model is `ar_irls`; defaults also include autoregressive order 30 and a configured temporal basis function. This is an analysis step, not just signal preprocessing. |
 | Resting State Connectivity | `connectivity.resting_state_connectivity` | Computes resting-state connectivity and stores a connectivity result. Defaults include AR order 18, robust estimation, and short-separation correction. |
 | Hyperscanning Connectivity | `connectivity.hyperscanning` | Computes a connectivity result for hyperscanning data. This is an analysis step; its paired-recording assumptions should be reviewed before an assistant recommends it. |

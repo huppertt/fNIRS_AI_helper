@@ -1,0 +1,157 @@
+[00:00:00] then it's gone okay cool so this course obviously it's going to be
+[00:00:08] about advanced data analysis in general and it's kind of centered around our new
+[00:00:15] toolbox that we call the analyzer toolbox formerly was called the nearest
+[00:00:21] toolbox but we decided that that was too generic as a name so that became the
+[00:00:25] analyzer tool box so we're gonna kind of center about a lot of the discussion and
+[00:00:31] methods and stuff around this but a lot of like the stuff will talk about it in
+[00:00:37] terms of statistical models and stuff kind of extend beyond my toolbox per se
+[00:00:42] but that's where we're gonna do a lot of the analysis
+[00:00:48] background for me so I did my PhD at Harvard
+[00:00:53] my PhD was actually on multimodal imaging and combining
+[00:00:59] NIRS, MEG and fMRI to try to look at underlying vascular the relationships
+[00:01:06] between these hemodynamic and these neural signals in terms of vascular
+[00:01:10] models and he's wind castles and stuff like that and so it's very much kind of
+[00:01:15] multimodal imaging and during the course of that PhD I wrote the first NIRS
+[00:01:22] software that became available to the community which was called Homer since
+[00:01:28] then so now 15 years later it's evolved into Homer too and then that has now
+[00:01:35] sort of evolved into our somewhat competitive tool box here which is very
+[00:01:41] much more focused on the statistics and kind of this this toolbox evolve out of
+[00:01:48] I've been here at Pitt for 10 years now and was working with these 27 different
+[00:01:53] investigators and kind of realizing that when we initially wrote the software for
+[00:01:59] Homer and we're developing these methods we were very heavy on the signal
+[00:02:03] processing the filtering but we were physicists we were engineers and that's
+[00:02:09] what we knew to do and as I kind of moved here next
+[00:02:12] to support projects that were actually doing real science you know it became
+[00:02:17] more of a hypothesis driven right we had investigators asking us okay well that's
+[00:02:23] great but you know how do I statistically test the difference
+[00:02:26] between this condition and a condition and you know that was easy
+[00:02:30] but then the questions started to become harder and so we started to develop
+[00:02:33] these tools around food that kind of hypothesis dress and so they thought was
+[00:02:40] switch to the next slide so we started in with this tool box in 2014 late 2014
+[00:02:48] so it's about three and a half years old and the work was I have to credit Jeff
+[00:02:53] Barker who is my former grad student who did the initial framework for this he
+[00:02:59] did an absolutely wonderful job if you're like a computer programmer you
+[00:03:03] look at the tool box Jeff just in an insane insanely nice job with
+[00:03:08] structuring the toy box I'm Jeff's PhD was awesome unfortunately
+[00:03:14] I lost in the industry I've lost my to grad students so far to
+[00:03:19] industry but Jeff worked on this he graduated about 2016 and he went off to
+[00:03:27] industry but I have to really credit him with this right now so this is just the
+[00:03:33] distribution of people that have downloaded our tool box you know so
+[00:03:37] you've got a large concentration on the east coast of the US large concentration
+[00:03:42] in taxes apparently most of Europe some of the Asia and even some areas of
+[00:03:47] Africa and Australia are starting to use this so we we've we've had about 2000
+[00:03:52] downloads not that all those people are dial you
+[00:03:55] know using it and not that I haven't downloaded it several times myself so I
+[00:04:03] think it's starting to grow and pick up and I to the hope is kind of
+[00:04:07] as more people start to use it and certainly that's kind of the purpose of
+[00:04:13] these kind of classes like this is you'll it'll work both ways I'll provide
+[00:04:18] tools for you could you also come back with those unique hypotheses and oh I
+[00:04:24] really wish that I could do DPA can we do you know MVPA was in the
+[00:04:29] tool box and so then we can go and start to think
+[00:04:32] about how to develop that and and one of the themes that you'll see kind of
+[00:04:36] repeated throughout here is that yours is different from fMRI it's different
+[00:04:42] from EEG it has features that are common right in terms of oh it measures even a
+[00:04:48] nap response so there's FM right oh we measure a channel space so does
+[00:04:51] EEG or Meg we have an inverse problem but there's a really unique features of
+[00:04:56] mirrors and so one of the continuing themes with this is going to be how the
+[00:05:01] statistics really need to change to address those unique noise structures
+[00:05:06] and features of veneers data okay so the toolbox itself the best place to get it
+[00:05:14] is the bitbucket site so it's an online repository I sent a links to this so
+[00:05:19] hopefully everyone downloaded it if not actually if you have a computer and you
+[00:05:24] want to try to download it please do if you downloaded it like not so
+[00:05:31] recently like so four weeks ago or something you can go and update your
+[00:05:36] version we did actually make some changes based on developing these demo
+[00:05:40] data sets and stuff like that we found not anything terrible but kind of those
+[00:05:44] nuance little tiny bugs and that we can fix the limit so here's here's the
+[00:05:51] toolbox you can go to that it does require MATLAB 23 24 B or newer
+[00:05:58] everything that I'm going to show today only uses these statistics and signal
+[00:06:03] processing toolbox but we're trying to actually work at CW to need those but
+[00:06:08] kind of as a bare minimum processing it's open source mantlet bays it's all
+[00:06:14] command-line but I'll show as we go through here we've started to develop
+[00:06:18] some graphical interfaces because you know we're getting more and more people
+[00:06:22] using it and they want to kind of have more but not gooey days in our biscuits
+[00:06:30] and then so we have if you go to the site there is a wiki that
+[00:06:34] admittedly we haven't updated in a little bit at least a year or so
+[00:06:39] but he goes through the basics of how to download how to install stuff like that
+[00:06:43] also on the bitbucket so if you want to download it which uses download and
+[00:06:52] repository so that download the actual full Doc's these other data zip files
+[00:06:59] they're actually called by there's a bunch of demo scripts that we're going
+[00:07:04] to go through and the demo scripts themselves would actually download music
+[00:07:07] files for you so you don't need to download separately if you go into the
+[00:07:12] bit bucket there's now a four row here excuse me which is called the nearest
+[00:07:18] course demo dot zip and that's the demo data that we're going to be going
+[00:07:23] through this afternoon and tomorrow if you haven't gotten a chance to download
+[00:07:28] that I only put it up like two weeks ago or so but you download that day Dayna
+[00:07:33] set as well and we have it on a flash drive that we can bring it pass around
+[00:07:37] if you don't want to download I think it's like three hundred fifty Meg or
+[00:07:41] something like that it's not it's not small but it's not huge okay I'm also on
+[00:07:47] the bitbucket site we have on the thing here this is palaces issues so you can
+[00:07:56] use this to communicate to us any sort of problems that you encounter I know a
+[00:08:01] number if you sent you know use this actually over the last few days as you
+[00:08:06] were installing and testing this and I fixed all those bugs like that but that
+[00:08:10] actually sends an email directly to me and I'm usually fairly quick to respond
+[00:08:14] to fix these things so that's the best way with regard to I found an error or
+[00:08:20] suggestion or something like that to communicate that is to put it through a
+[00:08:24] big bucket site if you have more of a scientific question you can send it
+[00:08:30] directly to me and I often times very busy but just email me again because I'm
+[00:08:38] happy to respond I just don't always have time to do it so if I forget just
+[00:08:41] I'm not offended if you just emailing me and I'm sorry in advance if I do that
+[00:08:47] okay so the big buckets so you can go to that
+[00:08:51] you download you know down the entire toolbox but it's actually
+[00:08:55] bitbucket uses what's called a CPS to Greek guidance
+[00:08:59] basically we have tracking changes within the program and so what we
+[00:09:04] recommend is that you actually use one of these CS programs so that you can
+[00:09:10] actually pop whip up with changes in the box and so the one to use if this works
+[00:09:16] on a map and but it's really nice on Windows is this tortoisehg program and
+[00:09:23] basically what tortoisehg is you go to the website you download it and it'll
+[00:09:28] first start up your repository unless you basically want to clone the nearest
+[00:09:37] cool box right there buckets so you go if you would enter in that bit bucket
+[00:09:42] URL address and then the destination where you put the toolbox and just
+[00:09:48] choose clone and it downloads it all onto your computer just the same as
+[00:09:52] downloaded it directly zip file only now once it's downloaded what you can do is
+[00:09:59] you can use the tortoisehg program to basically keep that up to date and so if
+[00:10:05] you if you go to open the tortoisehg it has a whole history of every change that
+[00:10:11] made in the toolbox so you see for example right here I'm on revision 633
+[00:10:18] they'll give some information about what was changed and that actually tell you
+[00:10:22] which files were changed and then if you want to if say at the end of this course
+[00:10:28] you found a bug or something like that or something something we fixed added to
+[00:10:33] the toolbox what you would do is you can use the same program and you can pull
+[00:10:38] those changes from the website where it's only updating the one or two files
+[00:10:43] that I changed you don't have to you don't have to do anything so it bucket
+[00:10:47] uses a two-stage CVS which uses some people if you're not used to it here's
+[00:10:56] basically - there's two level three levels are
+[00:11:00] of the toolbox and the history there is the version that exists bitbucket
+[00:11:05] and so that's there's an iBook uploaded with all the changes and so what you do
+[00:11:11] is you first pull those changes on here you sit so it pulls that pulls the
+[00:11:16] changes touch the website against your local urgent and pulls any new products
+[00:11:21] you then have a local CES that if you're working on this and you make any local
+[00:11:27] changes it saves all that history here dance and then you're working version is
+[00:11:33] the one that's actually Matlin is home ok so if you make a change that you
+[00:11:38] decide kind of destroyed the toolbox or whatever you can undo just your changes
+[00:11:44] or I knew some of your changes there's a new state system the things remember is
+[00:11:50] that when you update your toolbox you have to do two steps you have to first
+[00:11:55] fold the data from website and then you right click on the version so let's say
+[00:12:01] 6:33 update to right-click on you say update and then your matlab and it's
+[00:12:07] updated your velocity and that lab reflects oh okay we've had a number of
+[00:12:12] people that you know we you know oh I fixed something into a box update the
+[00:12:18] latest version and they get this step right but they forget to do this part
+[00:12:22] and so there's still mallet is still referencing really old or I shouldn't
+[00:12:26] even know they have a newer version sitting on there and then if if you do
+[00:12:33] want to start to contribute to the toolbox you don't have very many people
+[00:12:37] external to my lab that are doing this at the moment but I'm very open to yeah
+[00:12:42] it's again a two stage sting where you commit any changes you have your local
+[00:12:48] history making sure the program works well several revisions and then once
+[00:12:54] it's good and stable you could that push it on to the bitbucket site so that
+[00:12:58] wouldn't have access to okay and actually in in Windows what you
+[00:13:07] can do is you don't even have to launch this booty if you click on your near
+[00:13:10] school box folder you right click on it you have those options to pull and
+[00:13:14] commit or update directly from right-clicking on the folder on a Mac
+[00:13:20] you have to go through this interface to do it that way if you're using using
+[00:13:25] tortoisehg but as I said it does have if you click on anything it does tell you
+[00:13:30] what this changed so I added this line so I in this case I removed this red
+[00:13:36] line and I added that green line so I changed the in this case I changed the
+[00:13:40] default behavior of the load directory function if you don't give it any second
+[00:13:44] arguments as an example okay and my computer is thinking I'm running that
+[00:13:53] software that's capturing my screen in the background I might not be able to do
+[00:13:57] that when you actually get to the MATLAB it's
+[00:14:13] I'm gonna have to kill that program in the background

@@ -1,0 +1,83 @@
+# Natural-language event annotation: pairing odd/even stimulus markers
+
+## Entry status
+- Type: Processing decision
+- Status: Draft
+- Prepared on: 2026-10-08
+- Reviewed by, if applicable:
+- Related documentation section: AI-assisted annotation
+
+## Short summary
+A researcher may describe an event structure in natural language rather than knowing which Brain Analyzer operations to use. Example: a recording contains 30 stimulus markers, with every odd marker representing an event start and every even marker representing the corresponding event end. The AI assistant should inspect the marker structure, infer the intended start/end pairing, identify the existing Brain Analyzer operations that can accomplish this, and propose the resulting annotation changes for user approval.
+
+## Goal and problem
+- Researcher’s goal: Convert poorly annotated stimulus markers into meaningful task/event annotations.
+- What was confusing, failing, or needing a decision? The researcher knows the marker convention but may not know which Brain Analyzer functions or sequence of operations should be used.
+- What did the researcher expect to happen? Each odd/even marker pair should define one event, with appropriate event labels.
+
+## Data and context
+- Data type and relevant characteristics: fNIRS/NIRS brain-imaging time series with stimulus/event markers.
+- Number of recordings/files, if relevant: One example recording; exact data not provided.
+- Relevant event/condition structure, if relevant: 30 markers; odd markers are event starts and even markers are event ends.
+- Data source: General description only
+- Explicitly excluded sensitive details: No subject-identifying or PHI data.
+
+## Workflow as performed
+This was an architectural example discussed for the future AI assistant; it has not yet been executed against a real dataset.
+
+1. **Inspect event structure**
+   - User-facing name: Find/summarize events
+   - Pipeline module/class, if known: To be identified from the existing Brain Analyzer codebase.
+   - Input: Current dataset and its event markers.
+   - Parameters and values: Marker/event information sufficient to determine ordering and timing.
+   - Output: Structured list/summary of markers and their timing.
+   - Why it was used: Verify that the stated odd/even marker convention is actually present before modifying annotations.
+   - Notes or warnings: The AI should not assume the user's description is correct without inspecting the available data.
+
+2. **Propose event construction/annotation**
+   - User-facing name: Create or pair events
+   - Pipeline module/class, if known: To be identified from the existing Brain Analyzer codebase.
+   - Input: Verified marker sequence and user's requested labeling.
+   - Parameters and values: Start/end marker pairs and desired event labels.
+   - Output: Proposed annotation operations.
+   - Why it was used: Translate the user's natural-language request into existing Brain Analyzer operations.
+   - Notes or warnings: Proposed modifications should be shown to the user before execution.
+
+## Outcome and validation
+- What changed or was produced? No dataset was changed. The desired outcome is a proposed sequence of existing Brain Analyzer annotation operations.
+- How was the result checked? Future implementation should validate marker ordering, pairing, and resulting event durations.
+- Observed warnings, failures, or unexpected results: None; this is a design/example entry rather than a completed analysis.
+- What evidence supports the conclusion? This entry records the intended interaction pattern discussed with the developer.
+
+## Interpretation
+- What do we believe was happening? The key challenge is translating study-specific natural-language knowledge about marker conventions into a sequence of controlled Brain Analyzer operations.
+- Which parts are confirmed by code, documentation, or observed results? The general requirement and example were discussed conceptually. Specific existing functions have not yet been mapped.
+- Which parts are hypotheses or expert judgment? The exact tool sequence and event-pairing implementation remain to be determined from the Brain Analyzer codebase.
+
+## Generalizable guidance
+- Potential rule or recommendation: The AI assistant should first inspect and validate the event structure, then propose existing annotation operations rather than directly manipulating data or generating arbitrary code.
+- When it applies: When users describe marker conventions or annotation problems in natural language.
+- Preconditions: The relevant event/marker information must be accessible through controlled read-only Brain Analyzer tools.
+- When it should *not* be applied: Do not automatically pair markers when the marker semantics are ambiguous or inconsistent.
+- Known exceptions or alternatives: Some studies may use different marker conventions, missing markers, nested events, or multiple marker types.
+
+## Brain Analyzer functionality involved
+- Existing module/function/GUI operation: Event inspection, creation, renaming, shifting, merging, and deletion are examples of relevant existing functionality.
+- Reusable behavior identified: The AI layer should call existing Brain Analyzer functionality rather than duplicate event-manipulation logic.
+- Missing capability or documentation, if any: Need to identify the actual event APIs and functions in the current Python codebase.
+- Do not duplicate existing functionality: Yes. AI tools should be thin, controlled wrappers around existing Brain Analyzer operations where possible.
+
+## References and provenance
+- Brain Analyzer version or commit, if known: Current Python Brain Analyzer codebase; exact commit not recorded.
+- Relevant source files or documentation: To be identified by Copilot during codebase inspection.
+- Publications or other references: None for this example.
+- Conversation date or other provenance: Discussion with ChatGPT on 2026-10-08.
+
+## Suggested documentation change
+Use this example as a prototype for the AI assistant's annotation knowledge base. The important pattern is: understand the user's marker convention, inspect the actual event structure, map the request to existing Brain Analyzer tools, and present proposed modifications for approval.
+
+## Questions to resolve
+- Which existing Brain Analyzer functions can inspect marker/event structure?
+- Is there already an operation that pairs start/end markers or creates events from marker pairs?
+- What structured representation should an AI tool return for events and proposed modifications?
+- How should the GUI display a proposed sequence of annotation changes?

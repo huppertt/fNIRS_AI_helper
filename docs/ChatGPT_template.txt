@@ -1,0 +1,75 @@
+# [Short descriptive title]
+
+## Entry status
+- Type: [Analysis workflow / Processing decision / Troubleshooting case / Other]
+- Status: [Draft / Reviewed / Confirmed]
+- Prepared on:
+- Reviewed by, if applicable:
+- Related documentation section:
+
+## Short summary
+[What was the analysis problem, and what was the main lesson or solution?]
+
+## Goal and problem
+- Researcher’s goal:
+- What was confusing, failing, or needing a decision?
+- What did the researcher expect to happen?
+
+## Data and context
+- Data type and relevant characteristics:
+- Number of recordings/files, if relevant:
+- Relevant event/condition structure, if relevant:
+- Data source: [Synthetic / De-identified / General description only]
+- Explicitly excluded sensitive details:
+
+## Workflow as performed
+List the actual steps in order. Distinguish observed actions from recommendations.
+
+1. **Tool/module or GUI operation:**
+   - User-facing name:
+   - Pipeline module/class, if known:
+   - Input:
+   - Parameters and values:
+   - Output:
+   - Why it was used:
+   - Notes or warnings:
+
+2. **Next step:**
+   - ...
+
+## Outcome and validation
+- What changed or was produced?
+- How was the result checked?
+- Observed warnings, failures, or unexpected results:
+- What evidence supports the conclusion?
+
+## Interpretation
+- What do we believe was happening?
+- Which parts are confirmed by code, documentation, or observed results?
+- Which parts are hypotheses or expert judgment?
+
+## Generalizable guidance
+- Potential rule or recommendation:
+- When it applies:
+- Preconditions:
+- When it should *not* be applied:
+- Known exceptions or alternatives:
+
+## Brain Analyzer functionality involved
+- Existing module/function/GUI operation:
+- Reusable behavior identified:
+- Missing capability or documentation, if any:
+- Do not duplicate existing functionality:
+
+## References and provenance
+- Brain Analyzer version or commit, if known:
+- Relevant source files or documentation:
+- Publications or other references:
+- Conversation date or other provenance:
+
+## Suggested documentation change
+[Append-ready prose, or a concise change request for Copilot. Do not claim
+unverified behavior as fact.]
+
+## Questions to resolve
+- [Open question, uncertainty, or needed expert review]
